@@ -1,0 +1,219 @@
+\documentclass[aspectratio=169]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{hyperref}
+
+% Theme settings
+\usetheme{metropolis}
+\setbeamertemplate{navigation symbols}{}
+
+% Define custom colors
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{blue},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2
+}
+
+\lstset{style=mystyle}
+
+\title[Fortgeschrittenes OOP in Python]{\textbf{Tag 1: Fortgeschrittene objektorientierte Programmierung in Python}}
+\author{Ihr Name}
+\date{\today}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\section{Einleitung}
+
+\begin{frame}{\textbf{Willkommen und Rückblick}}
+\textbf{Ziele für heute:}
+\begin{itemize}
+    \item Grundlagen der objektorientierten Programmierung (OOP) festigen.
+    \item Fortgeschrittene Themen wie Kapselung, abstrakte Klassen und Methoden erlernen.
+    \item OOP anwenden, um reale Probleme zu modellieren.
+    \item Debugging und Testen von OOP-Code üben.
+\end{itemize}
+\textbf{Frage an die Teilnehmer:}
+\begin{itemize}
+    \item Was sind die Hauptvorteile der Verwendung von OOP in der Softwareentwicklung?
+\end{itemize}
+\end{frame}
+
+\section{Kapselung}
+
+\begin{frame}{\textbf{Was ist Kapselung?}}
+\textbf{Definition:}
+\begin{itemize}
+    \item Kapselung bedeutet, Daten und Methoden, die auf diese Daten zugreifen, in einer Einheit (Klasse) zu bündeln.
+    \item Zugriff auf Daten durch private und öffentliche Attribute steuern.
+\end{itemize}
+\textbf{Schlüsselkonzepte:}
+\begin{itemize}
+    \item Öffentliche Attribute: Von außerhalb der Klasse zugänglich.
+    \item Private Attribute: Von außerhalb der Klasse verborgen (Verwendung des Präfixes `\_\_`).
+\end{itemize}
+\textbf{Vorteile der Kapselung:}
+\begin{itemize}
+    \item Schutz der Datenintegrität.
+    \item Reduzierung von Abhängigkeiten.
+    \item Erleichterung von Änderungen und Erweiterungen.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{\textbf{Beispiel für Kapselung}}
+\textbf{Codebeispiel:}
+\begin{lstlisting}[language=Python]
+class BankAccount:
+    def __init__(self, owner, balance):
+        self.owner = owner
+        self.__balance = balance  # Privates Attribut
+
+    def deposit(self, amount):
+        if amount > 0:
+            self.__balance += amount
+
+    def get_balance(self):
+        return self.__balance
+
+account = BankAccount("Alice", 1000)
+print(account.get_balance())  # Zugriff auf private Daten über Methode
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}{\textbf{Kapselung und Datenzugriff}}
+\textbf{Diskussion:}
+\begin{itemize}
+    \item Warum ist der direkte Zugriff auf `\_\_balance` nicht erlaubt?
+    \item Wie kann dies zu sicherem Programmieren beitragen?
+\end{itemize}
+\end{frame}
+
+\section{Abstrakte Klassen}
+
+\begin{frame}{\textbf{Was sind abstrakte Klassen?}}
+\textbf{Definition:}
+\begin{itemize}
+    \item Abstrakte Klassen dienen als Blaupausen für andere Klassen.
+    \item Sie können nicht direkt instanziiert werden.
+    \item Verwendung des `abc`-Moduls in Python.
+\end{itemize}
+\textbf{Warum abstrakte Klassen verwenden?}
+\begin{itemize}
+    \item Erzwingen die Implementierung bestimmter Methoden in Unterklassen.
+    \item Stellen eine konsistente Schnittstelle über verschiedene Unterklassen sicher.
+\end{itemize}
+\textbf{Beispiele für den Einsatz:}
+\begin{itemize}
+    \item Formen wie Rechtecke und Kreise.
+    \item Fahrzeugtypen wie Autos und Motorräder.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{\textbf{Beispiel für abstrakte Klassen}}
+\textbf{Codebeispiel:}
+\begin{lstlisting}[language=Python]
+from abc import ABC, abstractmethod
+
+class Shape(ABC):
+    @abstractmethod
+    def area(self):
+        pass
+
+    @abstractmethod
+    def perimeter(self):
+        pass
+
+class Rectangle(Shape):
+    def __init__(self, width, height):
+        self.width = width
+        self.height = height
+
+    def area(self):
+        return self.width * self.height
+
+    def perimeter(self):
+        return 2 * (self.width + self.height)
+\end{lstlisting}
+\textbf{Übung:}
+\begin{itemize}
+    \item Implementieren Sie eine `Circle`-Klasse, die von `Shape` erbt.
+    \item Fügen Sie die Methoden `area` und `perimeter` hinzu.
+\end{itemize}
+\end{frame}
+
+\section{Statische und Klassenmethoden}
+
+\begin{frame}{\textbf{Statische und Klassenmethoden}}
+\textbf{Definitionen:}
+\begin{itemize}
+    \item \textbf{Statische Methoden:} Definiert mit `@staticmethod`. Sie hängen nicht von Instanz- oder Klassenvariablen ab.
+    \item \textbf{Klassenmethoden:} Definiert mit `@classmethod`. Sie nehmen die Klasse als ersten Parameter.
+\end{itemize}
+\textbf{Anwendungsfälle:}
+\begin{itemize}
+    \item Statische Methoden für Hilfsfunktionen (z.B. Berechnungen).
+    \item Klassenmethoden für Factory-Methoden.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{\textbf{Beispiel für statische und Klassenmethoden}}
+\textbf{Codebeispiel:}
+\begin{lstlisting}[language=Python]
+class MathUtils:
+    @staticmethod
+    def add(a, b):
+        return a + b
+
+    @classmethod
+    def pi(cls):
+        return 3.14159
+
+print(MathUtils.add(5, 7))  # 12
+print(MathUtils.pi())      # 3.14159
+\end{lstlisting}
+\textbf{Diskussion:}
+\begin{itemize}
+    \item Wann sollte eine statische Methode anstelle einer Instanzmethode verwendet werden?
+    \item Wie unterscheiden sich Klassenmethoden von statischen Methoden?
+\end{itemize}
+\end{frame}
+
+\section{Fazit}
+
+\begin{frame}{\textbf{Zusammenfassung und Q\&A}}
+\textbf{Wichtige Erkenntnisse:}
+\begin{itemize}
+    \item Kapselung schützt Daten innerhalb einer Klasse.
+    \item Abstrakte Klassen bieten eine Blaupause für konsistente Schnittstellen.
+    \item Statische und Klassenmethoden ermöglichen Dienstprogramme und klassenbezogene Verhaltensweisen.
+    \item OOP hilft effektiv bei der Modellierung realer Probleme.
+\end{itemize}
+\textbf{Nächste Schritte:}
+\begin{itemize}
+    \item Modellierung realer Probleme üben.
+    \item Heutige Codebeispiele überprüfen und erweitern.
+    \item Experimentieren Sie mit abstrakten Klassen und Methoden.
+\end{itemize}
+\end{frame}
+
+\end{document}
