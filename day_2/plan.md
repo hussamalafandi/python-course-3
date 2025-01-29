@@ -1,4 +1,4 @@
-### **Day 1: Recap and Advanced Object-Oriented Programming (OOP)**  
+### **Day 2: Recap and Advanced Object-Oriented Programming (OOP)**  
 **Objective:** Reinforce foundational OOP concepts and introduce advanced topics such as encapsulation, abstract classes, and real-world modeling.
 
 ---
