@@ -1,172 +1,171 @@
-### **Course Title: Python 3 - Advanced Concepts and Applications**
-**Objective:** Strengthen Python skills with OOP, computational thinking, recursion, data analysis, and algorithmic problem-solving while using the right environments and tools.
+## **Kurs: Python 3 - Fortgeschrittene Konzepte und Anwendungen**  
+**Ziel:** Vertiefung der Python-Kenntnisse mit **OOP, algorithmischem Denken, Rekursion, Datenanalyse** und der Verwendung von Entwicklungsumgebungen und Tools.  
 
 ---
 
-### **Day 1: Setting Up Environments and Working with Jupyter Notebooks**
-**Goal:** Ensure students have a proper working environment for Python development.
+### **Tag 1: Einrichten von Umgebungen und Arbeiten mit Jupyter Notebooks**  
+**Ziel:** Sicherstellen, dass die Studierenden eine geeignete Entwicklungsumgebung haben.  
 
-- **Topics:**
-  - Introduction to Python environments:
-    - What are virtual environments? Why use them?
-    - Creating and managing virtual environments (`venv`, `conda`).
-    - Installing and managing dependencies with `pip` and `conda`.
-  - Introduction to Jupyter Notebooks:
-    - Setting up Jupyter and running Python code in notebooks.
-    - Markdown for documentation.
-    - Running and debugging Python scripts.
+- **Themen:**
+  - Einführung in **Python-Umgebungen**:
+    - Was sind virtuelle Umgebungen und warum werden sie verwendet?
+    - Erstellung und Verwaltung von virtuellen Umgebungen mit `venv` und `conda`.
+    - Installation und Verwaltung von Bibliotheken mit `pip` und `conda`.
+  - Einführung in **Jupyter Notebooks**:
+    - Einrichtung und Ausführung von Python-Code.
+    - Verwendung von Markdown zur Dokumentation.
+    - Debugging und Visualisierung von Daten.  
 
-- **Practice:**
-  - Create a virtual environment and install NumPy, Pandas, Matplotlib.
-  - Open and run a Jupyter Notebook.
-  - Write a simple script to import and visualize sample data.
-
----
-
-### **Day 2: Recap and Advanced Object-Oriented Programming (OOP)**
-**Goal:** Reinforce and expand OOP concepts.
-
-- **Topics:**
-  - Recap: Classes, objects, inheritance, and polymorphism.
-  - Advanced OOP:
-    - Encapsulation, public/private attributes.
-    - Static methods and class methods.
-    - Abstract classes (`abc` module).
-  - Real-world modeling:
-    - Designing a real-world problem with OOP.
-
-- **Practice:**
-  - Model a **library management system** with classes for books, members, and borrowing records.
+- **Übungen:**
+  - Erstellen einer virtuellen Umgebung und Installation von NumPy, Pandas, Matplotlib.
+  - Öffnen und Bearbeiten eines Jupyter Notebooks.
+  - Schreiben eines einfachen Skripts zur Datenverarbeitung.  
 
 ---
 
-### **Day 3: Applied OOP and Design Patterns**
-**Goal:** Apply OOP concepts to more complex problems.
+### **Tag 2: Wiederholung und erweiterte objektorientierte Programmierung (OOP)**  
+**Ziel:** Stärkung und Erweiterung der OOP-Konzepte.  
 
-- **Topics:**
-  - Design patterns (introduction):
-    - Singleton and Factory patterns.
-  - Debugging and testing OOP-based programs.
-  - Building modular programs using OOP.
+- **Themen:**
+  - Wiederholung: **Klassen, Objekte, Vererbung, Polymorphie**.
+  - Erweiterte OOP-Konzepte:
+    - **Kapselung**, öffentliche/private Attribute.
+    - **Statische Methoden** und **Klassenmethoden**.
+    - **Abstrakte Klassen** (`abc`-Modul).
+  - Modellierung realer Probleme mit OOP.  
 
-- **Practice:**
-  - Extend the **library management system** with inheritance and polymorphism.
-  - Debug and test the program for improvements.
-
----
-
-### **Day 4: Computational Thinking and Algorithm Efficiency**
-**Goal:** Introduce algorithmic problem-solving and efficiency.
-
-- **Topics:**
-  - Computational thinking principles.
-  - Searching algorithms:
-    - Linear search, binary search.
-  - Sorting algorithms:
-    - Bubble sort, selection sort, quick sort.
-  - Big O notation:
-    - Understanding time complexity.
-
-- **Practice:**
-  - Implement sorting algorithms and compare their performance.
-  - Write a binary search function to find elements in a sorted list.
+- **Übungen:**
+  - Modellierung eines **Bibliothekssystems** mit Klassen für Bücher, Mitglieder und Ausleihen.  
 
 ---
 
-### **Day 5: Recursive Thinking**
-**Goal:** Understand and apply recursion.
+### **Tag 3: Angewandte OOP und Design Patterns**  
+**Ziel:** Anwendung von OOP-Konzepten in realistischen Szenarien.  
 
-- **Topics:**
-  - Basics of recursion:
-    - Base case, recursive case.
-    - Avoiding infinite recursion.
-  - Classic recursion problems:
-    - Factorial, Fibonacci sequence.
-    - Tower of Hanoi.
+- **Themen:**
+  - Einführung in **Design Patterns**:
+    - **Singleton**- und **Factory-Muster**.
+  - Erstellung modularer Programme mit OOP.
+  - Debugging und Testen von OOP-basierten Programmen.  
 
-- **Practice:**
-  - Implement recursive solutions for factorial and Fibonacci.
-  - Solve **Tower of Hanoi** and visualize the steps.
+- **Übungen:**
+  - **Erweiterung des Bibliothekssystems** mit **Vererbung** und **Polymorphie**.
+  - Implementierung einer **Fabrikklasse** zur Erstellung unterschiedlicher Buchtypen.  
 
 ---
 
-### **Day 6: Data Analysis with NumPy and Pandas (Part 1)**
-**Goal:** Learn data manipulation and basic analysis techniques.
+### **Tag 4: Algorithmisches Denken und Effizienz von Algorithmen**  
+**Ziel:** Einführung in algorithmische Problemlösung und Effizienzbewertung.  
 
-- **Topics:**
+- **Themen:**
+  - Einführung in **algorithmisches Denken**.
+  - **Suchalgorithmen**:
+    - Lineare Suche, Binäre Suche.
+  - **Sortieralgorithmen**:
+    - Bubblesort, Selectionsort, Quicksort.
+  - **Big O-Notation**:
+    - Einführung in **Laufzeitkomplexität**.  
+
+- **Übungen:**
+  - Implementierung von **Sortieralgorithmen** und Vergleich der Laufzeiten.
+  - Schreiben einer **binären Suche** für eine sortierte Liste.  
+
+---
+
+### **Tag 5: Rekursion und rekursives Denken**  
+**Ziel:** Verständnis und Anwendung von Rekursion.  
+
+- **Themen:**
+  - Einführung in **rekursive Funktionen**:
+    - **Basisfall**, rekursiver Fall.
+    - Vermeidung von **Endlosrekursion**.
+  - Klassische Rekursionsprobleme:
+    - Fakultät, Fibonacci-Folge.
+    - **Türme von Hanoi**.  
+
+- **Übungen:**
+  - Schreiben einer **rekursiven Fakultäts- und Fibonacci-Funktion**.
+  - **Lösung des Türme von Hanoi-Problems** mit Visualisierung.  
+
+---
+
+### **Tag 6: Datenanalyse mit NumPy und Pandas (Teil 1)**  
+**Ziel:** Einführung in die Datenverarbeitung mit **NumPy** und **Pandas**.  
+
+- **Themen:**
   - **NumPy**:
-    - Arrays, indexing, slicing.
-    - Basic operations (sum, mean, transpose).
+    - Arrays, Indexierung, Slicing.
+    - Grundlegende Operationen (Summe, Mittelwert, Transponierung).
   - **Pandas**:
-    - Series and DataFrames.
-    - Importing/exporting data (CSV, Excel).
+    - **Series** und **DataFrames**.
+    - Import und Export von Daten (CSV, Excel).  
 
-- **Practice:**
-  - Perform basic array operations in NumPy.
-  - Load and explore a dataset using Pandas.
-
----
-
-### **Day 7: Data Analysis with NumPy and Pandas (Part 2)**
-**Goal:** Perform advanced data manipulation and visualization.
-
-- **Topics:**
-  - Pandas advanced operations:
-    - Grouping, merging, filtering.
-    - Handling missing data.
-  - Data visualization:
-    - Matplotlib and Pandas plotting.
-
-- **Practice:**
-  - Analyze a dataset (e.g., **COVID-19 statistics**).
-  - Create visualizations for trends.
+- **Übungen:**
+  - Grundlegende **Array-Manipulationen** mit NumPy.
+  - Laden und **Erkunden eines Datensatzes** mit Pandas.  
 
 ---
 
-### **Day 8: Time Series and Linear Regression**
-**Goal:** Introduce time series analysis and linear regression.
+### **Tag 7: Datenanalyse mit NumPy und Pandas (Teil 2)**  
+**Ziel:** Fortgeschrittene Datenanalyse und Visualisierung.  
 
-- **Topics:**
-  - Time series analysis:
-    - Handling datetime in Pandas.
-    - Analyzing trends over time.
-  - Linear regression:
-    - Basics of regression.
-    - Fitting a regression line using NumPy/Pandas.
+- **Themen:**
+  - **Erweiterte Pandas-Operationen**:
+    - Gruppierung, Zusammenführung, Filterung.
+    - Umgang mit fehlenden Daten.
+  - **Datenvisualisierung**:
+    - Erstellung von Diagrammen mit Matplotlib und Pandas.  
 
-- **Practice:**
-  - Analyze and visualize stock market or sales data.
-  - Implement linear regression to predict trends.
-
----
-
-### **Day 9: Practical Applications and Mini-Project**
-**Goal:** Apply knowledge to solve a real-world problem.
-
-- **Activity:** Work on a guided mini-project.
-  - Example: Analyze **sales data** to find trends and predict future sales using regression.
-  - Steps:
-    - Load and clean the dataset.
-    - Perform exploratory analysis.
-    - Apply regression for prediction.
-    - Visualize results.
+- **Übungen:**
+  - Analyse eines **realen Datensatzes** (z. B. COVID-19-Statistiken).
+  - Erstellung von **Diagrammen zur Datenvisualisierung**.  
 
 ---
 
-### **Day 10: Capstone Project and Final Review**
-**Goal:** Consolidate learning through a **comprehensive project**.
+### **Tag 8: Zeitreihenanalyse und lineare Regression**  
+**Ziel:** Einführung in die Zeitreihenanalyse und Regression.  
 
-- **Project Topics (students choose one):**
-  - Build a **class-based system** (e.g., **employee management**).
-  - Analyze **time-series data** and make **predictions**.
-  - Create a **modular Python program** for a **real-world application**.
+- **Themen:**
+  - **Zeitreihenanalyse**:
+    - Umgang mit **Datumswerten in Pandas**.
+    - Erkennung von **Trends und saisonalen Mustern**.
+  - **Lineare Regression**:
+    - Grundlagen der Regression.
+    - Berechnung einer **Regressionslinie mit NumPy und Pandas**.  
 
-- **Final Review:**
-  - Recap of key topics.
-  - Discussion on next learning steps (Machine Learning, Data Science, etc.).
+- **Übungen:**
+  - Analyse von **Aktienkurs- oder Verkaufsdaten**.
+  - Implementierung einer **einfachen linearen Regression**.  
 
 ---
 
-### **Key Tools & Libraries:**
-- **Python Environments:** Jupyter Notebook, `venv`, `conda`
-- **Libraries:** NumPy, Pandas, Matplotlib
+### **Tag 9: Praktische Anwendungen und Mini-Projekt**  
+**Ziel:** Anwendung des erlernten Wissens auf reale Probleme.  
+
+- **Aktivitäten:**  
+  - Bearbeitung eines **Mini-Projekts**, z. B. **Analyse von Verkaufsdaten** zur **Vorhersage zukünftiger Trends**.  
+  - **Schritte:**
+    - Laden und Bereinigung des Datensatzes.
+    - Explorative Datenanalyse.
+    - Anwendung von **Regression** zur Vorhersage.
+    - Visualisierung der Ergebnisse.  
+
+---
+
+### **Tag 10: Abschlussprojekt und Zusammenfassung**  
+**Ziel:** Konsolidierung des Wissens durch ein umfassendes Projekt.  
+
+- **Projektoptionen (Studierende wählen eine Aufgabe):**  
+  - Entwicklung eines **OOP-gestützten Systems** (z. B. **Mitarbeiterverwaltung**).  
+  - Analyse von **Zeitreihendaten** und Vorhersagen mit Regression.  
+  - Erstellung eines **modularen Python-Programms** für eine **reale Anwendung**.  
+
+- **Zusammenfassung:**
+  - Wiederholung der **wichtigsten Konzepte**.
+  - **Diskussion über nächste Schritte** (z. B. Machine Learning, Data Science).  
+
+---
+
+## **Werkzeuge & Bibliotheken:**
+- **Python-Umgebungen:** Jupyter Notebook, `venv`, `conda`
+- **Bibliotheken:** NumPy, Pandas, Matplotlib
