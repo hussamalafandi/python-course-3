@@ -32,7 +32,7 @@
 \lstset{style=mystyle}
 
 
-\title{Tag 1: Einrichten von Python-Umgebungen und Arbeiten mit Jupyter Notebooks}
+\title{Einrichten von Python-Umgebungen und Arbeiten mit Jupyter Notebooks}
 \author{}
 \date{\today}
 
@@ -76,18 +76,18 @@
   \textbf{Schritte:}
   \begin{enumerate}
     \item Erstellen der Umgebung:
-          \begin{lstlisting}[language=bash]
-    python -m venv my_env
-    \end{lstlisting}
+\begin{lstlisting}[language=bash]
+  python -m venv my_env
+\end{lstlisting}
     \item Aktivieren der Umgebung:
-          \begin{lstlisting}[language=bash]
-    source my_env/bin/activate  # Mac/Linux
-    my_env\Scripts\activate  # Windows
-    \end{lstlisting}
+\begin{lstlisting}[language=bash]
+  source my_env/bin/activate  # Mac/Linux
+  my_env\Scripts\activate  # Windows
+\end{lstlisting}
     \item Deaktivieren der Umgebung:
-          \begin{lstlisting}[language=bash]
-      deactivate
-    \end{lstlisting}
+\begin{lstlisting}[language=bash]
+  deactivate
+\end{lstlisting}
   \end{enumerate}
 \end{frame}
 
@@ -95,17 +95,17 @@
   \textbf{Schritte:}
   \begin{enumerate}
     \item Erstellen der Umgebung:
-          \begin{lstlisting}
-    conda create --name my_env python=3.10
-    \end{lstlisting}
+\begin{lstlisting}[language=bash]
+  conda create --name my_env python=3.10
+\end{lstlisting}
     \item Aktivieren der Umgebung:
-          \begin{lstlisting}
-    conda activate my_env
-    \end{lstlisting}
+\begin{lstlisting}[language=bash]
+  conda activate my_env
+\end{lstlisting}
     \item Deaktivieren der Umgebung:
-          \begin{lstlisting}
-    conda deactivate
-    \end{lstlisting}
+\begin{lstlisting}[language=bash]
+  conda deactivate
+\end{lstlisting}
   \end{enumerate}
 \end{frame}
 
@@ -114,42 +114,42 @@
 \begin{frame}[fragile]{Installieren von Paketen mit pip}
   \begin{itemize}
     \item Installation eines Pakets mit pip:
-          \begin{lstlisting}
-    pip install notebook
-    \end{lstlisting}
+\begin{lstlisting}[language=bash]
+  pip install notebook
+\end{lstlisting}
     \item Anzeigen installierter Pakete:
-          \begin{lstlisting}
-    pip list
-    \end{lstlisting}
+\begin{lstlisting}[language=bash]
+  pip list
+\end{lstlisting}
     \item Erstellung einer Liste installierter Pakete (Abhängigkeiten):
-          \begin{lstlisting}
-    pip freeze > requirements.txt
-    \end{lstlisting}
+\begin{lstlisting}[language=bash]
+  pip freeze > requirements.txt
+\end{lstlisting}
     \item Installation der gespeicherten Abhängigkeiten:
-          \begin{lstlisting}
-    pip install -r requirements.txt
-    \end{lstlisting}
+\begin{lstlisting}[language=bash]
+  pip install -r requirements.txt
+\end{lstlisting}
   \end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]{Installieren von Paketen mit Conda}
   \begin{itemize}
     \item Installation eines Pakets mit Conda:
-          \begin{lstlisting}
-    conda install numpy pandas matplotlib
-    \end{lstlisting}
+\begin{lstlisting}[language=bash]
+  conda install numpy pandas matplotlib
+\end{lstlisting}
     \item Anzeigen installierter Pakete:
-          \begin{lstlisting}
-    conda list
-    \end{lstlisting}
+\begin{lstlisting}[language=bash]
+  conda list
+\end{lstlisting}
     \item Erstellung einer Umgebungsdatei für Wiederverwendung:
-          \begin{lstlisting}
-    conda env export > environment.yml
-    \end{lstlisting}
+\begin{lstlisting}[language=bash]
+  conda env export > environment.yml
+\end{lstlisting}
     \item Installation der gespeicherten Umgebung:
-          \begin{lstlisting}
-    conda env create -f environment.yml
-    \end{lstlisting}
+\begin{lstlisting}[language=bash]
+  conda env create -f environment.yml
+\end{lstlisting}
   \end{itemize}
 \end{frame}
 
@@ -166,13 +166,13 @@
 \begin{frame}[fragile]{Starten von Jupyter Notebook}
   \begin{itemize}
     \item Sicherstellen, dass Jupyter installiert ist:
-          \begin{lstlisting}
-    pip install notebook
-    \end{lstlisting}
+\begin{lstlisting}[language=bash]
+  pip install notebook
+\end{lstlisting}
     \item Starten von Jupyter:
-          \begin{lstlisting}
-    jupyter notebook
-    \end{lstlisting}
+\begin{lstlisting}[language=bash]
+  jupyter notebook
+\end{lstlisting}
   \end{itemize}
 \end{frame}
 
@@ -197,9 +197,9 @@
             \item Öffnen aus Google Drive oder GitHub.
           \end{itemize}
     \item Beispiel für das Ausführen eines Codes in Colab:
-          \begin{lstlisting}
-    print("Hello Google Colab!")
-    \end{lstlisting}
+\begin{lstlisting}[language=Python]
+  print("Hello Google Colab!")
+\end{lstlisting}
   \end{itemize}
 \end{frame}
 
