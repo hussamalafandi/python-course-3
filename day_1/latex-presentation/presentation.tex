@@ -111,7 +111,7 @@
 
 \section{Verwalten von Abhängigkeiten}
 
-\begin{frame}[fragile]{Installieren von Paketen}
+\begin{frame}[fragile]{Installieren von Paketen mit pip}
   \begin{itemize}
     \item Installation eines Pakets mit pip:
           \begin{lstlisting}
@@ -121,9 +121,34 @@
           \begin{lstlisting}
     pip list
     \end{lstlisting}
-    \item Erstellung einer Anforderungsliste:
+    \item Erstellung einer Liste installierter Pakete (Abhängigkeiten):
           \begin{lstlisting}
     pip freeze > requirements.txt
+    \end{lstlisting}
+    \item Installation der gespeicherten Abhängigkeiten:
+          \begin{lstlisting}
+    pip install -r requirements.txt
+    \end{lstlisting}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Installieren von Paketen mit Conda}
+  \begin{itemize}
+    \item Installation eines Pakets mit Conda:
+          \begin{lstlisting}
+    conda install numpy pandas matplotlib
+    \end{lstlisting}
+    \item Anzeigen installierter Pakete:
+          \begin{lstlisting}
+    conda list
+    \end{lstlisting}
+    \item Erstellung einer Umgebungsdatei für Wiederverwendung:
+          \begin{lstlisting}
+    conda env export > environment.yml
+    \end{lstlisting}
+    \item Installation der gespeicherten Umgebung:
+          \begin{lstlisting}
+    conda env create -f environment.yml
     \end{lstlisting}
   \end{itemize}
 \end{frame}
