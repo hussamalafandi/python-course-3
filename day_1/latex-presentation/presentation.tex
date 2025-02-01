@@ -4,7 +4,6 @@
 \usepackage{listings}
 \usepackage{xcolor}
 
-
 % Define custom colors
 \definecolor{codegreen}{rgb}{0,0.6,0}
 \definecolor{codegray}{rgb}{0.5,0.5,0.5}
@@ -53,6 +52,16 @@
   \end{itemize}
 \end{frame}
 
+\begin{frame}{Überblick der Tools}
+  \begin{itemize}
+    \item \textbf{Python:} Die Programmiersprache, die wir heute nutzen.
+    \item \textbf{venv:} Erstellen isolierter Umgebungen für Projekte.
+    \item \textbf{pip:} Paketmanager für Python-Bibliotheken.
+    \item \textbf{Conda:} Alternative zu venv, speziell für wissenschaftliche Pakete.
+    \item \textbf{Jupyter Notebook:} Interaktive Umgebung für Python-Code und Visualisierungen.
+  \end{itemize}
+\end{frame}
+
 \begin{frame}{Warum virtuelle Umgebungen?}
   \begin{itemize}
     \item Vermeidung von Versionskonflikten zwischen Projekten.
@@ -67,16 +76,16 @@
   \textbf{Schritte:}
   \begin{enumerate}
     \item Erstellen der Umgebung:
-    \begin{lstlisting}[language=bash]
+          \begin{lstlisting}[language=bash]
     python -m venv my_env
     \end{lstlisting}
     \item Aktivieren der Umgebung:
-    \begin{lstlisting}[language=bash]
+          \begin{lstlisting}[language=bash]
     source my_env/bin/activate  # Mac/Linux
     my_env\Scripts\activate  # Windows
     \end{lstlisting}
     \item Deaktivieren der Umgebung:
-    \begin{lstlisting}[language=bash]
+          \begin{lstlisting}[language=bash]
       deactivate
     \end{lstlisting}
   \end{enumerate}
@@ -86,15 +95,15 @@
   \textbf{Schritte:}
   \begin{enumerate}
     \item Erstellen der Umgebung:
-    \begin{lstlisting}
+          \begin{lstlisting}
     conda create --name my_env python=3.10
     \end{lstlisting}
     \item Aktivieren der Umgebung:
-    \begin{lstlisting}
+          \begin{lstlisting}
     conda activate my_env
     \end{lstlisting}
     \item Deaktivieren der Umgebung:
-    \begin{lstlisting}
+          \begin{lstlisting}
     conda deactivate
     \end{lstlisting}
   \end{enumerate}
@@ -105,15 +114,15 @@
 \begin{frame}[fragile]{Installieren von Paketen}
   \begin{itemize}
     \item Installation eines Pakets mit pip:
-    \begin{lstlisting}
+          \begin{lstlisting}
     pip install notebook
     \end{lstlisting}
     \item Anzeigen installierter Pakete:
-    \begin{lstlisting}
+          \begin{lstlisting}
     pip list
     \end{lstlisting}
     \item Erstellung einer Anforderungsliste:
-    \begin{lstlisting}
+          \begin{lstlisting}
     pip freeze > requirements.txt
     \end{lstlisting}
   \end{itemize}
@@ -132,11 +141,11 @@
 \begin{frame}[fragile]{Starten von Jupyter Notebook}
   \begin{itemize}
     \item Sicherstellen, dass Jupyter installiert ist:
-    \begin{lstlisting}
+          \begin{lstlisting}
     pip install notebook
     \end{lstlisting}
     \item Starten von Jupyter:
-    \begin{lstlisting}
+          \begin{lstlisting}
     jupyter notebook
     \end{lstlisting}
   \end{itemize}
@@ -147,11 +156,11 @@
 \begin{frame}[fragile]{Zelltypen in Jupyter}
   \begin{itemize}
     \item \textbf{Code-Zellen:} Python-Code ausführen
-    \begin{lstlisting}
+          \begin{lstlisting}
     print("Hallo, Jupyter!")
     \end{lstlisting}
     \item \textbf{Markdown-Zellen:} Dokumentation und Formatierung
-    \begin{lstlisting}
+          \begin{lstlisting}
     # Meine erste Markdown-Zelle
     **Fettgedruckt**, *kursiv*, `Code`
     \end{lstlisting}
