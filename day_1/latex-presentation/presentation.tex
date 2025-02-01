@@ -176,38 +176,30 @@
   \end{itemize}
 \end{frame}
 
-\section{Arbeiten mit Jupyter-Zellen}
+\section{Jupyter Notebooks in VS Code und Google Colab}
 
-\begin{frame}[fragile]{Zelltypen in Jupyter}
+\begin{frame}[fragile]{Jupyter Notebooks in VS Code}
   \begin{itemize}
-    \item \textbf{Code-Zellen:} Python-Code ausführen
-          \begin{lstlisting}
-    print("Hallo, Jupyter!")
-    \end{lstlisting}
-    \item \textbf{Markdown-Zellen:} Dokumentation und Formatierung
-          \begin{lstlisting}
-    # Meine erste Markdown-Zelle
-    **Fettgedruckt**, *kursiv*, `Code`
-    \end{lstlisting}
+    \item Visual Studio Code unterstützt Jupyter Notebooks nativ.
+    \item Installation der Jupyter-Erweiterung in VS Code
+    \item Vorteil: Integrierte Debugging- und Entwicklungsumgebung.
   \end{itemize}
 \end{frame}
 
-\begin{frame}{Jupyter Shortcuts}
+\begin{frame}[fragile]{Jupyter Notebooks in Google Colab}
   \begin{itemize}
-    \item `Shift + Enter` - Zelle ausführen
-    \item `Esc + A/B` - Neue Zelle über/unter aktueller Zelle hinzufügen
-    \item `Esc + D, D` - Zelle löschen
-  \end{itemize}
-\end{frame}
-
-\section{Q\&A und Abschluss}
-
-\begin{frame}{Zusammenfassung des Tages}
-  \begin{itemize}
-    \item Einrichtung und Nutzung virtueller Umgebungen.
-    \item Installation und Verwaltung von Python-Paketen.
-    \item Einführung in Jupyter Notebook.
-    \item Arbeiten mit Jupyter-Zellen und Markdown.
+    \item Google Colab ist eine cloudbasierte Jupyter-Notebook-Umgebung.
+    \item Kein Setup erforderlich – funktioniert direkt im Browser.
+    \item Zugriff auf GPUs und TPUs für schnellere Berechnungen.
+    \item Laden eines Notebooks in Colab:
+          \begin{itemize}
+            \item Direkt eine `.ipynb`-Datei hochladen.
+            \item Öffnen aus Google Drive oder GitHub.
+          \end{itemize}
+    \item Beispiel für das Ausführen eines Codes in Colab:
+          \begin{lstlisting}
+    print("Hello Google Colab!")
+    \end{lstlisting}
   \end{itemize}
 \end{frame}
 
