@@ -1,0 +1,176 @@
+\documentclass[luatex, aspectratio=169]{beamer}
+\usepackage{fontspec} % Ensure compatibility with LuaLaTeX
+\usetheme{metropolis} % Use the Metropolis theme
+\usepackage{listings} % Proper code highlighting
+
+\title{Python Course: Day 1}
+\subtitle{Setting Up Environments and Jupyter Notebooks}
+\author{Instructor Name}
+\date{\today}
+
+\begin{document}
+
+% Title Slide
+\maketitle
+
+% Slide: Introduction
+\section{Introduction}
+\begin{frame}{Introduction to Python Environments}
+  \begin{itemize}
+    \item What are Python environments?
+    \item Why use environments?
+      \begin{itemize}
+        \item Isolate dependencies.
+        \item Avoid conflicts between projects.
+        \item Keep your system clean.
+      \end{itemize}
+    \item Tools for environments:
+      \begin{itemize}
+        \item \texttt{venv} (built into Python).
+        \item \texttt{conda} (for advanced use).
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+% Slide: Setting Up Virtual Environments
+\section{Setting Up Virtual Environments}
+\begin{frame}{Creating and Activating Virtual Environments}
+  \textbf{Using \texttt{venv}:}
+  \begin{enumerate}
+    \item Create an environment:
+      \begin{lstlisting}
+      python -m venv my_env
+      \end{lstlisting}
+    \item Activate the environment:
+      \begin{itemize}
+        \item Mac/Linux: \texttt{source my\_env/bin/activate}
+        \item Windows: \texttt{my\_env\texttt{\textbackslash}Scripts\texttt{\textbackslash}activate}
+      \end{itemize}
+    \item Deactivate:
+      \begin{lstlisting}
+      deactivate
+      \end{lstlisting}
+  \end{enumerate}
+  \vspace{0.5cm}
+  \textbf{Using \texttt{conda}:}
+  \begin{enumerate}
+    \item Create an environment:
+      \begin{lstlisting}
+      conda create --name my_env python=3.10
+      \end{lstlisting}
+    \item Activate the environment:
+      \begin{lstlisting}
+      conda activate my_env
+      \end{lstlisting}
+    \item Deactivate:
+      \begin{lstlisting}
+      conda deactivate
+      \end{lstlisting}
+  \end{enumerate}
+\end{frame}
+
+% Slide: Managing Dependencies
+\section{Managing Dependencies}
+\begin{frame}{Installing and Managing Packages}
+  \begin{itemize}
+    \item Installing packages with \texttt{pip}:
+      \begin{lstlisting}
+      pip install notebook
+      \end{lstlisting}
+    \item Checking installed packages:
+      \begin{lstlisting}
+      pip list
+      \end{lstlisting}
+    \item Generating \texttt{requirements.txt}:
+      \begin{lstlisting}
+      pip freeze > requirements.txt
+      \end{lstlisting}
+    \item Installing from \texttt{requirements.txt}:
+      \begin{lstlisting}
+      pip install -r requirements.txt
+      \end{lstlisting}
+  \end{itemize}
+\end{frame}
+
+% Slide: Introduction to Jupyter Notebooks
+\section{Introduction to Jupyter Notebooks}
+\begin{frame}{What is Jupyter Notebook?}
+  \begin{itemize}
+    \item Interactive coding environment.
+    \item Combines:
+      \begin{itemize}
+        \item Python code.
+        \item Markdown documentation.
+        \item Visualizations and outputs.
+      \end{itemize}
+    \item Launching Jupyter:
+      \begin{lstlisting}
+      jupyter notebook
+      \end{lstlisting}
+  \end{itemize}
+\end{frame}
+
+% Slide: Working with Jupyter Cells
+\section{Working with Jupyter Cells}
+\begin{frame}{Using Jupyter Cells}
+  \textbf{Types of Cells:}
+  \begin{itemize}
+    \item \textbf{Code Cells:}
+      \begin{itemize}
+        \item Execute Python code.
+        \item Display outputs directly below the cell.
+      \end{itemize}
+    \item \textbf{Markdown Cells:}
+      \begin{itemize}
+        \item Write formatted text.
+        \item Use headings, bullet points, and inline code.
+      \end{itemize}
+  \end{itemize}
+  \vspace{0.5cm}
+  \textbf{Basic Commands:}
+  \begin{itemize}
+    \item Run cell: \texttt{Shift + Enter}
+    \item Add cell: \texttt{+} button or \texttt{Insert}
+    \item Delete cell: Select and press \texttt{dd}
+  \end{itemize}
+\end{frame}
+
+% Slide: Practice Tasks
+\section{Practice Tasks}
+\begin{frame}{Practice Tasks}
+  \textbf{Task 1: Markdown Practice}
+  \begin{itemize}
+    \item Add a Markdown cell with:
+      \begin{lstlisting}
+      # My First Notebook
+      This is **bold** text and this is *italic* text.
+      \end{lstlisting}
+  \end{itemize}
+  \vspace{0.5cm}
+  \textbf{Task 2: Python Practice}
+  \begin{itemize}
+    \item Add a Code cell and execute:
+      \begin{lstlisting}
+      for i in range(5):
+          print(f"Number: {i}")
+      \end{lstlisting}
+  \end{itemize}
+\end{frame}
+
+% Slide: Q&A
+\section{Q&A}
+\begin{frame}{Questions and Troubleshooting}
+  \begin{itemize}
+    \item Any issues with environment setup?
+    \item Problems launching Jupyter Notebook?
+    \item Questions about Markdown or cells?
+  \end{itemize}
+  \vspace{0.5cm}
+  \textbf{Next Steps:}
+  \begin{itemize}
+    \item Practice creating virtual environments.
+    \item Explore Jupyter Notebook further.
+  \end{itemize}
+\end{frame}
+
+\end{document}
