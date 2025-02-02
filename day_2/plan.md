@@ -1,71 +1,86 @@
-### **Day 2: Recap and Advanced Object-Oriented Programming (OOP)**  
-**Objective:** Reinforce foundational OOP concepts and introduce advanced topics such as encapsulation, abstract classes, and real-world modeling.
+# **Tag 2: Fortgeschrittene OOP-Konzepte in Python**
+**Ziel:** Vertiefung der objektorientierten Programmierung (OOP) durch **Encapsulation, abstrakte Klassen, statische Methoden und realistische Modellierung**.
 
 ---
 
-#### **Schedule for Day 1**
-| Time          | Topic                                      | Activity/Methodology                              |
-|---------------|--------------------------------------------|--------------------------------------------------|
-| 9:00 - 9:30   | Welcome and Quick Recap                   | Discussion and Q&A                               |
-| 9:30 - 10:30  | Advanced OOP Concepts: Encapsulation      | Lecture with examples                            |
-| 10:30 - 10:45 | Break                                      |                                                  |
-| 10:45 - 11:30 | Abstract Classes and Methods              | Coding examples and small exercises              |
-| 11:30 - 12:15 | Static and Class Methods                  | Explanation and practical implementation         |
-| 12:15 - 1:15  | Lunch Break                                |                                                  |
-| 1:15 - 2:00   | Modeling Real-World Problems with OOP     | Group activity: designing a class structure      |
-| 2:00 - 2:45   | Code Implementation: Real-World Modeling  | Guided coding session                            |
-| 2:45 - 3:00   | Break                                      |                                                  |
-| 3:00 - 3:30   | Debugging and Testing OOP Code            | Hands-on debugging practice                      |
-| 3:30 - 4:00   | Recap and Q&A                             | Discussion of day’s learnings and challenges     |
+## **Tagesablauf**
+| **Zeit**   | **Thema**                                       | **Beschreibung**                                      |
+|------------|-----------------------------------------------|------------------------------------------------------|
+| **9:00 - 9:20** | **Interaktive Wiederholung**                | Kurzes OOP-Quiz, Fehleranalyse in Code, Diskussion. |
+| **9:20 - 9:50** | **Encapsulation & `@property` Dekorator**  | Theorie & Anwendung von privaten Attributen.        |
+| **9:50 - 10:20** | **Abstrakte Klassen und `abc` Modul**     | Einführung in abstrakte Methoden, praktische Übung. |
+| **10:20 - 10:50** | **`@staticmethod` vs. `@classmethod`**   | Erklärung, wann man sie nutzt, praktische Übung.   |
+| **10:50 - 11:20** | **OOP-Design mit UML-Diagramm**          | Planung eines realen Systems mit UML.               |
+| **11:20 - 11:50** | **Code-Implementierung des Systems**     | Umsetzung der Klassendefinitionen in Python.        |
+| **11:50 - 12:20** | **Debugging & Unit Testing mit `unittest`** | Einführung ins Testen, praktische Anwendung.    |
+| **12:20 - 13:00** | **Reflexion, Q&A und Ausblick auf Tag 3** | Zusammenfassung, Fragen, Vorschau auf NumPy & Pandas. |
 
 ---
 
-#### **Detailed Plan**
+## **Detaillierter Plan**
 
-### **9:00 - 9:30: Welcome and Quick Recap**
-- **Activity:**
-  - Ask students to share what they remember about OOP concepts from the previous courses.
-  - Focus on revisiting:
-    - Classes and objects.
-    - Inheritance and polymorphism.
-  - Provide a quick coding demonstration:
-    - Example: Create a `Vehicle` class with basic attributes and methods, then extend it to a `Car` class.
+### **9:00 - 9:20: Interaktive Wiederholung**
+**Ziel:** Aktivieren des Vorwissens der Studierenden und Fehleranalyse in OOP-Code.  
+
+- **Aktivitäten:**  
+  - Kurzes **OOP-Quiz** mit Fragen zu:
+    - Was sind Klassen und Objekte?
+    - Erkläre Vererbung und Polymorphie.
+  - Gruppenaufgabe: **Fehlersuche in OOP-Code**  
+    - Studierende finden und beheben Fehler in folgendem Code:
+    ```python
+    class Person:
+    def __init__(self name, age):  # Syntaxfehler
+        self.name = name
+        self.age = age
+
+    def greet(self)
+        print(f"Hallo, mein Name ist {self.name} und ich bin {self.age} Jahre alt.")
+    ```
+  - **Diskussion:** Warum ist OOP wichtig in der Praxis?
 
 ---
 
-### **9:30 - 10:30: Advanced OOP Concepts: Encapsulation**
-- **Concepts:**
-  - What is encapsulation?
-  - Public, private, and protected attributes in Python (using `_` and `__` prefixes).
-  - Getter and setter methods.
-- **Example:**
+### **9:20 - 9:50: Encapsulation & `@property` Dekorator**
+**Ziel:** Kapselung von Daten mithilfe von privaten Attributen und `@property`.  
+
+- **Theorie:**  
+  - Was ist Encapsulation?  
+  - Verwendung von **privaten Attributen (`__balance`)**.  
+  - Vorteile von `@property` gegenüber `getters` und `setters`.  
+
+- **Beispiel:**
   ```python
   class BankAccount:
       def __init__(self, owner, balance):
           self.owner = owner
-          self.__balance = balance  # Private attribute
-      
-      def deposit(self, amount):
-          if amount > 0:
-              self.__balance += amount
-              return True
-          return False
-      
-      def get_balance(self):
+          self.__balance = balance  # Privates Attribut
+
+      @property
+      def balance(self):
           return self.__balance
+      
+      @balance.setter
+      def balance(self, amount):
+          if amount >= 0:
+              self.__balance = amount
+          else:
+              raise ValueError("Negativer Betrag nicht erlaubt!")
   ```
 
-- **Activity:**
-  - Students modify the `BankAccount` class to include a withdrawal method with basic validation.
+- **Übung:**  
+  - **Studierende implementieren eine `BankAccount` Klasse**, die auch eine Methode `withdraw()` mit Validierung enthält.
 
 ---
 
-### **10:45 - 11:30: Abstract Classes and Methods**
-- **Concepts:**
-  - What are abstract classes?
-  - Why use abstract methods?
-  - Introduction to the `abc` module.
-- **Example:**
+### **9:50 - 10:20: Abstrakte Klassen mit `abc` Modul**
+**Ziel:** Einführung in **abstrakte Methoden** zur Strukturierung großer Codebasen.  
+
+- **Theorie:**  
+  - Warum braucht man abstrakte Klassen?  
+  - Einführung in das `abc` Modul.  
+
+- **Beispiel:**  
   ```python
   from abc import ABC, abstractmethod
   
@@ -90,16 +105,15 @@
           return 2 * (self.width + self.height)
   ```
 
-- **Activity:**
-  - Students extend the `Shape` class to implement a `Circle` class with `area` and `perimeter` methods.
+- **Übung:**  
+  - **Studierende erweitern die `Shape` Klasse** um eine `Circle`-Klasse.
 
 ---
 
-### **11:30 - 12:15: Static and Class Methods**
-- **Concepts:**
-  - Difference between instance methods, static methods (`@staticmethod`), and class methods (`@classmethod`).
-  - When to use static and class methods.
-- **Example:**
+### **10:20 - 10:50: `@staticmethod` vs. `@classmethod`**
+**Ziel:** Erlernen des Unterschieds zwischen Instanzmethoden, `staticmethod` und `classmethod`.  
+
+- **Beispiel:**
   ```python
   class MathUtils:
       @staticmethod
@@ -111,55 +125,70 @@
           return 3.14159
   ```
 
-- **Activity:**
-  - Students create a `TemperatureConverter` class with static methods to convert between Celsius and Fahrenheit.
+- **Übung:**  
+  - **Studierende erstellen eine `TemperatureConverter` Klasse**, die `@staticmethod` verwendet.
 
 ---
 
-### **1:15 - 2:00: Modeling Real-World Problems with OOP**
-- **Concepts:**
-  - How to approach a real-world problem using classes and objects.
-  - Identify entities, attributes, and behaviors.
-- **Example Problem:**
-  - A library system:
-    - Classes: `Book`, `Member`, `Librarian`.
-    - Attributes and methods for each class.
+### **10:50 - 11:20: OOP-Design mit UML**
+**Ziel:** Planung eines realen Systems mit UML-Klassendiagrammen.  
 
-- **Activity:**
-  - Students work in small groups to design a class structure for a real-world system (e.g., an online shopping cart).
+- **Beispiel:** **Bibliothekssystem oder Online-Shop**  
+  - Erstellung eines Klassendiagramms mit **`Book`**, `Member`, `Librarian`.  
+
+- **Übung:**  
+  - **Gruppenarbeit:**  
+    - Studierende entwickeln ein UML-Diagramm für ihr System.  
 
 ---
 
-### **2:00 - 2:45: Code Implementation**
-- **Activity:**
-  - Using the class design from the previous activity, students write Python code to implement their system.
-  - Example:
-    ```python
-    class Book:
-        def __init__(self, title, author, isbn):
-            self.title = title
-            self.author = author
-            self.isbn = isbn
-    ```
+### **11:20 - 11:50: Code-Implementierung**
+**Ziel:** Umsetzung der UML-Planung in Python.  
+
+- **Übung:**  
+  - Studierende schreiben eine **erste Version ihres Systems** in Code:
+  ```python
+  class Book:
+      def __init__(self, title, author, isbn):
+          self.title = title
+          self.author = author
+          self.isbn = isbn
+  ```
 
 ---
 
-### **3:00 - 3:30: Debugging and Testing OOP Code**
-- **Concepts:**
-  - Debugging techniques: Using `print`, `pdb`, and IDE debugging tools.
-  - Writing simple unit tests for OOP-based code using `unittest`.
-- **Activity:**
-  - Debug a faulty OOP implementation.
-  - Write tests for the `Book` and `Member` classes.
+### **11:50 - 12:20: Debugging & Unit Testing mit `unittest`**
+**Ziel:** Einführung in **automatisierte Tests** für OOP-Klassen.  
+
+- **Theorie:**  
+  - Warum sind Unit Tests wichtig?  
+  - Einführung in `unittest`.  
+
+- **Beispiel:**
+  ```python
+  import unittest
+  
+  class Book:
+      def __init__(self, title, author):
+          self.title = title
+          self.author = author
+  
+  class TestBook(unittest.TestCase):
+      def test_book_attributes(self):
+          book = Book("1984", "George Orwell")
+          self.assertEqual(book.title, "1984")
+          self.assertEqual(book.author, "George Orwell")
+
+  if __name__ == '__main__':
+      unittest.main()
+  ```
+
+- **Übung:**  
+  - Studierende schreiben **Unit-Tests für ihr eigenes OOP-Projekt**.
 
 ---
 
-### **3:30 - 4:00: Recap and Q&A**
-- **Activities:**
-  - Review the key takeaways of the day.
-  - Discuss common challenges students faced.
-  - Encourage students to ask questions or share feedback.
-
----
-
-This detailed plan ensures students get a solid foundation in advanced OOP while reinforcing prior knowledge. Let me know if you’d like adjustments or more examples!
+### **12:20 - 13:00: Reflexion, Q&A und Ausblick auf Tag 3**
+- **Kurze Wiederholung** der wichtigsten Konzepte.  
+- **Diskussion:** Was war die größte Herausforderung heute?  
+- **Ausblick auf Tag 3:** Einführung in **NumPy und Pandas für Datenanalyse**.
