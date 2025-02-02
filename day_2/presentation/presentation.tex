@@ -3,16 +3,17 @@
 \usepackage{listings}
 \usepackage{xcolor}
 \usepackage{hyperref}
+\usepackage{graphicx}
 
 % Theme settings
 \usetheme{metropolis}
-\setbeamertemplate{navigation symbols}{}
+
 
 % Define custom colors
 \definecolor{codegreen}{rgb}{0,0.6,0}
 \definecolor{codegray}{rgb}{0.5,0.5,0.5}
 \definecolor{codepurple}{rgb}{0.58,0,0.82}
-\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\definecolor{backcolour}{rgb}{0.96,0.96,0.96}
 
 \lstdefinestyle{mystyle}{
     backgroundcolor=\color{backcolour},
@@ -24,7 +25,7 @@
     breakatwhitespace=false,
     breaklines=true,
     captionpos=b,
-    keepspaces=true,
+    % keepspaces=true,
     numbers=left,
     numbersep=5pt,
     showspaces=false,
@@ -35,8 +36,9 @@
 
 \lstset{style=mystyle}
 
-\title[Fortgeschrittenes OOP in Python]{\textbf{Tag 1: Fortgeschrittene objektorientierte Programmierung in Python}}
-\author{Ihr Name}
+\title{Python 3 - Fortgeschrittene Konzepte und Anwendungen}
+\subtitle{Fortgeschrittenes OOP in Python}
+\author{Hussam Alafandi}
 \date{\today}
 
 \begin{document}
@@ -53,10 +55,11 @@
     \item OOP anwenden, um reale Probleme zu modellieren.
     \item Debugging und Testen von OOP-Code üben.
 \end{itemize}
-\textbf{Frage an die Teilnehmer:}
-\begin{itemize}
-    \item Was sind die Hauptvorteile der Verwendung von OOP in der Softwareentwicklung?
-\end{itemize}
+
+% \pause
+% \begin{block}{Frage}
+%     Was sind die Hauptvorteile der Verwendung von OOP in der Softwareentwicklung?
+% \end{block}
 \end{frame}
 
 \section{Kapselung}
@@ -75,7 +78,7 @@
 \textbf{Vorteile der Kapselung:}
 \begin{itemize}
     \item Schutz der Datenintegrität.
-    \item Reduzierung von Abhängigkeiten.
+    % \item Reduzierung von Abhängigkeiten.
     \item Erleichterung von Änderungen und Erweiterungen.
 \end{itemize}
 \end{frame}
@@ -101,12 +104,26 @@ print(account.get_balance())  # Zugriff auf private Daten über Methode
 \end{frame}
 
 \begin{frame}{\textbf{Kapselung und Datenzugriff}}
-\textbf{Diskussion:}
-\begin{itemize}
-    \item Warum ist der direkte Zugriff auf `\_\_balance` nicht erlaubt?
-    \item Wie kann dies zu sicherem Programmieren beitragen?
-\end{itemize}
+    \textbf{Diskussion:}
+    \begin{itemize}
+        \item Warum ist der direkte Zugriff auf `\_\_balance` nicht erlaubt?
+        \only<2->{
+            \begin{itemize}
+                \item In Python wird `\_\_balance` durch Namensmangling in `\_ClassName\_\_balance` umbenannt.  
+                \item Dadurch wird verhindert, dass der Wert direkt von außerhalb der Klasse geändert wird.
+            \end{itemize}
+        }
+    
+        \item Wie kann dies zu sicherem Programmieren beitragen?
+        \only<2->{
+            \begin{itemize}
+                \item Verhindert unkontrollierte Manipulation von sensiblen Daten.  
+                \item Erzwingt den Zugriff über getter- und setter-Methoden, die zusätzliche Prüfungen ermöglichen.
+            \end{itemize}
+        }
+    \end{itemize}
 \end{frame}
+    
 
 \section{Abstrakte Klassen}
 
@@ -142,7 +159,12 @@ class Shape(ABC):
     @abstractmethod
     def perimeter(self):
         pass
+\end{lstlisting}
+\end{frame}
 
+\begin{frame}[fragile]{Beispiel für abstrakte Klassen - 2}
+\textbf{Codebeispiel:}
+\begin{lstlisting}[language=Python]
 class Rectangle(Shape):
     def __init__(self, width, height):
         self.width = width
@@ -191,11 +213,25 @@ class MathUtils:
 print(MathUtils.add(5, 7))  # 12
 print(MathUtils.pi())      # 3.14159
 \end{lstlisting}
-\textbf{Diskussion:}
-\begin{itemize}
-    \item Wann sollte eine statische Methode anstelle einer Instanzmethode verwendet werden?
-    \item Wie unterscheiden sich Klassenmethoden von statischen Methoden?
-\end{itemize}
+\end{frame}
+
+\begin{frame}{Statische VS. Klassenmethoden}
+    \textbf{Diskussion:}
+    \begin{itemize}
+        \item Wann sollte eine statische Methode anstelle einer Instanzmethode verwendet werden?
+        \only<2->{ % Answer appears in slide step 2
+            \begin{itemize}
+                \item Statische Methoden sind sinnvoll, wenn die Methode keine Instanz- oder Klassenvariablen benötigt.
+            \end{itemize}
+        }
+        
+        \item Wie unterscheiden sich Klassenmethoden von statischen Methoden?
+        \only<2->{ % Answer appears in slide step 3
+            \begin{itemize}
+                \item Klassenmethoden erhalten automatisch die Klassenreferenz `cls` und können Klassenvariablen verändern.
+            \end{itemize}
+        }
+    \end{itemize}
 \end{frame}
 
 \section{Fazit}
