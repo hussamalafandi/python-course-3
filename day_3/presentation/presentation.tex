@@ -1,0 +1,219 @@
+\documentclass[aspectratio=169]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{graphicx}
+
+% Metropolis Theme
+\usetheme{metropolis}
+
+% Farbdefinitionen für Code-Highlighting
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.96,0.96,0.96}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{blue},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2
+}
+\lstset{style=mystyle}
+
+\title{Python 3 - Fortgeschrittene Konzepte und Anwendungen}
+\subtitle{Angewandte OOP und Design Patterns}
+\author{Hussam Alafandi}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Einleitung}
+
+
+\begin{frame}{\textbf{Ziele des Tages}}
+\begin{itemize}
+    \item Praktische Anwendung von OOP in Python (Wiederholung \& Vertiefung).
+    \item Verständnis von Zusammensetzung (Composition) vs. Vererbung.
+    \item Leichte Einführung in Design Patterns (Factory, Singleton).
+    \item Implementierung eines kleinen Projekts.
+    \item Verbesserte Debugging-Fähigkeiten.
+\end{itemize}
+\end{frame}
+
+\section{Recap von Tag 2}
+
+\begin{frame}{\textbf{Kurze Wiederholung}}
+\begin{itemize}
+    \item OOP-Grundpfeiler: Klassen, Objekte, Vererbung, Kapselung, Polymorphie.
+    \item Statische Methoden vs. Instanzmethoden.
+    \item Abstrakte Klassen und deren Nutzen.
+\end{itemize}
+\pause
+\begin{block}{Diskussion}
+\textbf{Was war für euch am schwierigsten?}
+\end{block}
+\end{frame}
+
+\section{Zusammensetzung (Composition)}
+
+\begin{frame}[fragile]{\textbf{Warum Composition?}}
+\begin{itemize}
+    \item Alternative oder Ergänzung zu Vererbung.
+    \item Ein Objekt kann \textbf{mehrere} andere Objekte enthalten.
+    \item Bessere Trennung der Verantwortlichkeiten in komplexen Systemen.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{\textbf{Beispiel: Auto und Motor}}
+\textbf{Code-Beispiel:}
+\begin{lstlisting}[language=Python]
+class Motor:
+    def __init__(self, leistung):
+        self.leistung = leistung
+class Auto:
+    def __init__(self, marke, modell, motor):
+        self.marke = marke
+        self.modell = modell
+        self.motor = motor  # Objekt in Objekt
+
+    def anzeigen(self):
+        print(f"{self.marke} {self.modell} mit {self.motor.leistung} PS")
+
+motor1 = Motor(150)
+auto1 = Auto("BMW", "X3", motor1)
+auto1.anzeigen()
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}{\textbf{Übung: Bibliothek und Bücher}}
+\textbf{Aufgabe:}
+\begin{itemize}
+    \item Erstellt eine Klasse \texttt{Buch} mit \texttt{titel} und \texttt{autor}.
+    \item Erstellt eine Klasse \texttt{Bibliothek}, die eine Liste von \texttt{Buch}-Objekten enthält.
+    \item \texttt{Bibliothek} soll \texttt{buecher\_hinzufuegen(buch)} und \texttt{anzeigen()} bereitstellen.
+\end{itemize}
+\end{frame}
+
+\section{Einfache Design Patterns}
+
+\begin{frame}{\textbf{Was sind Design Patterns?}}
+\begin{itemize}
+    \item „Schablonen“ für wiederkehrende Probleme in der Softwareentwicklung.
+    \item Hier nur sehr kurze Einführung: \textbf{Factory Method} und \textbf{Singleton}.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{\textbf{Factory Method}}
+\textbf{Idee:}  
+Eine spezielle „Fabrik“-Klasse erzeugt Objekte, ohne dass im Hauptcode konkrete Klassen instanziert werden müssen.
+
+\textbf{Beispiel:}
+\begin{lstlisting}[language=Python]
+class Fahrzeug:
+    def __init__(self, typ):
+        self.typ = typ
+    def fahren(self):
+        print(f"Das {self.typ} fährt los!")
+class FahrzeugFabrik:
+    @staticmethod
+    def erstellen(typ):
+        return Fahrzeug(typ)
+
+auto = FahrzeugFabrik.erstellen("Auto")
+auto.fahren()
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}{\textbf{Singleton}}%TODO: Add example
+\textbf{Idee:}  
+Nur eine Instanz einer Klasse im gesamten Programm.
+
+\textbf{Praxisbeispiel:}  
+\begin{itemize}
+    \item Datenbankverbindung.
+    \item Log-Instanz.
+\end{itemize}
+\end{frame}
+
+\section{Mini-Projekt}
+
+\begin{frame}{\textbf{Mini-Projekt: Online-Shop}}
+\textbf{Aufgabe:}
+\begin{itemize}
+    \item Klassen: \texttt{Produkt}, \texttt{Kunde}, \texttt{Bestellung}.
+    \item \texttt{Bestellung} enthält \texttt{Produkte} und einen \texttt{Kunde}.
+    \item Methoden: \texttt{produkt\_hinzufuegen()}, \texttt{anzeigen()} usw.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{\textbf{Beispiel-Code für den Start}}
+\begin{lstlisting}[language=Python]
+class Produkt:
+    def __init__(self, name, preis):
+        self.name = name
+        self.preis = preis
+
+class Kunde:
+    def __init__(self, name, email):
+        self.name = name
+        self.email = email
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{\textbf{Fortsetzung: Bestellung}}
+\begin{lstlisting}[language=Python]
+class Bestellung:
+    def __init__(self, kunde):
+        self.kunde = kunde
+        self.produkte = []
+
+    def produkt_hinzufuegen(self, produkt):
+        self.produkte.append(produkt)
+
+    def anzeigen(self):
+        print(f"Bestellung für {self.kunde.name}:")
+        for p in self.produkte:
+            print(f"- {p.name} ({p.preis} €)")
+\end{lstlisting}
+\end{frame}
+
+\section{Debugging \& Code-Verbesserung}
+
+\begin{frame}{\textbf{Debugging}}
+\textbf{Methoden:}
+\begin{itemize}
+    \item \texttt{print()} zur schnellen Fehlersuche.
+    \item Breakpoints in VS Code oder PyCharm.
+    \item \texttt{pdb}-Modul in Python.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{\textbf{Reflexion \& Q\&A}}
+\begin{itemize}
+    \item Zusammensetzung vs. Vererbung: Wann nutze ich was?
+    \item Wie kann ein einfaches Design Pattern helfen, den Code zu strukturieren?
+    \item Fragen oder Schwierigkeiten?
+\end{itemize}
+\begin{block}{Hausaufgabe (optional)}
+Erweitere das Online-Shop-Projekt: \\
+Füge eine \texttt{gesamtsumme()}-Methode in \texttt{Bestellung} ein, die die Summe aller Produktpreise berechnet.
+\end{block}
+\end{frame}
+
+\end{document}
