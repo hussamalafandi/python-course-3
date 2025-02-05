@@ -1,171 +1,148 @@
-## **Kurs: Python 3 - Fortgeschrittene Konzepte und Anwendungen**  
-**Ziel:** Vertiefung der Python-Kenntnisse mit **OOP, algorithmischem Denken, Rekursion, Datenanalyse** und der Verwendung von Entwicklungsumgebungen und Tools.  
+## **Kursübersicht**
+| **Tag** | **Thema** |
+|---------|----------|
+| **Tag 1** | Einrichten von Python-Umgebungen & Arbeiten mit Jupyter Notebooks |
+| **Tag 2** | Wiederholung & Fortgeschrittene OOP-Konzepte |
+| **Tag 3** | Angewandte OOP & Einführung in Design Patterns |
+| **Tag 4** | Computational Thinking, Algorithmeneffizienz & Rekursion |
+| **Tag 5** | Datenanalyse mit NumPy & Pandas (Teil 1) |
+| **Tag 6** | Datenanalyse mit NumPy & Pandas (Teil 2) |
+| **Tag 7** | Zeitreihenanalyse & Lineare Regression |
+| **Tag 8** | Praktische Anwendungen & Mini-Projekt |
+| **Tag 9** | **Wiederholung & Prüfungsvorbereitung** |
+| **Tag 10** | **Abschlussprüfung** |
 
 ---
 
-### **Tag 1: Einrichten von Umgebungen und Arbeiten mit Jupyter Notebooks**  
-**Ziel:** Sicherstellen, dass die Studierenden eine geeignete Entwicklungsumgebung haben.  
+## **Detaillierter Tagesplan**
 
+### **1: Einrichten von Python-Umgebungen & Arbeiten mit Jupyter Notebooks**
+- **Ziel:** Lernen, wie man Python-Umgebungen einrichtet und Jupyter Notebooks nutzt.
 - **Themen:**
-  - Einführung in **Python-Umgebungen**:
-    - Was sind virtuelle Umgebungen und warum werden sie verwendet?
-    - Erstellung und Verwaltung von virtuellen Umgebungen mit `venv` und `conda`.
-    - Installation und Verwaltung von Bibliotheken mit `pip` und `conda`.
-  - Einführung in **Jupyter Notebooks**:
-    - Einrichtung und Ausführung von Python-Code.
-    - Verwendung von Markdown zur Dokumentation.
-    - Debugging und Visualisierung von Daten.  
-
-- **Übungen:**
-  - Erstellen einer virtuellen Umgebung und Installation von NumPy, Pandas, Matplotlib.
-  - Öffnen und Bearbeiten eines Jupyter Notebooks.
-  - Schreiben eines einfachen Skripts zur Datenverarbeitung.  
+  - Virtuelle Umgebungen (`venv`, `conda`).
+  - Pakete installieren & verwalten (`pip`, `requirements.txt`).
+  - Einführung in Jupyter Notebooks.
+  - Markdown, Jupyter-Shortcuts und erste Python-Übungen.
+- **Praxis:**  
+  - Eine virtuelle Umgebung einrichten & `NumPy`, `Pandas`, `Matplotlib` installieren.
+  - Python-Code in Jupyter Notebook schreiben & ausführen.
 
 ---
 
-### **Tag 2: Wiederholung und erweiterte objektorientierte Programmierung (OOP)**  
-**Ziel:** Stärkung und Erweiterung der OOP-Konzepte.  
-
+### **2: Wiederholung & Fortgeschrittene OOP-Konzepte**
+- **Ziel:** Wiederholung von OOP-Grundlagen & Einführung fortgeschrittener Konzepte.
 - **Themen:**
-  - Wiederholung: **Klassen, Objekte, Vererbung, Polymorphie**.
-  - Erweiterte OOP-Konzepte:
-    - **Kapselung**, öffentliche/private Attribute.
-    - **Statische Methoden** und **Klassenmethoden**.
-    - **Abstrakte Klassen** (`abc`-Modul).
-  - Modellierung realer Probleme mit OOP.  
-
-- **Übungen:**
-  - Modellierung eines **Bibliothekssystems** mit Klassen für Bücher, Mitglieder und Ausleihen.  
+  - Wiederholung: **Klassen, Objekte, Vererbung & Polymorphie**.
+  - **Kapselung & private Attribute**.
+  - **Abstrakte Klassen** (`abc`-Modul).
+  - **Statische & Klassenmethoden**.
+- **Praxis:**  
+  - Die `BankAccount`-Klasse mit Kapselung erweitern.
+  - Eine abstrakte Klasse für verschiedene Formen implementieren.
 
 ---
 
-### **Tag 3: Angewandte OOP und Design Patterns**  
-**Ziel:** Anwendung von OOP-Konzepten in realistischen Szenarien.  
-
+### **3: Angewandte OOP & Einführung in Design Patterns**
+- **Ziel:** Anwendung von OOP-Konzepten in realen Szenarien.
 - **Themen:**
-  - Einführung in **Design Patterns**:
-    - **Singleton**- und **Factory-Muster**.
-  - Erstellung modularer Programme mit OOP.
-  - Debugging und Testen von OOP-basierten Programmen.  
-
-- **Übungen:**
-  - **Erweiterung des Bibliothekssystems** mit **Vererbung** und **Polymorphie**.
-  - Implementierung einer **Fabrikklasse** zur Erstellung unterschiedlicher Buchtypen.  
+  - **Zusammensetzung (Composition) vs. Vererbung**.
+  - Einführung in einfache **Design Patterns** (Factory Method, Singleton).
+  - Modellierung realer Systeme (Bibliothekssystem, Online-Shop).
+- **Praxis:**  
+  - Eine `Bibliothek`-Klasse erstellen, die `Buch`-Objekte enthält.
+  - Das **Factory Pattern** für die Erstellung von `Mitarbeiter`-Objekten verwenden.
 
 ---
 
-### **Tag 4: Algorithmisches Denken und Effizienz von Algorithmen**  
-**Ziel:** Einführung in algorithmische Problemlösung und Effizienzbewertung.  
-
+### **4: Computational Thinking, Algorithmeneffizienz & Rekursion**
+- **Ziel:** Entwicklung algorithmischen Denkens & effizientes Problemlösen.
 - **Themen:**
-  - Einführung in **algorithmisches Denken**.
-  - **Suchalgorithmen**:
-    - Lineare Suche, Binäre Suche.
-  - **Sortieralgorithmen**:
-    - Bubblesort, Selectionsort, Quicksort.
-  - **Big O-Notation**:
-    - Einführung in **Laufzeitkomplexität**.  
-
-- **Übungen:**
-  - Implementierung von **Sortieralgorithmen** und Vergleich der Laufzeiten.
-  - Schreiben einer **binären Suche** für eine sortierte Liste.  
+  - **Computational Thinking** (Zerlegung, Mustererkennung, Abstraktion, Algorithmenentwurf).
+  - **Suchalgorithmen:** **Lineare Suche, Binäre Suche**.
+  - **Sortieralgorithmen:** **Bubble Sort, Quick Sort**.
+  - **Algorithmeneffizienz & Big O Notation**.
+  - Einführung in **Rekursion** (Fakultät, Fibonacci, Türme von Hanoi).
+- **Praxis:**  
+  - Such- und Sortieralgorithmen implementieren & vergleichen.
+  - Rekursive Probleme lösen: **Ziffernsumme, rekursive Listensumme**.
 
 ---
 
-### **Tag 5: Rekursion und rekursives Denken**  
-**Ziel:** Verständnis und Anwendung von Rekursion.  
-
+### **5: Datenanalyse mit NumPy & Pandas (Teil 1)**
+- **Ziel:** Lernen, wie man Daten mit Python verarbeitet.
 - **Themen:**
-  - Einführung in **rekursive Funktionen**:
-    - **Basisfall**, rekursiver Fall.
-    - Vermeidung von **Endlosrekursion**.
-  - Klassische Rekursionsprobleme:
-    - Fakultät, Fibonacci-Folge.
-    - **Türme von Hanoi**.  
-
-- **Übungen:**
-  - Schreiben einer **rekursiven Fakultäts- und Fibonacci-Funktion**.
-  - **Lösung des Türme von Hanoi-Problems** mit Visualisierung.  
+  - Einführung in **NumPy**: Arrays, Indizierung, Operationen.
+  - Einführung in **Pandas**: DataFrames, Importieren/Exportieren von Daten.
+  - Datenvisualisierung mit **Matplotlib**.
+- **Praxis:**  
+  - Datensätze mit Pandas laden & analysieren.
+  - Grundlegende statistische Operationen durchführen.
 
 ---
 
-### **Tag 6: Datenanalyse mit NumPy und Pandas (Teil 1)**  
-**Ziel:** Einführung in die Datenverarbeitung mit **NumPy** und **Pandas**.  
-
+### **6: Datenanalyse mit NumPy & Pandas (Teil 2)**
+- **Ziel:** Fortgeschrittene Datenmanipulation durchführen.
 - **Themen:**
-  - **NumPy**:
-    - Arrays, Indexierung, Slicing.
-    - Grundlegende Operationen (Summe, Mittelwert, Transponierung).
-  - **Pandas**:
-    - **Series** und **DataFrames**.
-    - Import und Export von Daten (CSV, Excel).  
-
-- **Übungen:**
-  - Grundlegende **Array-Manipulationen** mit NumPy.
-  - Laden und **Erkunden eines Datensatzes** mit Pandas.  
+  - **Erweiterte Pandas-Funktionen:** Gruppierung, Zusammenführen, Filtern.
+  - **Umgang mit fehlenden Daten**.
+  - Datenvisualisierung mit **Matplotlib**.
+- **Praxis:**  
+  - **Echten Datensatz (COVID-19, Aktienkurse)** analysieren.
+  - Datenvisualisierungen erstellen.
 
 ---
 
-### **Tag 7: Datenanalyse mit NumPy und Pandas (Teil 2)**  
-**Ziel:** Fortgeschrittene Datenanalyse und Visualisierung.  
-
+### **7: Zeitreihenanalyse & Lineare Regression**
+- **Ziel:** Zeitreihenanalyse und Regression verstehen.
 - **Themen:**
-  - **Erweiterte Pandas-Operationen**:
-    - Gruppierung, Zusammenführung, Filterung.
-    - Umgang mit fehlenden Daten.
-  - **Datenvisualisierung**:
-    - Erstellung von Diagrammen mit Matplotlib und Pandas.  
-
-- **Übungen:**
-  - Analyse eines **realen Datensatzes** (z. B. COVID-19-Statistiken).
-  - Erstellung von **Diagrammen zur Datenvisualisierung**.  
+  - **Zeitreihenanalyse mit Pandas**.
+  - **Erkennen von Trends & Vorhersagen**.
+  - Einführung in **Lineare Regression**.
+- **Praxis:**  
+  - **Börsenkurse** oder **Temperaturtrends** analysieren.
+  - Ein **einfaches Regressionsmodell** implementieren.
 
 ---
 
-### **Tag 8: Zeitreihenanalyse und lineare Regression**  
-**Ziel:** Einführung in die Zeitreihenanalyse und Regression.  
-
-- **Themen:**
-  - **Zeitreihenanalyse**:
-    - Umgang mit **Datumswerten in Pandas**.
-    - Erkennung von **Trends und saisonalen Mustern**.
-  - **Lineare Regression**:
-    - Grundlagen der Regression.
-    - Berechnung einer **Regressionslinie mit NumPy und Pandas**.  
-
-- **Übungen:**
-  - Analyse von **Aktienkurs- oder Verkaufsdaten**.
-  - Implementierung einer **einfachen linearen Regression**.  
+### **8: Praktische Anwendungen & Mini-Projekt**
+- **Ziel:** Gelernte Konzepte in einem Projekt anwenden.
+- **Projektbeispiel:**  
+  - **Datenanalyse & Prognose von Verkaufszahlen**.
+  - **Daten bereinigen, visualisieren & Regression anwenden**.
 
 ---
 
-### **Tag 9: Praktische Anwendungen und Mini-Projekt**  
-**Ziel:** Anwendung des erlernten Wissens auf reale Probleme.  
-
-- **Aktivitäten:**  
-  - Bearbeitung eines **Mini-Projekts**, z. B. **Analyse von Verkaufsdaten** zur **Vorhersage zukünftiger Trends**.  
-  - **Schritte:**
-    - Laden und Bereinigung des Datensatzes.
-    - Explorative Datenanalyse.
-    - Anwendung von **Regression** zur Vorhersage.
-    - Visualisierung der Ergebnisse.  
-
----
-
-### **Tag 10: Abschlussprojekt und Zusammenfassung**  
-**Ziel:** Konsolidierung des Wissens durch ein umfassendes Projekt.  
-
-- **Projektoptionen (Studierende wählen eine Aufgabe):**  
-  - Entwicklung eines **OOP-gestützten Systems** (z. B. **Mitarbeiterverwaltung**).  
-  - Analyse von **Zeitreihendaten** und Vorhersagen mit Regression.  
-  - Erstellung eines **modularen Python-Programms** für eine **reale Anwendung**.  
-
-- **Zusammenfassung:**
-  - Wiederholung der **wichtigsten Konzepte**.
-  - **Diskussion über nächste Schritte** (z. B. Machine Learning, Data Science).  
+### **9: Wiederholung & Prüfungsvorbereitung**
+- **Ziel:** Wichtige Konzepte wiederholen & auf die Prüfung vorbereiten.
+- **Vormittag:**  
+  - **Schnelle Wiederholung:**  
+    - OOP: **Klassen, Vererbung, Kapselung**.
+    - **Algorithmen & Datenstrukturen:** Suchen, Sortieren, Rekursion.
+    - **Datenanalyse:** Pandas, NumPy.
+- **Mittag:**  
+  - **Übungsfragen lösen**:
+    - Multiple-Choice-Fragen.
+    - Kleine Programmieraufgaben.
+    - Debugging-Challenges.
+- **Nachmittag:**  
+  - **Probeklausur**:
+    - **Zeitlich begrenzte Codieraufgaben**.
+    - **Peer-Review & Diskussion über Lösungen**.
 
 ---
 
-## **Werkzeuge & Bibliotheken:**
-- **Python-Umgebungen:** Jupyter Notebook, `venv`, `conda`
-- **Bibliotheken:** NumPy, Pandas, Matplotlib
+### **10: Abschlussprüfung**
+- **Prüfungsformat:**
+  - **Multiple-Choice-Fragen** (20% der Note).
+  - **Kurzantwort-Codierung** (30% der Note).
+  - **Projektbasierte Problemlösung** (50% der Note).
+- **Geprüfte Themen:**
+  - **Python Grundlagen:** Variablen, Schleifen, Funktionen.
+  - **OOP-Konzepte:** Klassen, Objekte, Vererbung.
+  - **Algorithmen & Datenstrukturen:** Suchen, Sortieren, Rekursion.
+  - **Datenanalyse (Grundlagen von NumPy/Pandas)**.
+- **Dauer:** 3 Stunden.
+- **Bewertungskriterien:**
+  - **Sauberkeit des Codes**.
+  - **Effizienz der Lösungen**.
+  - **Best Practices (z. B. Kommentierung, Modularisierung)**.
