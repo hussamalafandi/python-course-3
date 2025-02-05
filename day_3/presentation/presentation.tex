@@ -31,19 +31,17 @@
     showtabs=false,
     tabsize=2
 }
-
 \lstset{style=mystyle}
 
 \title{Fortgeschrittene OOP-Konzepte in Python}
 \subtitle{Effektive Nutzung fortgeschrittener Python-Konzepte in der Praxis}
-\author{Ihr Name}
+\author{Hussam Alafandi}
 \date{\today}
 
 \begin{document}
 
 \maketitle
 
-% Agenda
 \begin{frame}{Agenda}
     \tableofcontents
 \end{frame}
@@ -51,15 +49,17 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Dunder-Methoden und Operatorüberladung}
 
-\begin{frame}{Einführung in Dunder-Methoden}
+\begin{frame}{Theorie: Dunder-Methoden}
     \begin{itemize}
-        \item \textbf{Dunder-Methoden} (Double Underscore) sind spezielle Methoden in Python, deren Namen mit \texttt{\_\_} beginnen und enden.
-        \item Beispiele: \texttt{\_\_init\_\_}, \texttt{\_\_str\_\_}, \texttt{\_\_repr\_\_}, \texttt{\_\_add\_\_}, \texttt{\_\_len\_\_} usw.
-        \item Sie erlauben es, benutzerdefinierte Klassen nahtlos in Sprachkonstrukte zu integrieren.
+        \item Dunder-Methoden sind spezielle Methoden, deren Name mit und endet mit \texttt{\_\_}.
+        \item Sie ermöglichen die Integration eigener Klassen in die Python-Syntax.
+        \item Beispiele: \texttt{\_\_init\_\_} (Konstruktor), \texttt{\_\_str\_\_} (String-Darstellung), \texttt{\_\_add\_\_} (Operatorüberladung).
     \end{itemize}
+    \vspace{1em}
+    \alert{Hinweis:} Detaillierte Beispiele und Übungen findest du im Notebook.
 \end{frame}
 
-\begin{frame}[fragile]{Beispiel: \texttt{\_\_init\_\_} und \texttt{\_\_str\_\_}}
+\begin{frame}[fragile]{Kurzes Beispiel: Person-Klasse}
     \begin{lstlisting}[language=Python]
 class Person:
     def __init__(self, name, alter):
@@ -70,54 +70,27 @@ class Person:
         return f"{self.name}, {self.alter} Jahre alt"
 
 p = Person("Anna", 30)
-print(p)  # Ausgabe: Anna, 30 Jahre alt
+print(p)
     \end{lstlisting}
-\end{frame}
-
-\begin{frame}{Operatorüberladung: Grundlagen}
-    \begin{itemize}
-        \item Mit Operatorüberladung können Standardoperatoren (z.B. \texttt{+}, \texttt{-}, \texttt{*}) für eigene Klassen definiert werden.
-        \item Bei \texttt{obj1 + obj2} wird beispielsweise automatisch die Methode \texttt{\_\_add\_\_} aufgerufen.
-    \end{itemize}
-\end{frame}
-
-\begin{frame}[fragile]{Beispiel: Vektor-Klasse mit Operatorüberladung}
-    \begin{lstlisting}[language=Python]
-class Vektor:
-    def __init__(self, x, y):
-        self.x = x
-        self.y = y
-
-    def __add__(self, other):
-        return Vektor(self.x + other.x, self.y + other.y)
-
-    def __str__(self):
-        return f"Vektor({self.x}, {self.y})"
-
-v1 = Vektor(2, 3)
-v2 = Vektor(4, 5)
-v3 = v1 + v2
-print(v3)  # Ausgabe: Vektor(6, 8)
-    \end{lstlisting}
-\end{frame}
-
-\begin{frame}{Weitere nützliche Dunder-Methoden}
-    \begin{itemize}
-        \item \texttt{\_\_eq\_\_}: Vergleicht Objekte (z.B. \texttt{==})
-        \item \texttt{\_\_len\_\_}: Ermöglicht die Verwendung von \texttt{len(obj)}
-        \item \texttt{\_\_getitem\_\_} und \texttt{\_\_setitem\_\_}: Erlauben Indexzugriffe
-        \item \texttt{\_\_iter\_\_}: Ermöglicht Iteration über das Objekt
-    \end{itemize}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Komposition vs. Vererbung (Bevorzugen Sie Komposition)}
+\section{Komposition vs. Vererbung}
 
-\begin{frame}[fragile]{Vererbung: Grundlagen}
+\begin{frame}{Theorie: Vererbung \& Komposition}
     \begin{itemize}
-        \item Vererbung ermöglicht es, eine neue Klasse auf Basis einer bestehenden zu definieren.
-        \item Dies fördert die Wiederverwendung von Code, kann jedoch zu starker Kopplung führen.
+        \item \textbf{Vererbung:} Erlaubt es, eine neue Klasse auf Basis einer bestehenden zu erstellen.\\
+              \emph{Vorteil:} Wiederverwendung von Code.\\
+              \emph{Nachteil:} Kann zu starker Kopplung führen.
+        \item \textbf{Komposition:} Eine Klasse verwendet andere Klassen als Attribute.\\
+              \emph{Vorteil:} Flexibles, lose gekoppeltes Design.
     \end{itemize}
+    \vspace{1em}
+    \alert{Weitere Details und Beispiele im Notebook.}
+\end{frame}
+
+\begin{frame}[fragile]{Kurzes Beispiel: Fahrzeug und Auto}
+    Beispiel für Vererbung:
     \begin{lstlisting}[language=Python]
 class Fahrzeug:
     def starten(self):
@@ -127,228 +100,81 @@ class Auto(Fahrzeug):
     pass
 
 a = Auto()
-a.starten()  # Ausgabe: Fahrzeug startet
-    \end{lstlisting}
+a.starten()
+\end{lstlisting}
 \end{frame}
 
-\begin{frame}[fragile]{Komposition: Grundlagen}
-    \begin{itemize}
-        \item Bei der Komposition enthält ein Objekt andere Objekte als Attribute.
-        \item Dies führt zu flexibleren und lose gekoppelten Designs.
-    \end{itemize}
+\begin{frame}[fragile]{Kurzes Beispiel: Fahrzeug und Auto}
+    Beispiel für Komposition:
     \begin{lstlisting}[language=Python]
 class Motor:
     def starten(self):
         print("Motor startet")
 
-class Auto:
+class AutoMitMotor:
     def __init__(self):
         self.motor = Motor()
-
     def starten(self):
         self.motor.starten()
-
-a = Auto()
-a.starten()  # Ausgabe: Motor startet
     \end{lstlisting}
 \end{frame}
 
-\begin{frame}{Warum Komposition bevorzugen?}
-    \begin{itemize}
-        \item \textbf{Wiederverwendbarkeit:} Komponenten können in verschiedenen Kontexten eingesetzt werden.
-        \item \textbf{Flexibilität:} Komponenten können leichter ausgetauscht oder angepasst werden.
-        \item \textbf{Wartbarkeit:} Flache Hierarchien vermeiden komplexe Vererbungsstrukturen.
-    \end{itemize}
-\end{frame}
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Polymorphismus \& Duck Typing in Python}
+\section{Polymorphismus \& Duck Typing}
 
-\begin{frame}{Polymorphismus: Prinzipien}
+\begin{frame}{Theorie: Polymorphismus und Duck Typing}
     \begin{itemize}
-        \item Verschiedene Objekte reagieren auf denselben Methodenaufruf.
-        \item Ermöglicht generischen Code, der mit verschiedenen Objekttypen arbeitet.
+        \item \textbf{Polymorphismus:} Unterschiedliche Objekte reagieren auf denselben Methodenaufruf.
+        \item \textbf{Duck Typing:} Es zählt, ob ein Objekt die benötigte Methode besitzt – nicht dessen Typ.
     \end{itemize}
+    \vspace{1em}
+    \alert{Details und praktische Beispiele gibt es im Notebook.}
 \end{frame}
 
-\begin{frame}{Duck Typing: Das Prinzip}
-    \begin{itemize}
-        \item „Wenn es aussieht wie eine Ente und quakt wie eine Ente, dann ist es eine Ente.“
-        \item Entscheidend ist nicht der Typ, sondern das Vorhandensein der benötigten Methode.
-        \item Keine explizite Schnittstellenimplementierung nötig.
-    \end{itemize}
-\end{frame}
-
-\begin{frame}[fragile]{Praktisches Beispiel: Dateiverarbeitung mit Duck Typing}
+\begin{frame}[fragile]{Kurzes Beispiel: Duck Typing}
     \begin{lstlisting}[language=Python]
-def daten_verarbeiten(quell_objekt):
-    # Erwartet, dass das Objekt eine read()-Methode besitzt
-    inhalt = quell_objekt.read()
-    print("Verarbeiteter Inhalt:", inhalt)
+def starte_fahrzeug(fahrzeug):
+    fahrzeug.fahre()
 
-# Beispiel 1: Verwendung eines Datei-Objekts
-with open("beispiel.txt", "r") as datei:
-    daten_verarbeiten(datei)
+class Auto:
+    def fahre(self):
+        print("Auto fährt")
 
-# Beispiel 2: Verwendung eines benutzerdefinierten Objekts
-class StringReader:
-    def __init__(self, text):
-        self.text = text
-        self.gelesen = False
+class Fahrrad:
+    def fahre(self):
+        print("Fahrrad fährt")
 
-    def read(self):
-        if not self.gelesen:
-            self.gelesen = True
-            return self.text
-        return ""
-
-string_reader = StringReader("Dies ist ein Beispieltext.")
-daten_verarbeiten(string_reader)
+starte_fahrzeug(Auto())
+starte_fahrzeug(Fahrrad())
     \end{lstlisting}
 \end{frame}
 
-\begin{frame}{Vorteile von Polymorphismus und Duck Typing}
-    \begin{itemize}
-        \item \textbf{Flexibilität:} Funktionen und Methoden arbeiten mit beliebigen Objekten, solange die benötigte Methode existiert.
-        \item \textbf{Einfachheit:} Reduziert starre Typüberprüfungen.
-        \item \textbf{Generische Programmierung:} Bessere Wiederverwendbarkeit des Codes.
-    \end{itemize}
-\end{frame}
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Entwurfsmuster (Nur wesentliche)}
+\section{Entwurfsmuster (Design Patterns)}
 
-\begin{frame}{Einführung in Entwurfsmuster}
+\begin{frame}{Theorie: Entwurfsmuster}
     \begin{itemize}
-        \item Entwurfsmuster sind bewährte Lösungen für häufige Probleme im Software-Design.
-        \item Sie tragen dazu bei, den Code verständlicher und wartbarer zu gestalten.
-        \item In Python sind nicht alle Muster zwingend erforderlich – Fokus auf das Wesentliche.
+        \item Entwurfsmuster sind wiederverwendbare Lösungen für häufige Design-Probleme.
+        \item In Python helfen sie, den Code wartbar und erweiterbar zu gestalten.
+        \item Wichtige Muster: Singleton, Factory, Observer, Strategy.
     \end{itemize}
+    \vspace{1em}
+    \alert{Ausführliche Erklärungen, Codebeispiele und Übungen im Notebook.}
 \end{frame}
 
-\begin{frame}[fragile]{Singleton-Muster}
-    \begin{itemize}
-        \item \textbf{Ziel:} Sicherstellen, dass von einer Klasse nur eine einzige Instanz existiert.
-        \item Nützlich, wenn ein globaler Zugriffspunkt benötigt wird.
-    \end{itemize}
+\begin{frame}[fragile]{Kurzes Beispiel: Singleton}
     \begin{lstlisting}[language=Python]
 class Singleton:
     _instance = None
-
     def __new__(cls, *args, **kwargs):
         if cls._instance is None:
             cls._instance = super().__new__(cls)
         return cls._instance
 
-# Test
 s1 = Singleton()
 s2 = Singleton()
-print(s1 is s2)  # Ausgabe: True
+print(s1 is s2)  % Ausgabe: True
     \end{lstlisting}
-\end{frame}
-
-\begin{frame}[fragile]{Factory-Muster}
-    \begin{itemize}
-        \item \textbf{Ziel:} Erstellung von Objekten, ohne deren konkrete Klassen explizit zu spezifizieren.
-        \item Bietet Flexibilität bei der Objekterzeugung.
-    \end{itemize}
-    \begin{lstlisting}[language=Python]
-class Tier:
-    def sprich(self):
-        pass
-
-class Katze(Tier):
-    def sprich(self):
-        print("Miau")
-
-class Hund(Tier):
-    def sprich(self):
-        print("Wuff")
-
-class TierFactory:
-    @staticmethod
-    def erstelle_tier(tier_typ):
-        if tier_typ == "Katze":
-            return Katze()
-        elif tier_typ == "Hund":
-            return Hund()
-        else:
-            raise ValueError("Unbekannter Tier-Typ")
-
-# Test
-tier = TierFactory.erstelle_tier("Katze")
-tier.sprich()  # Ausgabe: Miau
-    \end{lstlisting}
-\end{frame}
-
-\begin{frame}[fragile]{Observer-Muster}
-    \begin{itemize}
-        \item \textbf{Ziel:} Ermöglicht es, dass ein Objekt (Subject) mehrere andere Objekte (Observer) über Zustandsänderungen informiert.
-        \item Besonders nützlich in ereignisgesteuerten Anwendungen.
-    \end{itemize}
-    \begin{lstlisting}[language=Python]
-class Observable:
-    def __init__(self):
-        self.beobachter = []
-
-    def registriere_beobachter(self, beobachter):
-        self.beobachter.append(beobachter)
-
-    def benachrichtige_beobachter(self, nachricht):
-        for b in self.beobachter:
-            b.update(nachricht)
-
-class Beobachter:
-    def update(self, nachricht):
-        print(f"Beobachter erhielt: {nachricht}")
-
-# Test
-observable = Observable()
-beobachter = Beobachter()
-observable.registriere_beobachter(beobachter)
-observable.benachrichtige_beobachter("Daten aktualisiert")
-    \end{lstlisting}
-\end{frame}
-
-\begin{frame}[fragile]{Strategy-Muster (optional)}
-    \begin{itemize}
-        \item \textbf{Ziel:} Ermöglicht die Auswahl eines Algorithmus zur Laufzeit.
-        \item Trennt den Algorithmus von der Anwendungslogik.
-    \end{itemize}
-    \begin{lstlisting}[language=Python]
-class Strategie:
-    def berechne(self, a, b):
-        pass
-
-class Addition(Strategie):
-    def berechne(self, a, b):
-        return a + b
-
-class Multiplikation(Strategie):
-    def berechne(self, a, b):
-        return a * b
-
-class Kontext:
-    def __init__(self, strategie):
-        self.strategie = strategie
-
-    def ausfuehren(self, a, b):
-        return self.strategie.berechne(a, b)
-
-# Test
-kontext = Kontext(Addition())
-print(kontext.ausfuehren(3, 4))  # Ausgabe: 7
-kontext.strategie = Multiplikation()
-print(kontext.ausfuehren(3, 4))  # Ausgabe: 12
-    \end{lstlisting}
-\end{frame}
-
-\begin{frame}{Wichtige Hinweise zu Entwurfsmustern in Python}
-    \begin{itemize}
-        \item Aufgrund der dynamischen Natur von Python sind manche Muster weniger zwingend.
-        \item Nutzen Sie Muster als \textbf{Richtlinien} – nicht als starre Regeln.
-        \item Entscheidend ist das Verständnis des zugrunde liegenden Problems.
-    \end{itemize}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -356,27 +182,16 @@ print(kontext.ausfuehren(3, 4))  # Ausgabe: 12
 
 \begin{frame}{Zusammenfassung}
     \begin{itemize}
-        \item \textbf{Dunder-Methoden:} Erlauben die Integration benutzerdefinierter Klassen in die Python-Syntax.
-        \item \textbf{Operatorüberladung:} Ermöglicht den intuitiven Einsatz von Operatoren in eigenen Klassen.
-        \item \textbf{Komposition vs. Vererbung:} Komposition führt zu flexibleren und weniger stark gekoppelten Designs.
-        \item \textbf{Polymorphismus \& Duck Typing:} Ermöglichen generischen, dynamischen Code, der sich auf die Fähigkeiten der Objekte stützt.
-        \item \textbf{Entwurfsmuster:} Bieten bewährte Lösungen für wiederkehrende Probleme – in Python pragmatisch einsetzbar.
-    \end{itemize}
-\end{frame}
-
-\begin{frame}{Weiterführende Literatur und Ressourcen}
-    \begin{itemize}
-        \item \textbf{Bücher:} \emph{Fluent Python} von Luciano Ramalho
-        \item \textbf{Online-Ressourcen:} Python-Dokumentation, Blogs zu Entwurfsmustern in Python
-        \item \textbf{Übungen:} Praktische Projekte und kleine Übungen zur Vertiefung der Konzepte
+        \item \textbf{Dunder-Methoden:} Integrieren eigene Klassen in die Python-Syntax.
+        \item \textbf{Komposition vs. Vererbung:} Komposition bietet flexible, lose gekoppelte Designs.
+        \item \textbf{Polymorphismus \& Duck Typing:} Erlauben generischen Code, der auf den Fähigkeiten der Objekte basiert.
+        \item \textbf{Entwurfsmuster:} Bieten Lösungen für wiederkehrende Probleme.
     \end{itemize}
 \end{frame}
 
 \begin{frame}{Fragen \& Diskussion}
     \centering
-    \Large Vielen Dank für Ihre Aufmerksamkeit! \\
-    \vspace{1em}
-    Haben Sie Fragen?
+    \Large Vielen Dank für Ihre Aufmerksamkeit!
 \end{frame}
 
 \end{document}
