@@ -3,6 +3,10 @@
 \usepackage[T1]{fontenc}
 \usepackage[ngerman]{babel}
 \usepackage{amsmath,amssymb,geometry,listings}
+\usepackage{lipsum} % optional for dummy text if needed
+\usepackage{xcolor}
+
+% Page layout
 \geometry{
   left=2cm,
   right=2cm,
@@ -10,80 +14,97 @@
   bottom=2.5cm
 }
 
-\title{\textbf{Klausur: Python-Grundlagen, OOP, Algorithmik, NumPy und Pandas}}
-\author{(Keine Hilfsmittel erlaubt)}
+% Title
+\title{\textbf{Klausur: Python, OOP, Algorithmik, NumPy und Pandas}}
+\author{Keine Hilfsmittel erlaubt}
 \date{\today}
 
-\lstset{
-  language=Python,
-  basicstyle=\footnotesize\ttfamily,
-  columns=flexible,
-  breaklines=true,
-  frame=single,
-  showstringspaces=false
+
+% Define custom colors
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.96,0.96,0.96}
+
+\lstdefinestyle{mystyle}{
+    language=Python,
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{blue},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2
 }
+
+\lstset{style=mystyle}
 
 \begin{document}
 
 \maketitle
 
-\textbf{Anleitung:} Beantworten Sie alle Fragen in deutscher Sprache. Schreiben Sie Ihre Lösungen sauber und nachvollziehbar. Begründen Sie bei Bedarf Ihre Antworten mit kurzen Erklärungen. Keine Hilfsmittel (Skripte, Internet etc.) sind erlaubt. Bearbeitungszeit: 90 Minuten.
+\noindent
+\textbf{Anleitung:} Bitte beantworten Sie alle Fragen in deutscher Sprache. \\
+Bearbeitungszeit: 90 Minuten. Keine Skripte, kein Internet, keine Hilfsmittel.
 
 \section*{1. Python Fundamentals \& Environment Setup (7 Punkte)}
 
 \begin{enumerate}
-  \item \textbf{Virtuelle Umgebungen (3 Punkte)}
-  \begin{enumerate}
-    \item Erklären Sie den Zweck einer virtuellen Umgebung (\texttt{venv} oder \texttt{conda}). Warum ist es sinnvoll, eine zu verwenden?  
-    \item Wie können Sie in \texttt{conda} eine neue Umgebung erstellen und aktivieren? Nennen Sie die wichtigsten Befehle.
-  \end{enumerate}
-  
-  \item \textbf{Jupyter Notebook (2 Punkte)}
-  \begin{enumerate}
-    \item Beschreiben Sie kurz den Aufbau eines Jupyter Notebooks. Welche Zelltypen gibt es?
-    \item Welche Vorteile bieten Jupyter Notebooks gegenüber einfachen Python-Skripten?
-  \end{enumerate}
+    \item \textbf{Virtuelle Umgebungen (3 Punkte)}
+          \begin{enumerate}
+              \item Erklären Sie den Zweck einer virtuellen Umgebung (\texttt{venv} oder \texttt{conda}). Warum ist es sinnvoll, eine zu verwenden?
+              \item Wie können Sie in \texttt{conda} eine neue Umgebung erstellen und aktivieren? Nennen Sie die wichtigsten Befehle.
+          \end{enumerate}
+    \item \textbf{Jupyter Notebook (2 Punkte)}
+          \begin{enumerate}
+              \item Beschreiben Sie kurz den Aufbau eines Jupyter Notebooks. Welche Zelltypen gibt es?
+              \item Welche Vorteile bieten Jupyter Notebooks gegenüber einfachen Python-Skripten?
+          \end{enumerate}
+    \item \textbf{Code-Frage: Fehler finden (2 Punkte)}
 
-  \item \textbf{Code-Fehler finden (2 Punkte)}  
-  Betrachten Sie folgenden Python-Code:
-
-\begin{lstlisting}
+          Betrachten Sie folgenden Python-Code:
+          \begin{lstlisting}
 my_var = "Hello"
 
-if my-var == "Hello":
+if my_var == "Hello":
     print("Yes, it's Hello")
 else:
     print("No, it's not Hello")
 \end{lstlisting}
 
-  \begin{enumerate}
-    \item Der Code erzeugt einen Fehler. Nennen Sie die Ursache und schlagen Sie eine Korrektur vor. (1 Punkt)
-    \item Nehmen Sie an, Sie möchten eine weitere Zeile hinzufügen, die die Länge von \texttt{my\_var} ausgibt. Schreiben Sie die fehlende Codezeile. (1 Punkt)
-  \end{enumerate}
-
+          \begin{enumerate}
+              \item Der Code erzeugt einen Fehler. Nennen Sie die Ursache und schlagen Sie eine Korrektur vor. (1 Punkt)
+              \item Nehmen Sie an, Sie möchten eine Zeile hinzufügen, die die Länge von \texttt{my\_var} ausgibt. Schreiben Sie die fehlende Codezeile. (1 Punkt)
+          \end{enumerate}
 \end{enumerate}
 
-\vspace{0.5em}
 
 \section*{2. Object-Oriented Programming (OOP) (12 Punkte)}
 
 \begin{enumerate}
-  \item \textbf{Grundlagen und Konzepte (4 Punkte)}
-  \begin{enumerate}
-    \item Was versteht man unter einer Klasse und einem Objekt? Nennen Sie ein kurzes Beispiel in Python. (2 Punkte)
-    \item Erklären Sie kurz \textit{Encapsulation}, \textit{Inheritance} und \textit{Polymorphism}. (2 Punkte)
-  \end{enumerate}
+    \item \textbf{Grundlagen und Konzepte (4 Punkte)}
+          \begin{enumerate}
+              \item Was versteht man unter einer Klasse und einem Objekt? Geben Sie ein kurzes Beispiel in Python.
+              \item Erklären Sie kurz \textit{Encapsulation}, \textit{Inheritance} und \textit{Polymorphism}.
+          \end{enumerate}
+    \item \textbf{Vererbung (4 Punkte)}
+          \begin{enumerate}
+              \item Wie erstellt man eine Unterklasse in Python? Geben Sie ein kleines Beispiel.
+              \item Welche Bedeutung hat die Funktion \texttt{super()} bei der Vererbung?
+          \end{enumerate}
+    \item \textbf{Code-Frage: Fehler erkennen (4 Punkte)}
 
-  \item \textbf{Vererbung (4 Punkte)}
-  \begin{enumerate}
-    \item Wie erstellt man eine Unterklasse in Python? Geben Sie ein kleines Beispiel. (2 Punkte)
-    \item Welche Bedeutung hat die Funktion \texttt{super} bei der Vererbung? (2 Punkte)
-  \end{enumerate}
-
-  \item \textbf{Code-Frage: Fehler erkennen (4 Punkte)}  
-  Betrachten Sie folgenden Code-Ausschnitt:
-
-\begin{lstlisting}
+          Betrachten Sie folgenden Code-Ausschnitt:
+          \begin{lstlisting}
 class Animal:
     def __init__(self, name):
         self.__name = name
@@ -103,12 +124,11 @@ my_dog = Dog("Rex", "Labrador")
 my_dog.speak()
 \end{lstlisting}
 
-  \begin{enumerate}
-    \item Der Code kompiliert, aber es tritt ein Fehler zur Laufzeit auf. Erklären Sie den Fehler und schlagen Sie eine Lösung vor. (2 Punkte)
-    \item Nach der Korrektur möchten Sie das Attribut \texttt{breed} als privat kennzeichnen. Wie ändern Sie den Code? (1 Punkt)
-    \item Warum könnte das Anlegen privater Attribute (z.B. \_\_name) sinnvoll sein? (1 Punkt)
-  \end{enumerate}
-
+          \begin{enumerate}
+              \item Der Code kompiliert, aber es tritt ein Fehler zur Laufzeit auf. Erklären Sie den Fehler und schlagen Sie eine Lösung vor. (2 Punkte)
+              \item Nach der Korrektur möchten Sie das Attribut \texttt{breed} als privat kennzeichnen. Wie ändern Sie den Code? (1 Punkt)
+              \item Warum könnte das Anlegen privater Attribute sinnvoll sein? (1 Punkt)
+          \end{enumerate}
 \end{enumerate}
 
 \vspace{0.5em}
@@ -116,24 +136,22 @@ my_dog.speak()
 \section*{3. Algorithmic Thinking, Efficiency und Rekursion (10 Punkte)}
 
 \begin{enumerate}
-  \item \textbf{Big-O und Suchen (3 Punkte)}
-  \begin{enumerate}
-    \item Was versteht man unter \texttt{O(n)} und \texttt{O(log n)} in Bezug auf die Laufzeit? (1 Punkt)
-    \item Warum kann Binary Search nicht auf unsortierten Daten angewendet werden? (1 Punkt)
-    \item Geben Sie ein Beispiel für einen Anwendungsfall von Linear Search. (1 Punkt)
-  \end{enumerate}
+    \item \textbf{Big-O und Suchen (3 Punkte)}
+          \begin{enumerate}
+              \item Was versteht man unter \texttt{O(n)} und \texttt{O(log n)} in Bezug auf die Laufzeit?
+              \item Warum kann Binary Search nicht auf unsortierten Daten angewendet werden?
+              \item Geben Sie ein Beispiel für einen Anwendungsfall von Linear Search.
+          \end{enumerate}
+    \item \textbf{Sortieralgorithmen (3 Punkte)}
+          \begin{enumerate}
+              \item Erklären Sie das Grundprinzip von Bubble Sort.
+              \item Warum ist Bubble Sort meistens nicht effizient?
+              \item Welche Komplexität hat Quick Sort im schlechtesten Fall?
+          \end{enumerate}
+    \item \textbf{Rekursion (4 Punkte)}
 
-  \item \textbf{Sortieralgorithmen (3 Punkte)}
-  \begin{enumerate}
-    \item Erklären Sie das Grundprinzip von Bubble Sort. (1 Punkt)
-    \item Warum ist Bubble Sort meistens nicht effizient? (1 Punkt)
-    \item Welche Komplexität hat Quick Sort im schlechtesten Fall? (1 Punkt)
-  \end{enumerate}
-
-  \item \textbf{Rekursion (4 Punkte)}  
-  Unten sehen Sie eine unvollständige rekursive Funktion, die die Fakultät einer Zahl berechnet. Vervollständigen Sie den Code und erklären Sie den Basisfall.
-
-\begin{lstlisting}
+          Unten sehen Sie eine unvollständige rekursive Funktion \texttt{factorial}:
+          \begin{lstlisting}
 def factorial(n):
     # TODO: Basisfall ergänzen
     if n < 0:
@@ -142,12 +160,11 @@ def factorial(n):
         # TODO: Rekursionsfall ergänzen
 \end{lstlisting}
 
-  \begin{enumerate}
-    \item Ergänzen Sie die fehlenden Zeilen, sodass \texttt{factorial(4)} den Wert 24 liefert. (2 Punkte)
-    \item Erklären Sie, was passiert, wenn Sie \texttt{factorial(-1)} aufrufen und warum. (1 Punkt)
-    \item Welche Rolle spielt Memoization in Rekursionsverfahren? (1 Punkt)
-  \end{enumerate}
-
+          \begin{enumerate}
+              \item Ergänzen Sie die fehlenden Zeilen, sodass \texttt{factorial(4)} den Wert 24 liefert. (2 Punkte)
+              \item Erklären Sie, was passiert, wenn Sie \texttt{factorial(-1)} aufrufen und warum. (1 Punkt)
+              \item Welche Rolle spielt Memoization in Rekursionsverfahren? (1 Punkt)
+          \end{enumerate}
 \end{enumerate}
 
 \vspace{0.5em}
@@ -155,41 +172,38 @@ def factorial(n):
 \section*{4. NumPy (10 Punkte)}
 
 \begin{enumerate}
-  \item \textbf{Arrays erstellen und Attribute (3 Punkte)}
-  \begin{enumerate}
-    \item Wie erstellt man in NumPy ein Array mit Werten von 0 bis 9 (inklusive) und Schrittweite 1? (1 Punkt)
-    \item Welche Informationen liefern \texttt{.shape} und \texttt{.dtype}? (1 Punkt)
-    \item Geben Sie ein Beispiel für die Verwendung von \texttt{np.linspace}. (1 Punkt)
-  \end{enumerate}
-
-  \item \textbf{Broadcasting und Operationen (4 Punkte)}
-  \begin{enumerate}
-    \item Warum ist Broadcasting ein Vorteil in NumPy? (1 Punkt)
-    \item Gegeben: 
-\begin{lstlisting}
+    \item \textbf{Arrays erstellen und Attribute (3 Punkte)}
+          \begin{enumerate}
+              \item Wie erstellt man in NumPy ein Array mit Werten von 0 bis 9 (inklusive) und Schrittweite 1?
+              \item Welche Informationen liefern \texttt{.shape} und \texttt{.dtype}?
+              \item Geben Sie ein Beispiel für die Verwendung von \texttt{np.linspace}.
+          \end{enumerate}
+    \item \textbf{Broadcasting und Operationen (4 Punkte)}
+          \begin{enumerate}
+              \item Warum ist Broadcasting ein Vorteil in NumPy?
+              \item Gegeben:
+                    \begin{lstlisting}
 import numpy as np
 A = np.array([[1, 2, 3],
               [4, 5, 6]])
 B = np.array([10, 20, 30])
 \end{lstlisting}
-        Was ist das Ergebnis von \texttt{A + B}? Notieren Sie die entstehende Matrix. (2 Punkte)
-    \item Nennen Sie zwei Aggregationsfunktionen und deren Zweck. (1 Punkt)
-  \end{enumerate}
-
-  \item \textbf{Form und Matrixmanipulation (3 Punkte)}
-  \begin{enumerate}
-    \item Geben Sie ein Beispiel, wie man ein 1D-Array der Länge 6 in ein 2D-Array der Form (2,3) umwandelt. (1 Punkt)
-    \item Wie transponiert man eine Matrix \texttt{M} in NumPy? (1 Punkt)
-    \item Vervollständigen Sie den Code, der das Matrixprodukt von \texttt{A} und \texttt{C} berechnet:
-\begin{lstlisting}
+                    Was ist das Ergebnis von \texttt{A + B}? Notieren Sie die resultierende Matrix. (2 Punkte)
+              \item Nennen Sie zwei Aggregationsfunktionen und deren Zweck. (1 Punkt)
+          \end{enumerate}
+    \item \textbf{Form und Matrixmanipulation (3 Punkte)}
+          \begin{enumerate}
+              \item Geben Sie ein Beispiel, wie man ein 1D-Array der Länge 6 in ein 2D-Array der Form (2,3) umwandelt.
+              \item Wie transponiert man eine Matrix \texttt{M} in NumPy?
+              \item Vervollständigen Sie den Code, der das Matrixprodukt von \texttt{A} und \texttt{C} berechnet:
+                    \begin{lstlisting}
 A = np.array([[1,2],[3,4]])
 C = np.array([[5],[6]])  # 2x1 Matrix
 
 # TODO: Matrixprodukt
 result = ?
 \end{lstlisting}
-      (1 Punkt)
-  \end{enumerate}
+          \end{enumerate}
 \end{enumerate}
 
 \vspace{0.5em}
@@ -197,45 +211,44 @@ result = ?
 \section*{5. Pandas (12 Punkte)}
 
 \begin{enumerate}
-  \item \textbf{Grundlagen (4 Punkte)}
-  \begin{enumerate}
-    \item Was ist der Unterschied zwischen \texttt{Series} und \texttt{DataFrame}? (1 Punkt)
-    \item Wie liest man eine CSV-Datei \texttt{data.csv} in ein DataFrame \texttt{df} ein? (1 Punkt)
-    \item Nennen Sie zwei wichtige Attribute eines DataFrame und erklären Sie diese. (2 Punkte)
-  \end{enumerate}
-
-  \item \textbf{Selektion und Datenbereinigung (4 Punkte)}
-  \begin{enumerate}
-    \item Wie finden Sie fehlende Werte in einer bestimmten Spalte \texttt{mycol}? Schreiben Sie einen beispielhaften Pandas-Code. (1 Punkt)
-    \item Was ist der Unterschied zwischen \texttt{df.loc} und \texttt{df.iloc}? (1 Punkt)
-    \item Betrachten Sie den Code:
-\begin{lstlisting}
+    \item \textbf{Grundlagen (4 Punkte)}
+          \begin{enumerate}
+              \item Was ist der Unterschied zwischen \texttt{Series} und \texttt{DataFrame} in Pandas?
+              \item Wie liest man eine CSV-Datei \texttt{data.csv} in ein DataFrame ein?
+              \item Nennen Sie zwei wichtige Attribute eines DataFrame und erklären Sie diese kurz.
+              \item Wie speichert man ein DataFrame namens \texttt{df} in eine neue CSV-Datei namens \texttt{output.csv} (ohne Index)?
+          \end{enumerate}
+    \item \textbf{Selektion und Datenbereinigung (4 Punkte)}
+          \begin{enumerate}
+              \item Wie finden Sie fehlende Werte in einer Spalte \texttt{col\_x}? Schreiben Sie einen beispielhaften Pandas-Code.
+              \item Was ist der Unterschied zwischen \texttt{df.loc} und \texttt{df.iloc}?
+              \item Betrachten Sie den Code:
+                    \begin{lstlisting}
 df_new = df[df['column'] > 100]
 df_new.sort_values(by='column', ascending=False)
 \end{lstlisting}
-        Welche Zeilen werden in \texttt{df\_new} enthalten sein und wie ist deren Sortierreihenfolge? (2 Punkte)
-  \end{enumerate}
-
-  \item \textbf{Gruppierung, Pivot-Tabellen und Plotten (4 Punkte)}
-  \begin{enumerate}
-    \item Wie berechnen Sie den mittleren Wert einer Spalte \texttt{Value} für jede Kategorie in \texttt{Category} mithilfe von \texttt{groupby}? (1 Punkt)
-    \item Erstellen Sie eine Pivot-Tabelle, die den Durchschnitt der Spalte \texttt{Sales} anzeigt, gruppiert nach \texttt{Store} (Zeilen) und \texttt{Product} (Spalten). Geben Sie ein kurzes Code-Beispiel. (1 Punkt)
-    \item Welche Schritte sind nötig, um eine Zeitspalte in das Datetime-Format zu konvertieren und die Daten anschließend wöchentlich zu resamplen? (1 Punkt)
-    \item Schreiben Sie einen Einzeiler-Code, der ein Liniendiagramm der Spalte \texttt{Revenue} zeichnet. (1 Punkt)
-  \end{enumerate}
+                    Welche Zeilen werden in \texttt{df\_new} enthalten sein, und wie ist die Sortierreihenfolge?
+              \item Wie fügen Sie einer existierenden DataFrame-Spalte \texttt{df['Price']} z.B. 3 hinzu (um alle Preise zu erhöhen)? Geben Sie ein Code-Beispiel.
+          \end{enumerate}
+    \item \textbf{Gruppierung, Pivot-Tabellen und Plotten (4 Punkte)}
+          \begin{enumerate}
+              \item Wie berechnen Sie den mittleren Wert einer Spalte \texttt{Value} für jede Kategorie in \texttt{Category} mithilfe von \texttt{groupby}? Geben Sie ein Beispiel.
+              \item Erstellen Sie eine Pivot-Tabelle, die den Durchschnitt der Spalte \texttt{Sales} anzeigt, gruppiert nach \texttt{Store} (Zeilen) und \texttt{Product} (Spalten).
+              \item Welche Schritte sind nötig, um eine Zeitspalte in das \texttt{Datetime}-Format zu konvertieren und die Daten anschließend wöchentlich zu resamplen?
+              \item Schreiben Sie einen Einzeiler-Code, der ein Liniendiagramm der Spalte \texttt{Revenue} zeichnet.
+          \end{enumerate}
 \end{enumerate}
 
 \vspace{1em}
 \hrule
 \vspace{0.5em}
-
 \textbf{Punkteschlüssel:}
 \begin{itemize}
-  \item Teil 1: 7 Punkte
-  \item Teil 2: 12 Punkte
-  \item Teil 3: 10 Punkte
-  \item Teil 4: 10 Punkte
-  \item Teil 5: 12 Punkte
+    \item Teil 1: 7 Punkte
+    \item Teil 2: 12 Punkte
+    \item Teil 3: 10 Punkte
+    \item Teil 4: 10 Punkte
+    \item Teil 5: 12 Punkte
 \end{itemize}
 \textit{(Gesamt: 51 Punkte)}
 
