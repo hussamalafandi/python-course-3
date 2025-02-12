@@ -104,7 +104,7 @@
     \item Der folgende Code definiert eine Klasse \texttt{Person} mit einem privaten Attribut \texttt{\_\_password}. Ergänzen Sie die Methode \texttt{change\_password}, sodass sie das Passwort nur dann ändert, wenn das alte Passwort korrekt eingegeben wurde. Falls das alte Passwort nicht stimmt, soll eine Fehlermeldung ausgegeben werden. (2 Punkte)
 
           \vspace{0.3cm}
-          \begin{lstlisting}[language=Python, caption={Methode \texttt{change\_password} ergänzen}]
+          \begin{lstlisting}[language=Python]
 class Person:
   def __init__(self, name, password):
       self.name = name
@@ -148,7 +148,7 @@ class Person:
     \item Der folgende Code soll die Summe aller natürlichen Zahlen von \( 1 \) bis \( n \) rekursiv berechnen. Ergänzen Sie die fehlende Zeile für die Basisfallbedingung. (2 Punkt)
 
           \vspace{0.3cm}
-          \begin{lstlisting}[language=Python, caption={Rekursiver Algorithmus zur Summenberechnung}]
+          \begin{lstlisting}[language=Python]
 def summe(n):
 
 
@@ -166,7 +166,7 @@ print(summe(5))  # Erwartete Ausgabe: 15
     \item Der folgende Python-Code implementiert den Sortieralgorithmus \texttt{Insertion Sort}. Analysieren Sie den Code und geben Sie die Zeitkomplexität des Algorithmus an. (2 Punkte)
 
           \vspace{0.3cm}
-          \begin{lstlisting}[language=Python, caption={Sortieralgorithmus analysieren}]
+          \begin{lstlisting}[language=Python]
 def insertion_sort(arr):
     for i in range(1, len(arr)):
         key = arr[i]
@@ -192,7 +192,7 @@ def insertion_sort(arr):
 
     \item Betrachten Sie folgenden Code. Geben Sie die erwartete Ausgabe an und begründen Sie Ihre Antwort. (1 Punkt)
           \vspace{0.3cm}
-          \begin{lstlisting}[language=Python, caption={Broadcasting-Beispiel}]
+          \begin{lstlisting}[language=Python]
 import numpy as np
 
 a = np.array([1, 2, 3])
@@ -206,7 +206,7 @@ print(result)
           \newpage
     \item Ergänzen Sie den folgenden Code, um eine Matrixmultiplikation zwischen den beiden NumPy-Arrays \texttt{a} und \texttt{b} durchzuführen. (1 Punkte)
           \vspace{0.3cm}
-          \begin{lstlisting}[language=Python, caption={Matrixmultiplikation}]
+          \begin{lstlisting}[language=Python]
 import numpy as np
 
 a = np.array([[1, 2], [3, 4]])
@@ -232,7 +232,7 @@ print(result)
 
     \item Betrachten Sie den folgenden Code. Was wird ausgegeben, wenn der Code ausgeführt wird? (1 Punkt)
           \vspace{0.3cm}
-          \begin{lstlisting}[language=Python, caption={DataFrame-Filterung}]
+          \begin{lstlisting}[language=Python]
 import pandas as pd
 
 data = {'Name': ['Anna', 'Bernd', 'Clara', 'David'],
@@ -246,7 +246,7 @@ print(df['Alter'] > 30)
 
     \item Vervollständigen Sie den folgenden Code, der eine CSV-Datei einliest und alle Zeilen ausgibt, in denen der \texttt{total\_bill} größer als 20 ist. (1 Punkt)
           \vspace{0.3cm}
-          \begin{lstlisting}[language=Python, caption={Bedingte Filterung im tips-Datensatz}]
+          \begin{lstlisting}[language=Python]
 df = pd.read_csv("tips.csv")
 df_filtered = df[ ___________________________ ]
 print(df_filtered.head())
@@ -258,7 +258,7 @@ print(df_filtered.head())
 
     \item Ergänzen Sie den folgenden Code, um eine neue Spalte \texttt{Tip\_Percentage} zu erstellen, die den Prozentsatz des Trinkgelds am Gesamtbetrag berechnet. (1 Punkt)
           \vspace{0.3cm}
-          \begin{lstlisting}[language=Python, caption={Erstellung einer neuen Spalte in tips.csv}]
+          \begin{lstlisting}[language=Python]
 df = pd.read_csv("tips.csv")
 df["Tip_Percentage"] = ______________________________
 print(df[["total_bill", "tip", "Tip_Percentage"]].head())
