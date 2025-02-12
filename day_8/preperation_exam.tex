@@ -1,33 +1,25 @@
-\documentclass[12pt,a4paper]{article}
-\usepackage[utf8]{inputenc}
+\documentclass[a4paper,12pt]{article}
+
 \usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
 \usepackage[ngerman]{babel}
-\usepackage{amsmath,amssymb,geometry,listings}
-\usepackage{lipsum} % optional for dummy text if needed
+\usepackage{amsmath,amssymb}
+\usepackage{enumitem}
+\usepackage{listings}
 \usepackage{xcolor}
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\usepackage[hidelinks]{hyperref}
 
-% Page layout
-\geometry{
-  left=2cm,
-  right=2cm,
-  top=2cm,
-  bottom=2.5cm
-}
+\geometry{left=2.5cm, right=2.5cm, top=3.5cm, bottom=3.5cm}
 
-% Title
-\title{\textbf{Klausur: Python, OOP, Algorithmik, NumPy und Pandas}}
-\author{Keine Hilfsmittel erlaubt}
-\date{\today}
-
-
-% Define custom colors
+% Define colors and style for code listings
 \definecolor{codegreen}{rgb}{0,0.6,0}
 \definecolor{codegray}{rgb}{0.5,0.5,0.5}
 \definecolor{codepurple}{rgb}{0.58,0,0.82}
 \definecolor{backcolour}{rgb}{0.96,0.96,0.96}
 
 \lstdefinestyle{mystyle}{
-    language=Python,
     backgroundcolor=\color{backcolour},
     commentstyle=\color{codegreen},
     keywordstyle=\color{blue},
@@ -37,7 +29,6 @@
     breakatwhitespace=false,
     breaklines=true,
     captionpos=b,
-    keepspaces=true,
     numbers=left,
     numbersep=5pt,
     showspaces=false,
@@ -45,214 +36,234 @@
     showtabs=false,
     tabsize=2
 }
-
 \lstset{style=mystyle}
+
+% Fancy header and footer settings
+\pagestyle{fancy}
+\fancyhead[L]{Python 3}
+\fancyhead[R]{\today}
+\fancyfoot[C]{\thepage}
+\setlength{\headheight}{14.5pt}
+
+\title{Vorbereitungsklausur\\
+     Python 3}
+% \author{[Ihr Name oder Kursname]}
+\date{\today}
 
 \begin{document}
 
 \maketitle
 
-\noindent
-\textbf{Anleitung:} Bitte beantworten Sie alle Fragen in deutscher Sprache. \\
-Bearbeitungszeit: 90 Minuten. Keine Skripte, kein Internet, keine Hilfsmittel.
+% --- Student Information Fields ---
+\thispagestyle{empty}
+\vspace{1cm}
+\begin{center}
+    \textbf{Name:} \rule{8cm}{0.4pt} \\[0.5cm]
+    \textbf{Vorname:} \rule{8cm}{0.4pt} \\[0.5cm]
+    \textbf{Unterschrift:} \rule{8cm}{0.4pt}
+\end{center}
 
-\section*{1. Python Fundamentals \& Environment Setup (7 Punkte)}
 
+\vfil
+
+\begin{center}
+    \begin{tabular}{|c|c|c|}
+        \hline
+        \textbf{Aufgabe}                                & \textbf{Max. Punkte} & \textbf{Erreichte Punkte} \\ \hline
+    \ref{sec:python_environments}   & 4 &                           \\ \hline
+    \ref{sec:oop}                   & 6 &                           \\ \hline
+    \ref{sec:algorithms}            & 6 &                           \\ \hline
+    \ref{sec:numpy}                 & 6 &                           \\ \hline
+    \ref{sec:pandas}                & 7 &                           \\ \hline
+    \textbf{Gesamt}                 & 29 &                          \\ \hline
+    \end{tabular}
+\end{center}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+\section{Python Umgebungen (4 Punkte)}\label{sec:python_environments}
 \begin{enumerate}
-    \item \textbf{Virtuelle Umgebungen (3 Punkte)}
-          \begin{enumerate}
-              \item Erklären Sie den Zweck einer virtuellen Umgebung (\texttt{venv} oder \texttt{conda}). Warum ist es sinnvoll, eine zu verwenden?
-              \item Wie können Sie in \texttt{conda} eine neue Umgebung erstellen und aktivieren? Nennen Sie die wichtigsten Befehle.
-          \end{enumerate}
-    \item \textbf{Jupyter Notebook (2 Punkte)}
-          \begin{enumerate}
-              \item Beschreiben Sie kurz den Aufbau eines Jupyter Notebooks. Welche Zelltypen gibt es?
-              \item Welche Vorteile bieten Jupyter Notebooks gegenüber einfachen Python-Skripten?
-          \end{enumerate}
-    \item \textbf{Code-Frage: Fehler finden (2 Punkte)}
+    \item Erklären Sie mit eigenen Worten, \textbf{was} ein virtuelles Environment ist und \textbf{warum} es nützlich ist.\ \textbf{(2 Punkte)}
 
-          Betrachten Sie folgenden Python-Code:
-          \begin{lstlisting}
-my_var = "Hello"
+          \vfil
 
-if my_var == "Hello":
-    print("Yes, it's Hello")
-else:
-    print("No, it's not Hello")
-\end{lstlisting}
-
-          \begin{enumerate}
-              \item Der Code erzeugt einen Fehler. Nennen Sie die Ursache und schlagen Sie eine Korrektur vor. (1 Punkt)
-              \item Nehmen Sie an, Sie möchten eine Zeile hinzufügen, die die Länge von \texttt{my\_var} ausgibt. Schreiben Sie die fehlende Codezeile. (1 Punkt)
-          \end{enumerate}
+    \item Welche Befehle verwenden Sie, um ein virtuelles Environment zu \textbf{erstellen} und zu \textbf{aktivieren} mit \texttt{venv} in Python? \textbf{(2 Punkte)}
 \end{enumerate}
 
 
-\section*{2. Object-Oriented Programming (OOP) (12 Punkte)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+\section{Objektorientierte Programmierung (OOP) (6 Punkte)}\label{sec:oop}
 
 \begin{enumerate}
-    \item \textbf{Grundlagen und Konzepte (4 Punkte)}
-          \begin{enumerate}
-              \item Was versteht man unter einer Klasse und einem Objekt? Geben Sie ein kurzes Beispiel in Python.
-              \item Erklären Sie kurz \textit{Encapsulation}, \textit{Inheritance} und \textit{Polymorphism}.
-          \end{enumerate}
-    \item \textbf{Vererbung (4 Punkte)}
-          \begin{enumerate}
-              \item Wie erstellt man eine Unterklasse in Python? Geben Sie ein kleines Beispiel.
-              \item Welche Bedeutung hat die Funktion \texttt{super()} bei der Vererbung?
-          \end{enumerate}
-    \item \textbf{Code-Frage: Fehler erkennen (4 Punkte)}
+    \item Erklären Sie mit eigenen Worten, \textbf{was} sind abstrakte Klassen und \textbf{warum} sind sie nützlich? Geben Sie ein Beispiel für eine abstrakte Klasse in Python. (2 Punkte)
 
-          Betrachten Sie folgenden Code-Ausschnitt:
-          \begin{lstlisting}
-class Animal:
-    def __init__(self, name):
-        self.__name = name
+          \vfill
 
-    def speak(self):
-        print("...")
+    \item Der folgende Code definiert eine Klasse \texttt{Person} mit einem privaten Attribut \texttt{\_\_password}. Ergänzen Sie die Methode \texttt{change\_password}, sodass sie das Passwort nur dann ändert, wenn das alte Passwort korrekt eingegeben wurde. Falls das alte Passwort nicht stimmt, soll eine Fehlermeldung ausgegeben werden. (2 Punkte)
 
-class Dog(Animal):
-    def __init__(self, name, breed):
-        super().__init__(name)
-        self.breed = breed
+          \vspace{0.3cm}
+          \begin{lstlisting}[language=Python, caption={Methode \texttt{change\_password} ergänzen}]
+class Person:
+  def __init__(self, name, password):
+      self.name = name
+      self.__password = password  # Privates Attribut
+  
+  def change_password(self, old_password, new_password):
 
-    def speak():
-        print(f"{self.__name} barks!")
+  
 
-my_dog = Dog("Rex", "Labrador")
-my_dog.speak()
-\end{lstlisting}
 
-          \begin{enumerate}
-              \item Der Code kompiliert, aber es tritt ein Fehler zur Laufzeit auf. Erklären Sie den Fehler und schlagen Sie eine Lösung vor. (2 Punkte)
-              \item Nach der Korrektur möchten Sie das Attribut \texttt{breed} als privat kennzeichnen. Wie ändern Sie den Code? (1 Punkt)
-              \item Warum könnte das Anlegen privater Attribute sinnvoll sein? (1 Punkt)
-          \end{enumerate}
+
+
+
+
+
+
+    
+.
+    \end{lstlisting}
+
+
+
+          \newpage
+    \item Erklären Sie den Zweck der Funktion \texttt{super()} in einer Unterklasse? (1 Punkt)
+
+          \vfil
+
+
+    \item Nennen Sie zwei Entwurfmustern. (1 Punkt)
 \end{enumerate}
 
-\vspace{0.5em}
+\newpage
 
-\section*{3. Algorithmic Thinking, Efficiency und Rekursion (10 Punkte)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Algorithmen, Effizienz und Rekursion (6 Punkte)}\label{sec:algorithms}
 
 \begin{enumerate}
-    \item \textbf{Big-O und Suchen (3 Punkte)}
-          \begin{enumerate}
-              \item Was versteht man unter \texttt{O(n)} und \texttt{O(log n)} in Bezug auf die Laufzeit?
-              \item Warum kann Binary Search nicht auf unsortierten Daten angewendet werden?
-              \item Geben Sie ein Beispiel für einen Anwendungsfall von Linear Search.
-          \end{enumerate}
-    \item \textbf{Sortieralgorithmen (3 Punkte)}
-          \begin{enumerate}
-              \item Erklären Sie das Grundprinzip von Bubble Sort.
-              \item Warum ist Bubble Sort meistens nicht effizient?
-              \item Welche Komplexität hat Quick Sort im schlechtesten Fall?
-          \end{enumerate}
-    \item \textbf{Rekursion (4 Punkte)}
+    \item Erklären Sie den Unterschied zwischen linearer Suche und binärer Suche. Geben Sie die Zeitkomplexität für lineare Suche. (2 Punkte)
+          \vfil
 
-          Unten sehen Sie eine unvollständige rekursive Funktion \texttt{factorial}:
-          \begin{lstlisting}
-def factorial(n):
-    # TODO: Basisfall ergänzen
-    if n < 0:
-        return None
-    else:
-        # TODO: Rekursionsfall ergänzen
-\end{lstlisting}
+    \item Der folgende Code soll die Summe aller natürlichen Zahlen von \( 1 \) bis \( n \) rekursiv berechnen. Ergänzen Sie die fehlende Zeile für die Basisfallbedingung. (2 Punkt)
 
-          \begin{enumerate}
-              \item Ergänzen Sie die fehlenden Zeilen, sodass \texttt{factorial(4)} den Wert 24 liefert. (2 Punkte)
-              \item Erklären Sie, was passiert, wenn Sie \texttt{factorial(-1)} aufrufen und warum. (1 Punkt)
-              \item Welche Rolle spielt Memoization in Rekursionsverfahren? (1 Punkt)
-          \end{enumerate}
+          \vspace{0.3cm}
+          \begin{lstlisting}[language=Python, caption={Rekursiver Algorithmus zur Summenberechnung}]
+def summe(n):
+
+
+
+
+
+  return n + summe(n-1)
+
+print(summe(5))  # Erwartete Ausgabe: 15
+    \end{lstlisting}
+
+          \textbf{Hinweis:} Der Basisfall ist erforderlich, um eine unendliche Rekursion zu vermeiden.
+
+          \newpage
+    \item Der folgende Python-Code implementiert den Sortieralgorithmus \texttt{Insertion Sort}. Analysieren Sie den Code und geben Sie die Zeitkomplexität des Algorithmus an. (2 Punkte)
+
+          \vspace{0.3cm}
+          \begin{lstlisting}[language=Python, caption={Sortieralgorithmus analysieren}]
+def insertion_sort(arr):
+    for i in range(1, len(arr)):
+        key = arr[i]
+        j = i - 1
+        while j >= 0 and arr[j] > key:
+            arr[j + 1] = arr[j]
+            j -= 1
+        arr[j + 1] = key
+    return arr
+      \end{lstlisting}
+
 \end{enumerate}
 
-\vspace{0.5em}
+\newpage
 
-\section*{4. NumPy (10 Punkte)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{NumPy (6 Punkte)}\label{sec:numpy}
 
 \begin{enumerate}
-    \item \textbf{Arrays erstellen und Attribute (3 Punkte)}
-          \begin{enumerate}
-              \item Wie erstellt man in NumPy ein Array mit Werten von 0 bis 9 (inklusive) und Schrittweite 1?
-              \item Welche Informationen liefern \texttt{.shape} und \texttt{.dtype}?
-              \item Geben Sie ein Beispiel für die Verwendung von \texttt{np.linspace}.
-          \end{enumerate}
-    \item \textbf{Broadcasting und Operationen (4 Punkte)}
-          \begin{enumerate}
-              \item Warum ist Broadcasting ein Vorteil in NumPy?
-              \item Gegeben:
-                    \begin{lstlisting}
+    \item Erklären Sie den Unterschied zwischen einem NumPy-Array und einer Python-Liste. Welche Vorteile bieten NumPy-Arrays gegenüber Python-Listen? (2 Punkte)
+
+          \vfil
+
+    \item Betrachten Sie folgenden Code. Geben Sie die erwartete Ausgabe an und begründen Sie Ihre Antwort. (1 Punkt)
+          \vspace{0.3cm}
+          \begin{lstlisting}[language=Python, caption={Broadcasting-Beispiel}]
 import numpy as np
-A = np.array([[1, 2, 3],
-              [4, 5, 6]])
-B = np.array([10, 20, 30])
-\end{lstlisting}
-                    Was ist das Ergebnis von \texttt{A + B}? Notieren Sie die resultierende Matrix. (2 Punkte)
-              \item Nennen Sie zwei Aggregationsfunktionen und deren Zweck. (1 Punkt)
-          \end{enumerate}
-    \item \textbf{Form und Matrixmanipulation (3 Punkte)}
-          \begin{enumerate}
-              \item Geben Sie ein Beispiel, wie man ein 1D-Array der Länge 6 in ein 2D-Array der Form (2,3) umwandelt.
-              \item Wie transponiert man eine Matrix \texttt{M} in NumPy?
-              \item Vervollständigen Sie den Code, der das Matrixprodukt von \texttt{A} und \texttt{C} berechnet:
-                    \begin{lstlisting}
-A = np.array([[1,2],[3,4]])
-C = np.array([[5],[6]])  # 2x1 Matrix
 
-# TODO: Matrixprodukt
-result = ?
-\end{lstlisting}
-          \end{enumerate}
+a = np.array([1, 2, 3])
+b = np.array([[10], [20], [30]])
+
+result = a + b
+print(result)
+  \end{lstlisting}
+
+
+          \newpage
+    \item Ergänzen Sie den folgenden Code, um eine Matrixmultiplikation zwischen den beiden NumPy-Arrays \texttt{a} und \texttt{b} durchzuführen. (1 Punkte)
+          \vspace{0.3cm}
+          \begin{lstlisting}[language=Python, caption={Matrixmultiplikation}]
+import numpy as np
+
+a = np.array([[1, 2], [3, 4]])
+b = np.array([[5, 6], [7, 8]])
+
+result = _____________________
+print(result)
+    \end{lstlisting}
+
+
+          \vfil
+    \item Was versteht man unter Broadcasting in NumPy? Erklären Sie anhand eines Beispiels. (2 Punkte)
 \end{enumerate}
 
-\vspace{0.5em}
+\newpage
 
-\section*{5. Pandas (12 Punkte)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Pandas (7 Punkte)}\label{sec:pandas}
 
 \begin{enumerate}
-    \item \textbf{Grundlagen (4 Punkte)}
-          \begin{enumerate}
-              \item Was ist der Unterschied zwischen \texttt{Series} und \texttt{DataFrame} in Pandas?
-              \item Wie liest man eine CSV-Datei \texttt{data.csv} in ein DataFrame ein?
-              \item Nennen Sie zwei wichtige Attribute eines DataFrame und erklären Sie diese kurz.
-              \item Wie speichert man ein DataFrame namens \texttt{df} in eine neue CSV-Datei namens \texttt{output.csv} (ohne Index)?
-          \end{enumerate}
-    \item \textbf{Selektion und Datenbereinigung (4 Punkte)}
-          \begin{enumerate}
-              \item Wie finden Sie fehlende Werte in einer Spalte \texttt{col\_x}? Schreiben Sie einen beispielhaften Pandas-Code.
-              \item Was ist der Unterschied zwischen \texttt{df.loc} und \texttt{df.iloc}?
-              \item Betrachten Sie den Code:
-                    \begin{lstlisting}
-df_new = df[df['column'] > 100]
-df_new.sort_values(by='column', ascending=False)
-\end{lstlisting}
-                    Welche Zeilen werden in \texttt{df\_new} enthalten sein, und wie ist die Sortierreihenfolge?
-              \item Wie fügen Sie einer existierenden DataFrame-Spalte \texttt{df['Price']} z.B. 3 hinzu (um alle Preise zu erhöhen)? Geben Sie ein Code-Beispiel.
-          \end{enumerate}
-    \item \textbf{Gruppierung, Pivot-Tabellen und Plotten (4 Punkte)}
-          \begin{enumerate}
-              \item Wie berechnen Sie den mittleren Wert einer Spalte \texttt{Value} für jede Kategorie in \texttt{Category} mithilfe von \texttt{groupby}? Geben Sie ein Beispiel.
-              \item Erstellen Sie eine Pivot-Tabelle, die den Durchschnitt der Spalte \texttt{Sales} anzeigt, gruppiert nach \texttt{Store} (Zeilen) und \texttt{Product} (Spalten).
-              \item Welche Schritte sind nötig, um eine Zeitspalte in das \texttt{Datetime}-Format zu konvertieren und die Daten anschließend wöchentlich zu resamplen?
-              \item Schreiben Sie einen Einzeiler-Code, der ein Liniendiagramm der Spalte \texttt{Revenue} zeichnet.
-          \end{enumerate}
+    \item Erklären Sie den Unterschied zwischen einer Series und einem DataFrame in Pandas. Wann würden Sie eine Series verwenden und wann ein DataFrame? (2 Punkte)
+          \vfil
+
+    \item Betrachten Sie den folgenden Code. Was wird ausgegeben, wenn der Code ausgeführt wird? (1 Punkt)
+          \vspace{0.3cm}
+          \begin{lstlisting}[language=Python, caption={DataFrame-Filterung}]
+import pandas as pd
+
+data = {'Name': ['Anna', 'Bernd', 'Clara', 'David'],
+        'Alter': [28, 34, 29, 42],
+        'Stadt': ['Berlin', 'München', 'Hamburg', 'Köln']}
+
+df = pd.DataFrame(data)
+print(df['Alter'] > 30)
+  \end{lstlisting}
+          \newpage
+
+    \item Vervollständigen Sie den folgenden Code, der eine CSV-Datei einliest und alle Zeilen ausgibt, in denen der \texttt{total\_bill} größer als 20 ist. (1 Punkt)
+          \vspace{0.3cm}
+          \begin{lstlisting}[language=Python, caption={Bedingte Filterung im tips-Datensatz}]
+df = pd.read_csv("tips.csv")
+df_filtered = df[ ___________________________ ]
+print(df_filtered.head())
+  \end{lstlisting}
+
+          \vfil
+    \item Beschreiben Sie, wie man in Pandas fehlende Werte erkennt und behandelt. Was ist der Unterschied zwischen \texttt{fillna()} und \texttt{dropna()}? (2 Punkte)
+          \vfil
+
+    \item Ergänzen Sie den folgenden Code, um eine neue Spalte \texttt{Tip\_Percentage} zu erstellen, die den Prozentsatz des Trinkgelds am Gesamtbetrag berechnet. (1 Punkt)
+          \vspace{0.3cm}
+          \begin{lstlisting}[language=Python, caption={Erstellung einer neuen Spalte in tips.csv}]
+df = pd.read_csv("tips.csv")
+df["Tip_Percentage"] = ______________________________
+print(df[["total_bill", "tip", "Tip_Percentage"]].head())
+  \end{lstlisting}
 \end{enumerate}
 
-\vspace{1em}
-\hrule
-\vspace{0.5em}
-\textbf{Punkteschlüssel:}
-\begin{itemize}
-    \item Teil 1: 7 Punkte
-    \item Teil 2: 12 Punkte
-    \item Teil 3: 10 Punkte
-    \item Teil 4: 10 Punkte
-    \item Teil 5: 12 Punkte
-\end{itemize}
-\textit{(Gesamt: 51 Punkte)}
-
-\vspace{0.5em}
-\textbf{Viel Erfolg bei der Klausur!}
 
 \end{document}
