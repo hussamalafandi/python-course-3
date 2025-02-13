@@ -230,7 +230,7 @@ def selection_sort(arr):
         \begin{enumerate}
           \item \texttt{np.zeros()}
                 \vspace{5cm}
-          \item \texttt{np.linspace()}
+          \item \texttt{np.arange()}
         \end{enumerate}
 
         \vfil
@@ -244,6 +244,7 @@ import numpy as np
 a = np.eye(3)
 print(a)
 \end{lstlisting}
+\textbf{Hinweis:} Die Funktion \texttt{np.eye()} erstellt eine Einheitsmatrix.
 
         \vfil
 
@@ -296,7 +297,7 @@ print(df[df['Alter'] > 30])
   df_filtered = df[ ___________________________ ]
   print(df_filtered.head())
   \end{lstlisting}
-        \textbf{Hinweis:} Um den Prozentsatz zu berechnen, können Sie die folgende Formel verwenden: \(\text{Prozentsatz} = \text{Trinkgeld}/\text{Gesamtrechnung} \times 100\).
+        \textbf{Hinweis:} Um den Prozentsatz zu berechnen, können Sie die folgende Formel verwenden: \(\text{Prozentsatz} = \text{tip}/\text{total\_bill} \times 100\).
 
         \vfil
 
