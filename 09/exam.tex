@@ -55,21 +55,30 @@
 
 \maketitle
 
-\section*{Allgemeine Hinweise}
-Beantworten Sie alle Fragen schriftlich. Es sind keinerlei Hilfsmittel (Computer, Bücher, Internet) erlaubt. Viel Erfolg!
 
+% --- Student Information Fields ---
+\thispagestyle{empty}
 \vspace{1cm}
 \begin{center}
-    \begin{tabular}{|c|c|c|}
-        \hline
-        \textbf{Aufgabe}                                & \textbf{Max. Punkte} & \textbf{Erreichte Punkte} \\ \hline
-        1. Python Fundamentals \& Environment Setup    & 4                    &                           \\ \hline
-        2. Objektorientierte Programmierung (OOP)         & 6                    &                           \\ \hline
-        3. Algorithmen, Effizienz und Rekursion           & 6                    &                           \\ \hline
-        4. NumPy                                        & 6                    &                           \\ \hline
-        5. Pandas                                       & 7                    &                           \\ \hline
-        \textbf{Gesamt}                                  & 29                   &                           \\ \hline
-    \end{tabular}
+  \textbf{Name:} \rule{8cm}{0.4pt} \\[0.5cm]
+  \textbf{Vorname:} \rule{8cm}{0.4pt} \\[0.5cm]
+  \textbf{Unterschrift:} \rule{8cm}{0.4pt}
+\end{center}
+
+
+\vfil
+
+\begin{center}
+  \begin{tabular}{|c|c|c|}
+    \hline
+    \textbf{Aufgabe}     & \textbf{Max. Punkte} & \textbf{Erreichte Punkte} \\ \hline
+    \ref{sec:python}     & 4                    &                           \\ \hline
+    \ref{sec:oop}        & 6                    &                           \\ \hline
+    \ref{sec:algorithms} & 6                    &                           \\ \hline
+    \ref{sec:numpy}      & 8                    &                           \\ \hline
+    \ref{sec:pandas}     & 8                    &                           \\ \hline
+    \textbf{Gesamt}      & 32                   &                           \\ \hline
+  \end{tabular}
 \end{center}
 
 \newpage
@@ -77,11 +86,11 @@ Beantworten Sie alle Fragen schriftlich. Es sind keinerlei Hilfsmittel (Computer
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Python Fundamentals \& Environment Setup (4 Punkte)}\label{sec:python}
 
-\begin{enumerate}[label=\arabic*.]
-  \item Erklären Sie, was ein virtuelles Python-Environment ist und warum es in Projekten sinnvoll ist. (2 Punkte)
-
-  \item Welche Befehle verwenden Sie, um ein virtuelles Environment mit \texttt{conda} zu erstellen und zu aktivieren? Schreiben Sie den entsprechenden Befehl. (2 Punkte)\\[0.3cm]
-  \textbf{Hinweis:} Verwenden Sie z. B. den Befehl zur Erstellung eines neuen Environments namens \texttt{myenv}.
+\begin{enumerate}
+  \item Erklären Sie, \textbf{was} ein virtuelles Python-Environment ist und \textbf{warum} es in Projekten sinnvoll ist. (2 Punkte)
+        \vfil
+  \item Welche Befehle verwenden Sie, um ein virtuelles Environment mit \texttt{conda} zu \textbf{erstellen} und zu \textbf{aktivieren}? Schreiben Sie den entsprechenden Befehl. (2 Punkte)\\[0.3cm]
+        \textbf{Hinweis:} Verwenden Sie z. B. den Befehl zur Erstellung eines neuen Environments namens \texttt{python\_kurs\_3}.
 \end{enumerate}
 
 \newpage
@@ -89,24 +98,62 @@ Beantworten Sie alle Fragen schriftlich. Es sind keinerlei Hilfsmittel (Computer
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Objektorientierte Programmierung (OOP) (6 Punkte)}\label{sec:oop}
 
-\begin{enumerate}[label=\arabic*.]
-  \item Erklären Sie den Unterschied zwischen statischen Methoden und Klassenmethoden in Python. Geben Sie ein Beispiel, wann eine statische Methode sinnvoll ist. (2 Punkte)
+\begin{enumerate}
+  \item Erklären Sie den Unterschied zwischen \textbf{statischen} Methoden und \textbf{Klassenmethoden} in Python. (2 Punkte)
+        \vfil
+  \item Nennen Sie ein Entwurfsmuster. (1 Punkte)
+  \vfil
+  \item Ist die folgende Aussage wahr oder falsch? (1 Punkt)
+  \begin{quote}
+    \textit{``Das Entwurfsmuster Singleton wird verwendet, um sicherzustellen, dass eine Klasse nur eine Instanz hat.''}
+  \end{quote}
 
-  \item Der folgende Code enthält einen Fehler. Finden Sie den Fehler und korrigieren Sie den Code, sodass die Methode \texttt{beschreiben} den Namen der Person korrekt ausgibt. (2 Punkte)
-  \vspace{0.3cm}
-  \begin{lstlisting}[language=Python, caption={Fehlersuche in einer Klassenmethode}]
-class Person:
-    def __init__(self, name):
+
+        \newpage
+
+  \item Der folgende Code enthält einen Fehler. Finden Sie den Fehler und korrigieren Sie ihn. (2 Punkte)
+
+        \vspace{0.3cm}
+        \begin{lstlisting}[language=Python]
+from abc import ABC, abstractmethod
+
+class Fahrzeug(ABC):
+    def __init__(self, name, max_speed):
         self.name = name
+        self.max_speed = max_speed
 
-    def beschreiben(self):
-        print("Die Person heißt " + Name)
+    @abstractmethod
+    def fahren(self):
+        pass
 
-p = Person("Laura")
-p.beschreiben()
-  \end{lstlisting}
+class Fahrrad(Fahrzeug):
+    def __init__(self, name, max_speed, typ):
+        super().__init__(name, max_speed)
+        self.typ = typ
 
-  \item Nennen Sie ein praktisches Beispiel, in welchem das Singleton-Muster sinnvoll eingesetzt wird. (2 Punkte)
+    def fahren(self):
+        return f"Das Fahrrad {self.name} fährt mit maximal {self.max_speed} km/h."
+
+class Auto(Fahrzeug): # Hinweis: Der Fehler liegt in dieser Klasse
+    def __init__(self, name, max_speed, anzahl_sitze):
+        super().__init__(name, max_speed)
+        self.anzahl_sitze = anzahl_sitze
+
+
+
+
+
+
+
+
+
+
+auto = Auto("BMW", 220, 5)
+\end{lstlisting}
+        \textbf{Hinweis:} Der Code enthält einen Fehler, der das Erstellen einer Instanz der Klasse \texttt{Auto} verhindert.
+
+
+
 \end{enumerate}
 
 \newpage
@@ -114,101 +161,168 @@ p.beschreiben()
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Algorithmen, Effizienz und Rekursion (6 Punkte)}\label{sec:algorithms}
 
-\begin{enumerate}[label=\arabic*.]
-  \item Vergleichen Sie die Zeitkomplexitäten von Bubble Sort und Quick Sort in Ihren eigenen Worten. (2 Punkte)
+\begin{enumerate}
+  \item Welche der folgenden Aussagen zur Zeitkomplexität von Bubble Sort ist \textbf{korrekt}? (1 Punkte)
 
-  \item Der folgende rekursive Code berechnet die n-te Fibonacci-Zahl. Es fehlt eine Basisfallbedingung. Vervollständigen Sie den Code. (2 Punkte)
-  \vspace{0.3cm}
-  \begin{lstlisting}[language=Python, caption={Rekursiver Algorithmus zur Berechnung der Fibonacci-Zahl}]
-def fibonacci(n):
+        \vspace{0.3cm}
+        \begin{enumerate}
+          \item Die Worst-Case-Zeitkomplexität von Bubble Sort ist \(O(n^2)\), weil jedes Element mit jedem anderen verglichen werden kann.
+          \item Die Worst-Case-Zeitkomplexität von Bubble Sort ist \(O(n \log n)\), weil der Algorithmus immer die Eingabe halbiert.
+          \item Bubble Sort ist in allen Fällen der effizienteste Sortieralgorithmus mit einer Laufzeit von \(O(n)\).
+          \item Die Worst-Case-Zeitkomplexität von Bubble Sort ist \(O(n)\), weil nur eine Schleife durchlaufen wird.
+        \end{enumerate}
+
+        \vfil
+
+
+  \item Der folgende rekursive Code berechnet die Summe aller geraden Zahlen von \(1\) bis \(n\). Eine wichtige Bedingung fehlt, um sicherzustellen, dass nur gerade Zahlen addiert werden. Ergänzen Sie die fehlende Bedingung. (2 Punkte)
+
+        \vspace{0.3cm}
+        \begin{lstlisting}[language=Python]
+def sum_even(n):
+    if n <= 0:
+        return 0
     if ___________________________:
-        return n
+        return n + sum_even(n-2)
     else:
-        return fibonacci(n-1) + fibonacci(n-2)
+        return sum_even(n-1)
 
-print(fibonacci(6))  % Erwartete Ausgabe: 8
-  \end{lstlisting}
-  
-  \item Beschreiben Sie, warum es bei rekursiven Algorithmen wichtig ist, einen Basisfall zu definieren, und wie Memoization die Effizienz verbessern kann. (2 Punkte)
+print(sum_even(6))  # Erwartete Ausgabe: 12 (2 + 4 + 6)
+\end{lstlisting}
+        \textbf{Hinweis:} Mit $\%$ können Sie den Rest einer Division berechnen.
+
+
+        \newpage
+  \item Beschreiben Sie, warum es bei rekursiven Algorithmen wichtig ist, einen Basisfall zu definieren. (1 Punkt)
+
+        \vfil
+
+  \item Der folgende Python-Code implementiert den Sortieralgorithmus \texttt{Selection Sort}. Analysieren Sie den Code und geben Sie die Zeitkomplexität des Algorithmus an. (2 Punkte)
+
+        \vspace{0.3cm}
+        \begin{lstlisting}[language=Python]
+def selection_sort(arr):
+    n = len(arr)
+    for i in range(n):
+        min_index = i
+        for j in range(i + 1, n):
+            if arr[j] < arr[min_index]:
+                min_index = j
+        arr[i], arr[min_index] = arr[min_index], arr[i]
+    return arr
+\end{lstlisting}
+        \textbf{Hinweis:} Bitte geben Sie nur die Zeitkomplexität in Big-O-Notation an.
+
+
 \end{enumerate}
 
 \newpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{NumPy (6 Punkte)}\label{sec:numpy}
+\section{NumPy (8 Punkte)}\label{sec:numpy}
 
-\begin{enumerate}[label=\arabic*.]
+\begin{enumerate}
   \item Erklären Sie, warum NumPy-Arrays für numerische Berechnungen gegenüber Python-Listen bevorzugt werden. (2 Punkte)
+        \vfil
 
-  \item Betrachten Sie folgenden Code. Geben Sie die erwartete Ausgabe an und begründen Sie, warum. (1 Punkt)
-  \vspace{0.3cm}
-  \begin{lstlisting}[language=Python, caption={Broadcasting-Beispiel}]
+  \item Was ist die Aufgabe der folgenden NumPy-Funktionen? (2 Punkte)
+
+        \begin{enumerate}
+          \item \texttt{np.zeros()}
+                \vspace{5cm}
+          \item \texttt{np.linspace()}
+        \end{enumerate}
+
+        \vfil
+
+        \newpage
+  \item Was ist die Ausgabe des folgenden Codes? (1 Punkt)
+        \vspace{0.3cm}
+        \begin{lstlisting}[language=Python]
 import numpy as np
-a = np.array([1, 2, 3])
-b = np.array([[10], [20], [30]])
-result = a + b
-print(result)
-  \end{lstlisting}
 
-  \item Vervollständigen Sie den folgenden Code, um ein 3x3 Array mit Zufallszahlen zwischen 0 und 1 zu erzeugen. (1 Punkt)
-  \vspace{0.3cm}
-  \begin{lstlisting}[language=Python, caption={Ergänzen Sie den Code}]
+a = np.eye(3)
+print(a)
+\end{lstlisting}
+
+        \vfil
+
+  \item Was ist die Ausgabe des folgenden Codes? (3 Punkt)
+        \vspace{0.3cm}
+        \begin{lstlisting}[language=Python]
 import numpy as np
-array_random = np.random.______________((3,3))
-print(array_random)
-  \end{lstlisting}
 
-  \item Was bedeutet der Begriff Broadcasting in NumPy? Geben Sie eine kurze Erklärung und ein Beispiel. (2 Punkte)
+a = np.array([[1, 2, 3],
+              [4, 5, 6]])
+
+print(a.shape)
+print(a[:, 2])
+print(a[1, :].sum())
+\end{lstlisting}
+
+
+
+
 \end{enumerate}
-
 \newpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Pandas (7 Punkte)}\label{sec:pandas}
+\section{Pandas (8 Punkte)}\label{sec:pandas}
 
-\begin{enumerate}[label=\arabic*.]
-  \item Erklären Sie den Unterschied zwischen einer Series und einem DataFrame in Pandas. Wann würden Sie welche Datenstruktur verwenden? (2 Punkte)
+\begin{enumerate}
+  \item Erklären Sie den Unterschied zwischen einer Series und einem DataFrame in Pandas. (2 Punkt)
+        \vfil
 
   \item Betrachten Sie den folgenden Codeausschnitt. Was ist die Ausgabe, wenn dieser Code ausgeführt wird? (1 Punkt)
-  \vspace{0.3cm}
-  \begin{lstlisting}[language=Python, caption={DataFrame-Filterung}]
+        \vspace{0.3cm}
+        \begin{lstlisting}[language=Python]
 import pandas as pd
+
+data = {'Name': ['Anna', 'Bernd', 'Clara', 'David'],
+        'Alter': [28, 34, 29, 42],
+        'Stadt': ['Berlin', 'München', 'Hamburg', 'Köln']}
+
+df = pd.DataFrame(data)
+
+print(df[df['Alter'] > 30])
+  \end{lstlisting}
+
+        \newpage
+  \item Vervollständigen Sie den folgenden Code, um eine CSV-Datei einzulesen und nur die Rechnungen anzuzeigen, bei denen das Trinkgeld (\texttt{tip}) mehr als 15\% der Gesamtrechnung (\texttt{total\_bill}) beträgt. (2 Punkt)
+
+        \vspace{0.3cm}
+        \begin{lstlisting}[language=Python]
+  df = pd.read_csv("tips.csv")
+  df_filtered = df[ ___________________________ ]
+  print(df_filtered.head())
+  \end{lstlisting}
+        \textbf{Hinweis:} Um den Prozentsatz zu berechnen, können Sie die folgende Formel verwenden: \(\text{Prozentsatz} = \text{Trinkgeld}/\text{Gesamtrechnung} \times 100\).
+
+        \vfil
+
+  \item Was macht die methode \texttt{df.head(10)} in Pandas? (1 Punkt)
+        \newpage
+
+  \item Was ist die Ausgabe des folgenden Codes? (2 Punkte)
+        \vspace{0.3cm}
+        \begin{lstlisting}[language=Python]
+import pandas as pd
+
 data = {'Name': ['Anna', 'Bernd', 'Clara', 'David'],
         'Alter': [28, 34, 29, 42],
         'Stadt': ['Berlin', 'München', 'Hamburg', 'Köln']}
 df = pd.DataFrame(data)
-print(df[df['Alter'] > 30])
-  \end{lstlisting}
 
-  \item Vervollständigen Sie den folgenden Code, der eine CSV-Datei einliest und alle Zeilen ausgibt, in denen der \texttt{total\_bill} größer als 20 ist. (1 Punkt)
-  \vspace{0.3cm}
-  \begin{lstlisting}[language=Python, caption={Bedingte Filterung im tips-Datensatz}]
-df = pd.read_csv("tips.csv")
-df_filtered = df[ ___________________________ ]
-print(df_filtered.head())
-  \end{lstlisting}
+df['Geschlecht'] = ['w', 'm', 'w', 'm']
+print(df)
+\end{lstlisting}
 
-  \item Beschreiben Sie, wie Sie in Pandas fehlende Werte erkennen und behandeln können. Erklären Sie den Unterschied zwischen \texttt{fillna()} und \texttt{dropna()}. (2 Punkte)
-
-  \item Vervollständigen Sie den folgenden Code, um eine neue Spalte \texttt{Tip\_Percentage} zu erstellen, die den Prozentsatz des Trinkgelds am Gesamtbetrag berechnet. (1 Punkt)
-  \vspace{0.3cm}
-  \begin{lstlisting}[language=Python, caption={Ergänzen Sie den Code zur neuen Spalte in tips.csv}]
-df = pd.read_csv("tips.csv")
-df["Tip_Percentage"] = ______________________________
-print(df[["total_bill", "tip", "Tip_Percentage"]].head())
-  \end{lstlisting}
-
-  \item Beschreiben Sie in eigenen Worten, wie Sie eine Zeitreihe in Pandas analysieren würden. Welche Schritte sind dabei notwendig? (1 Punkt)
 \end{enumerate}
 
-\newpage
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section*{Hinweis}
-Überprüfen Sie alle Antworten sorgfältig. Ihre Erklärungen und Code-Snippets sollten klar und vollständig formuliert sein.
 
 \vfill
 \hrule
+\vspace{0.3cm}
 \small{Viel Erfolg bei der Klausur!}
 
 \end{document}
