@@ -4,11 +4,11 @@
 | **Tag 1** | Einrichten von Python-Umgebungen & Arbeiten mit Jupyter Notebooks |
 | **Tag 2** | Wiederholung & Fortgeschrittene OOP-Konzepte |
 | **Tag 3** | Angewandte OOP & Einführung in Design Patterns |
-| **Tag 4** | Computational Thinking (Such-Algorithmen, Sortier-Algorithmen), Algorithmeneffizienz & Rekursion |
+| **Tag 4** | Computational Thinking (Suchalgorithmen, Sortieralgorithmen), Algorithmeneffizienz & Rekursion |
 | **Tag 5** | Datenanalyse mit NumPy|
 | **Tag 6** | Datenanalyse mit NumPy & Pandas |
 | **Tag 7** | Pandas & Wiederholung|
-| **Tag 8** | Zeitreihen Analyse |
+| **Tag 8** | Zeitreihenanalyse |
 | **Tag 9** | **Prüfungsvorbereitung** |
 | **Tag 10** | **Abschlussprüfung** |
 
