@@ -1,0 +1,214 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage{enumitem}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\usepackage[hidelinks]{hyperref}
+\usepackage[de-DE]{datetime2}  % Use German date format
+
+\geometry{left=2.5cm, right=2.5cm, top=3.5cm, bottom=3.0cm}
+
+% Define colors and style for code listings
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.96,0.96,0.96}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{blue},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2
+}
+\lstset{style=mystyle}
+
+% Fancy header and footer settings
+\pagestyle{fancy}
+\fancyhead[L]{Python Programmierung III}
+\fancyhead[R]{\today}
+\fancyfoot[C]{}
+\fancyfoot[R]{\thepage}
+\setlength{\headheight}{14.5pt}
+
+\title{Abschlussklausur\\Python Programmierung III}
+% \author{[Ihr Name oder Kursname]}
+\DTMsetdatestyle{de-DE}
+\date{\DTMdisplaydate{2025}{2}{14}{-1}}
+
+\begin{document}
+
+\maketitle
+
+\section*{Allgemeine Hinweise}
+Beantworten Sie alle Fragen schriftlich. Es sind keinerlei Hilfsmittel (Computer, Bücher, Internet) erlaubt. Viel Erfolg!
+
+\vspace{1cm}
+\begin{center}
+    \begin{tabular}{|c|c|c|}
+        \hline
+        \textbf{Aufgabe}                                & \textbf{Max. Punkte} & \textbf{Erreichte Punkte} \\ \hline
+        1. Python Fundamentals \& Environment Setup    & 4                    &                           \\ \hline
+        2. Objektorientierte Programmierung (OOP)         & 6                    &                           \\ \hline
+        3. Algorithmen, Effizienz und Rekursion           & 6                    &                           \\ \hline
+        4. NumPy                                        & 6                    &                           \\ \hline
+        5. Pandas                                       & 7                    &                           \\ \hline
+        \textbf{Gesamt}                                  & 29                   &                           \\ \hline
+    \end{tabular}
+\end{center}
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Python Fundamentals \& Environment Setup (4 Punkte)}\label{sec:python}
+
+\begin{enumerate}[label=\arabic*.]
+  \item Erklären Sie, was ein virtuelles Python-Environment ist und warum es in Projekten sinnvoll ist. (2 Punkte)
+
+  \item Welche Befehle verwenden Sie, um ein virtuelles Environment mit \texttt{conda} zu erstellen und zu aktivieren? Schreiben Sie den entsprechenden Befehl. (2 Punkte)\\[0.3cm]
+  \textbf{Hinweis:} Verwenden Sie z. B. den Befehl zur Erstellung eines neuen Environments namens \texttt{myenv}.
+\end{enumerate}
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Objektorientierte Programmierung (OOP) (6 Punkte)}\label{sec:oop}
+
+\begin{enumerate}[label=\arabic*.]
+  \item Erklären Sie den Unterschied zwischen statischen Methoden und Klassenmethoden in Python. Geben Sie ein Beispiel, wann eine statische Methode sinnvoll ist. (2 Punkte)
+
+  \item Der folgende Code enthält einen Fehler. Finden Sie den Fehler und korrigieren Sie den Code, sodass die Methode \texttt{beschreiben} den Namen der Person korrekt ausgibt. (2 Punkte)
+  \vspace{0.3cm}
+  \begin{lstlisting}[language=Python, caption={Fehlersuche in einer Klassenmethode}]
+class Person:
+    def __init__(self, name):
+        self.name = name
+
+    def beschreiben(self):
+        print("Die Person heißt " + Name)
+
+p = Person("Laura")
+p.beschreiben()
+  \end{lstlisting}
+
+  \item Nennen Sie ein praktisches Beispiel, in welchem das Singleton-Muster sinnvoll eingesetzt wird. (2 Punkte)
+\end{enumerate}
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Algorithmen, Effizienz und Rekursion (6 Punkte)}\label{sec:algorithms}
+
+\begin{enumerate}[label=\arabic*.]
+  \item Vergleichen Sie die Zeitkomplexitäten von Bubble Sort und Quick Sort in Ihren eigenen Worten. (2 Punkte)
+
+  \item Der folgende rekursive Code berechnet die n-te Fibonacci-Zahl. Es fehlt eine Basisfallbedingung. Vervollständigen Sie den Code. (2 Punkte)
+  \vspace{0.3cm}
+  \begin{lstlisting}[language=Python, caption={Rekursiver Algorithmus zur Berechnung der Fibonacci-Zahl}]
+def fibonacci(n):
+    if ___________________________:
+        return n
+    else:
+        return fibonacci(n-1) + fibonacci(n-2)
+
+print(fibonacci(6))  % Erwartete Ausgabe: 8
+  \end{lstlisting}
+  
+  \item Beschreiben Sie, warum es bei rekursiven Algorithmen wichtig ist, einen Basisfall zu definieren, und wie Memoization die Effizienz verbessern kann. (2 Punkte)
+\end{enumerate}
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{NumPy (6 Punkte)}\label{sec:numpy}
+
+\begin{enumerate}[label=\arabic*.]
+  \item Erklären Sie, warum NumPy-Arrays für numerische Berechnungen gegenüber Python-Listen bevorzugt werden. (2 Punkte)
+
+  \item Betrachten Sie folgenden Code. Geben Sie die erwartete Ausgabe an und begründen Sie, warum. (1 Punkt)
+  \vspace{0.3cm}
+  \begin{lstlisting}[language=Python, caption={Broadcasting-Beispiel}]
+import numpy as np
+a = np.array([1, 2, 3])
+b = np.array([[10], [20], [30]])
+result = a + b
+print(result)
+  \end{lstlisting}
+
+  \item Vervollständigen Sie den folgenden Code, um ein 3x3 Array mit Zufallszahlen zwischen 0 und 1 zu erzeugen. (1 Punkt)
+  \vspace{0.3cm}
+  \begin{lstlisting}[language=Python, caption={Ergänzen Sie den Code}]
+import numpy as np
+array_random = np.random.______________((3,3))
+print(array_random)
+  \end{lstlisting}
+
+  \item Was bedeutet der Begriff Broadcasting in NumPy? Geben Sie eine kurze Erklärung und ein Beispiel. (2 Punkte)
+\end{enumerate}
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Pandas (7 Punkte)}\label{sec:pandas}
+
+\begin{enumerate}[label=\arabic*.]
+  \item Erklären Sie den Unterschied zwischen einer Series und einem DataFrame in Pandas. Wann würden Sie welche Datenstruktur verwenden? (2 Punkte)
+
+  \item Betrachten Sie den folgenden Codeausschnitt. Was ist die Ausgabe, wenn dieser Code ausgeführt wird? (1 Punkt)
+  \vspace{0.3cm}
+  \begin{lstlisting}[language=Python, caption={DataFrame-Filterung}]
+import pandas as pd
+data = {'Name': ['Anna', 'Bernd', 'Clara', 'David'],
+        'Alter': [28, 34, 29, 42],
+        'Stadt': ['Berlin', 'München', 'Hamburg', 'Köln']}
+df = pd.DataFrame(data)
+print(df[df['Alter'] > 30])
+  \end{lstlisting}
+
+  \item Vervollständigen Sie den folgenden Code, der eine CSV-Datei einliest und alle Zeilen ausgibt, in denen der \texttt{total\_bill} größer als 20 ist. (1 Punkt)
+  \vspace{0.3cm}
+  \begin{lstlisting}[language=Python, caption={Bedingte Filterung im tips-Datensatz}]
+df = pd.read_csv("tips.csv")
+df_filtered = df[ ___________________________ ]
+print(df_filtered.head())
+  \end{lstlisting}
+
+  \item Beschreiben Sie, wie Sie in Pandas fehlende Werte erkennen und behandeln können. Erklären Sie den Unterschied zwischen \texttt{fillna()} und \texttt{dropna()}. (2 Punkte)
+
+  \item Vervollständigen Sie den folgenden Code, um eine neue Spalte \texttt{Tip\_Percentage} zu erstellen, die den Prozentsatz des Trinkgelds am Gesamtbetrag berechnet. (1 Punkt)
+  \vspace{0.3cm}
+  \begin{lstlisting}[language=Python, caption={Ergänzen Sie den Code zur neuen Spalte in tips.csv}]
+df = pd.read_csv("tips.csv")
+df["Tip_Percentage"] = ______________________________
+print(df[["total_bill", "tip", "Tip_Percentage"]].head())
+  \end{lstlisting}
+
+  \item Beschreiben Sie in eigenen Worten, wie Sie eine Zeitreihe in Pandas analysieren würden. Welche Schritte sind dabei notwendig? (1 Punkt)
+\end{enumerate}
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Hinweis}
+Überprüfen Sie alle Antworten sorgfältig. Ihre Erklärungen und Code-Snippets sollten klar und vollständig formuliert sein.
+
+\vfill
+\hrule
+\small{Viel Erfolg bei der Klausur!}
+
+\end{document}
