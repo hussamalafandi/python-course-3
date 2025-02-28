@@ -60,24 +60,24 @@
 \thispagestyle{empty}
 \vspace{1cm}
 \begin{center}
-  \textbf{Name:} \rule{8cm}{0.4pt} \\[0.5cm]
-  \textbf{Vorname:} \rule{8cm}{0.4pt} \\[0.5cm]
-  \textbf{Unterschrift:} \rule{8cm}{0.4pt}
+      \textbf{Name:} \rule{8cm}{0.4pt} \\[0.5cm]
+      \textbf{Vorname:} \rule{8cm}{0.4pt} \\[0.5cm]
+      \textbf{Unterschrift:} \rule{8cm}{0.4pt}
 \end{center}
 
 \vfil
 
 \begin{center}
-  \begin{tabular}{|c|c|c|}
-    \hline
-    \textbf{Aufgabe}     & \textbf{Max. Punkte} & \textbf{Erreichte Punkte} \\ \hline
-    \ref{sec:python}     & 4                    &                           \\ \hline
-    \ref{sec:oop}        & 6                    &                           \\ \hline
-    \ref{sec:algorithms} & 6                    &                           \\ \hline
-    \ref{sec:numpy}      & 8                    &                           \\ \hline
-    \ref{sec:pandas}     & 8                    &                           \\ \hline
-    \textbf{Gesamt}      & 32                   &                           \\ \hline
-  \end{tabular}
+      \begin{tabular}{|c|c|c|}
+            \hline
+            \textbf{Aufgabe}     & \textbf{Max. Punkte} & \textbf{Erreichte Punkte} \\ \hline
+            \ref{sec:python}     & 4                    &                           \\ \hline
+            \ref{sec:oop}        & 6                    &                           \\ \hline
+            \ref{sec:algorithms} & 6                    &                           \\ \hline
+            \ref{sec:numpy}      & 8                    &                           \\ \hline
+            \ref{sec:pandas}     & 8                    &                           \\ \hline
+            \textbf{Gesamt}      & 32                   &                           \\ \hline
+      \end{tabular}
 \end{center}
 
 \newpage
@@ -86,10 +86,10 @@
 \section{Python Fundamentals \& Environment Setup (4 Punkte)}\label{sec:python}
 
 \begin{enumerate}
-  \item Erklären Sie, \textbf{was} ein virtuelles Python-Environment ist und \textbf{warum} es in Projekten sinnvoll ist. (2 Punkte)
-        \vfil
-  \item Welche Befehle verwenden Sie, um ein virtuelles Environment mit \texttt{conda} zu \textbf{erstellen} und zu \textbf{aktivieren}? Schreiben Sie den entsprechenden Befehl. (2 Punkte)\\[0.3cm]
-        \textbf{Hinweis:} Verwenden Sie z. B. den Befehl zur Erstellung eines neuen Environments namens \texttt{python\_kurs\_3}.
+      \item Erklären Sie, \textbf{was} ein virtuelles Python-Environment ist und \textbf{warum} es in Projekten sinnvoll ist. (2 Punkte)
+            \vfil
+      \item Welche Befehle verwenden Sie, um ein virtuelles Environment mit \texttt{conda} zu \textbf{erstellen} und zu \textbf{aktivieren}? Schreiben Sie den entsprechenden Befehl. (2 Punkte)\\[0.3cm]
+            \textbf{Hinweis:} Verwenden Sie z. B. den Befehl zur Erstellung eines neuen Environments namens \texttt{python\_kurs\_3}.
 \end{enumerate}
 \newpage
 
@@ -97,40 +97,41 @@
 \section{Objektorientierte Programmierung (OOP) (6 Punkte)}\label{sec:oop}
 
 \begin{enumerate}
-  \item Erklären Sie das Konzept der \textbf{Kapselung} in der objektorientierten Programmierung. Warum ist sie nützlich? Nennen Sie ein Beispiel, wie Kapselung in Python umgesetzt wird. (2 Punkte)
+      \item Erklären Sie das Konzept der \textbf{Kapselung} in der objektorientierten Programmierung. Warum ist sie nützlich? Nennen Sie ein Beispiel, wie Kapselung in Python umgesetzt wird. (2 Punkte)
 
-        \vfil
+            \vfil
 
-  \item Nennen Sie zwei Entwurfsmuster und erklären Sie einen von ihnen. (2 Punkte)
+      \item Nennen Sie zwei Entwurfsmuster und erklären Sie einen von ihnen. (2 Punkte)
 
-        \newpage\item Der folgende Code enthält einen Fehler in Bezug auf \textbf{private Attribute} und \textbf{abstrakte Methoden}. Finden Sie die zwei Fehler und erklären Sie, warum sie problematisch sind. (2 Punkte)
+            \newpage
+      \item Der folgende Code enthält einen Fehler in Bezug auf \textbf{private Attribute} und \textbf{abstrakte Methoden}. Finden Sie die zwei Fehler und erklären Sie, warum sie problematisch sind. (2 Punkte)
 
 
-        \begin{lstlisting}[language=Python]
+            \begin{lstlisting}[language=Python]
 from abc import ABC, abstractmethod
 
 class Fahrzeug(ABC):
-def __init__(self, marke, modell):
-  self.__marke = marke
-  self.__modell = modell
+  def __init__(self, marke, modell):
+    self.__marke = marke
+    self.__modell = modell
 
-@abstractmethod
-def beschreibung(self):
-  pass
+  @abstractmethod
+  def beschreibung(self):
+    pass
 
 class Auto(Fahrzeug):
-def __init__(self, marke, modell, ps):
-  super().__init__(marke, modell)
-  self.ps = ps
+  def __init__(self, marke, modell, ps):
+    super().__init__(marke, modell)
+    self.ps = ps
 
-def auto_beschreibung(self):
-  return f"{self.__marke} {self.__modell} mit {self.ps} PS"
+  def auto_beschreibung(self):
+    return f"{self.__marke} {self.__modell} mit {self.ps} PS"
 
 # Objekt erstellen
 auto1 = Auto("BMW", "X5", 300)
 print(auto1.beschreibung())
 \end{lstlisting}
-        \textbf{Hinweis:} Sie müssen keinen Code schrieben, sondern nur die Fehler finden und erklären.
+            \textbf{Hinweis:} Sie müssen keinen Code schrieben, sondern nur die Fehler finden und erklären.
 \end{enumerate}
 
 \newpage
@@ -139,11 +140,11 @@ print(auto1.beschreibung())
 \section{Algorithmen, Effizienz und Rekursion (6 Punkte)}\label{sec:algorithms}
 
 \begin{enumerate}
-  \item Erklären Sie, warum ein iterativer Ansatz manchmal gegenüber einem rekursiven bevorzugt wird. Nennen Sie jeweils einen Vorteil. (2 Punkte)
-        \vfil
-  \item Implementieren Sie eine rekursive Funktion zur Berechnung von \( a^b \), wobei \( a \) die Basis und \( b \) der Exponent ist. Ergänzen Sie die Basisfallbedingung. (2 Punkte)
-        \vspace{0.3cm}
-        \begin{lstlisting}[language=Python]
+      \item Erklären Sie, warum ein iterativer Ansatz manchmal gegenüber einem rekursiven bevorzugt wird. Nennen Sie jeweils einen Vorteil. (2 Punkte)
+            \vfil
+      \item Implementieren Sie eine rekursive Funktion zur Berechnung von \( a^b \), wobei \( a \) die Basis und \( b \) der Exponent ist. Ergänzen Sie die Basisfallbedingung. (2 Punkte)
+            \vspace{0.3cm}
+            \begin{lstlisting}[language=Python]
 def power(a, b):
     if ___________________________:
         return ___________
@@ -152,12 +153,12 @@ def power(a, b):
 print(power(2, 3))  # Erwartete Ausgabe: 8 (2^3 = 2 * 2 * 2)
         \end{lstlisting}
 
-        \newpage
+            \newpage
 
-  \item Der folgende Python-Code sucht das größte Element in einer Liste. Analysieren Sie den Code und geben Sie die \textbf{Zeitkomplexität} des Algorithmus an. (2 Punkte)
+      \item Der folgende Python-Code sucht das größte Element in einer Liste. Analysieren Sie den Code und geben Sie die \textbf{Zeitkomplexität} des Algorithmus an. (2 Punkte)
 
-        \vspace{0.3cm}
-        \begin{lstlisting}[language=Python]
+            \vspace{0.3cm}
+            \begin{lstlisting}[language=Python]
 def find_max(arr):
     max_value = arr[0]
     for i in range(1, len(arr)):
@@ -168,7 +169,7 @@ def find_max(arr):
 # Beispiel:
 print(find_max([3, 7, 2, 9, 5]))  # Erwartete Ausgabe: 9
         \end{lstlisting}
-        \textbf{Hinweis:} Bitte geben Sie nur die Zeitkomplexität in Big-O-Notation an.
+            \textbf{Hinweis:} Bitte geben Sie nur die Zeitkomplexität in Big-O-Notation an.
 \end{enumerate}
 
 \newpage
@@ -177,31 +178,31 @@ print(find_max([3, 7, 2, 9, 5]))  # Erwartete Ausgabe: 9
 \section{NumPy (8 Punkte)}\label{sec:numpy}
 
 \begin{enumerate}
-  \item Nennen Sie zwei Funktionen zur Erstellung von NumPy-Arrays und erläutern Sie kurz, worin sie sich unterscheiden. (2 Punkte)
-        \vfil
-  \item Was bewirkt der Befehl \texttt{np.random.randint(0, 100, (3,4))}? (1 Punkt)
-        \vfil
-  \item Vervollständigen Sie den folgenden Code, um ein Array mit 10 gleichmäßig verteilten Werten zwischen 5 und 15 zu erzeugen. (1 Punkt)
-        \vspace{0.3cm}
-        \begin{lstlisting}[language=Python]
+      \item Nennen Sie zwei Funktionen zur Erstellung von NumPy-Arrays und erläutern Sie kurz, worin sie sich unterscheiden. (2 Punkte)
+            \vfil
+      \item Was bewirkt der Befehl \texttt{np.random.randint(0, 100, (3,4))}? (1 Punkt)
+            \vfil
+      \item Vervollständigen Sie den folgenden Code, um ein Array mit 10 gleichmäßig verteilten Werten zwischen 5 und 15 zu erzeugen. (1 Punkt)
+            \vspace{0.3cm}
+            \begin{lstlisting}[language=Python]
 import numpy as np
 
 array_linspace = np.linspace(____, ____, ____)
 
 print(array_linspace)
   \end{lstlisting}
-        \newpage
-  \item Was gibt folgender Code aus? Begründen Sie kurz Ihre Antwort. (2 Punkte)
-        \vspace{0.3cm}
-        \begin{lstlisting}[language=Python]
+            \newpage
+      \item Was gibt folgender Code aus? Begründen Sie kurz Ihre Antwort. (2 Punkte)
+            \vspace{0.3cm}
+            \begin{lstlisting}[language=Python]
 import numpy as np
 
 a = np.array([2, 4, 6])
 
 print(a * 3)
   \end{lstlisting}
-        \vfil
-  \item Erklären Sie, was Broadcasting in NumPy bedeutet, und nennen Sie ein typisches Anwendungsbeispiel. (2 Punkte)
+            \vfil
+      \item Erklären Sie, was Broadcasting in NumPy bedeutet, und nennen Sie ein typisches Anwendungsbeispiel. (2 Punkte)
 \end{enumerate}
 
 \newpage
@@ -210,13 +211,13 @@ print(a * 3)
 \section{Pandas (8 Punkte)}\label{sec:pandas}
 
 \begin{enumerate}
-  \item Erklären Sie den Unterschied zwischen einer \textbf{Series} und einem \textbf{DataFrame} in Pandas. Wann würden Sie welche Datenstruktur verwenden? (2 Punkte)
-        \vfil
-  \item Welche Methode verwenden Sie, um die ersten 5 Zeilen eines DataFrames anzuzeigen? (1 Punkt)
-        \vfil
-  \item Vervollständigen Sie den folgenden Code, um den \texttt{Median} der Spalte \texttt{total\_bill} im \texttt{tips}-Datensatz zu berechnen. (1 Punkt)
-        \vspace{0.3cm}
-        \begin{lstlisting}[language=Python]
+      \item Erklären Sie den Unterschied zwischen einer \textbf{Series} und einem \textbf{DataFrame} in Pandas. Wann würden Sie welche Datenstruktur verwenden? (2 Punkte)
+            \vfil
+      \item Welche Methode verwenden Sie, um die ersten 5 Zeilen eines DataFrames anzuzeigen? (1 Punkt)
+            \vfil
+      \item Vervollständigen Sie den folgenden Code, um den \texttt{Median} der Spalte \texttt{total\_bill} im \texttt{tips}-Datensatz zu berechnen. (1 Punkt)
+            \vspace{0.3cm}
+            \begin{lstlisting}[language=Python]
 import pandas as pd
 
 df = pd.read_csv("tips.csv")
@@ -225,31 +226,31 @@ median_total = df["total_bill"].____________()
 print(median_total)
   \end{lstlisting}
 
-        \newpage
-  \item  Vervollständigen Sie den folgenden Code, um eine CSV-Datei einzulesen und nur die Rechnungen anzuzeigen, bei denen das Trinkgeld (\texttt{tip}) weniger als 10\% der Gesamtrechnung (\texttt{total\_bill}) beträgt. (2 Punkt)
-        \vspace{0.3cm}
-        \begin{lstlisting}[language=Python]
+            \newpage
+      \item  Vervollständigen Sie den folgenden Code, um eine CSV-Datei einzulesen und nur die Rechnungen anzuzeigen, bei denen das Trinkgeld (\texttt{tip}) weniger als 10\% der Gesamtrechnung (\texttt{total\_bill}) beträgt. (2 Punkt)
+            \vspace{0.3cm}
+            \begin{lstlisting}[language=Python]
 df = pd.read_csv("tips.csv")
 
 df_filtered = df[ _______________________________________________ ]
 
 print(df_filtered.head())
   \end{lstlisting}
-        \textbf{Hinweis:} Um den Prozentsatz zu berechnen, können Sie die folgende Formel verwenden: \(\text{Prozentsatz} = \text{tip}/\text{total\_bill} \times 100\).
+            \textbf{Hinweis:} Um den Prozentsatz zu berechnen, können Sie die folgende Formel verwenden: \(\text{Prozentsatz} = \text{tip}/\text{total\_bill} \times 100\).
 
-        \vfill
+            \vfill
 
-  \item Gegeben ist ein Pandas-DataFrame \texttt{df} mit einer Spalte \texttt{"Datum"}, die Datumswerte als Strings enthält. Ergänzen Sie den Code, um die Spalte in ein \texttt{datetime}-Format zu konvertieren und als Index zu setzen. (2 Punkt)
+      \item Gegeben ist ein Pandas-DataFrame \texttt{df} mit einer Spalte \texttt{"Datum"}, die Datumswerte als Strings enthält. Ergänzen Sie den Code, um die Spalte in ein \texttt{datetime}-Format zu konvertieren und als Index zu setzen. (2 Punkt)
 
-        \vspace{0.3cm}
-        \begin{lstlisting}[language=Python]
+            \vspace{0.3cm}
+            \begin{lstlisting}[language=Python]
 import pandas as pd
 
 df["Datum"] = ___________________________
 df = df.set_index("Datum")
   \end{lstlisting}
 
-        \textbf{Hinweis:} Verwenden Sie die Methode \texttt{pd.to\_datetime()}, um die Spalte in das richtige Format zu bringen.
+            \textbf{Hinweis:} Verwenden Sie die Methode \texttt{pd.to\_datetime()}, um die Spalte in das richtige Format zu bringen.
 \end{enumerate}
 
 \vspace*{\fill}
