@@ -46,10 +46,10 @@
 \fancyfoot[R]{\thepage}
 \setlength{\headheight}{14.5pt}
 
-\title{Abschlussklausur\\Python Programmierung III (Alternative)}
+\title{Abschlussklausur\\Python Programmierung III (Zweite Wiederholung)}
 % \author{[Ihr Name oder Kursname]}
 \DTMsetdatestyle{de-DE}
-\date{\DTMdisplaydate{2025}{2}{27}{-1}}
+\date{\DTMdisplaydate{2025}{2}{28}{-1}}
 
 \begin{document}
 
@@ -75,8 +75,8 @@
     \ref{sec:oop}        & 6                    &                           \\ \hline
     \ref{sec:algorithms} & 6                    &                           \\ \hline
     \ref{sec:numpy}      & 8                    &                           \\ \hline
-    \ref{sec:pandas}     & 7                    &                           \\ \hline
-    \textbf{Gesamt}      & 31                   &                           \\ \hline
+    \ref{sec:pandas}     & 8                    &                           \\ \hline
+    \textbf{Gesamt}      & 32                   &                           \\ \hline
   \end{tabular}
 \end{center}
 
@@ -178,65 +178,81 @@ print(find_max([3, 7, 2, 9, 5]))  # Erwartete Ausgabe: 9
 
 \begin{enumerate}
   \item Nennen Sie zwei Funktionen zur Erstellung von NumPy-Arrays und erläutern Sie kurz, worin sie sich unterscheiden. (2 Punkte)
-
+        \vfil
   \item Was bewirkt der Befehl \texttt{np.random.randint(0, 100, (3,4))}? (1 Punkt)
-
+        \vfil
   \item Vervollständigen Sie den folgenden Code, um ein Array mit 10 gleichmäßig verteilten Werten zwischen 5 und 15 zu erzeugen. (1 Punkt)
         \vspace{0.3cm}
-        \begin{lstlisting}[language=Python, caption={Ergänzen Sie den Code}]
+        \begin{lstlisting}[language=Python]
 import numpy as np
+
 array_linspace = np.linspace(____, ____, ____)
+
 print(array_linspace)
   \end{lstlisting}
-
+        \newpage
   \item Was gibt folgender Code aus? Begründen Sie kurz Ihre Antwort. (2 Punkte)
         \vspace{0.3cm}
-        \begin{lstlisting}[language=Python, caption={Ausgabevorhersage}]
+        \begin{lstlisting}[language=Python]
 import numpy as np
+
 a = np.array([2, 4, 6])
+
 print(a * 3)
   \end{lstlisting}
-
+        \vfil
   \item Erklären Sie, was Broadcasting in NumPy bedeutet, und nennen Sie ein typisches Anwendungsbeispiel. (2 Punkte)
 \end{enumerate}
 
 \newpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Pandas (7 Punkte)}\label{sec:pandas}
+\section{Pandas (8 Punkte)}\label{sec:pandas}
 
 \begin{enumerate}
   \item Erklären Sie den Unterschied zwischen einer \textbf{Series} und einem \textbf{DataFrame} in Pandas. Wann würden Sie welche Datenstruktur verwenden? (2 Punkte)
-
+        \vfil
   \item Welche Methode verwenden Sie, um die ersten 5 Zeilen eines DataFrames anzuzeigen? (1 Punkt)
-
-  \item Vervollständigen Sie den folgenden Code, um den Median der Spalte \texttt{total\_bill} im \texttt{tips}-Datensatz zu berechnen. (1 Punkt)
+        \vfil
+  \item Vervollständigen Sie den folgenden Code, um den \texttt{Median} der Spalte \texttt{total\_bill} im \texttt{tips}-Datensatz zu berechnen. (1 Punkt)
         \vspace{0.3cm}
-        \begin{lstlisting}[language=Python, caption={Berechnung des Medians}]
+        \begin{lstlisting}[language=Python]
 import pandas as pd
+
 df = pd.read_csv("tips.csv")
 median_total = df["total_bill"].____________()
+
 print(median_total)
   \end{lstlisting}
 
-  \item Schreiben Sie ein Code-Snippet, das den \texttt{tips}-Datensatz einliest und alle Zeilen anzeigt, bei denen das Trinkgeld mehr als 10\% des Gesamtbetrags beträgt. (2 Punkte)
+        \newpage
+  \item  Vervollständigen Sie den folgenden Code, um eine CSV-Datei einzulesen und nur die Rechnungen anzuzeigen, bei denen das Trinkgeld (\texttt{tip}) weniger als 10\% der Gesamtrechnung (\texttt{total\_bill}) beträgt. (2 Punkt)
         \vspace{0.3cm}
-        \begin{lstlisting}[language=Python, caption={Filterung im tips-Datensatz}]
+        \begin{lstlisting}[language=Python]
 df = pd.read_csv("tips.csv")
-df_filtered = df[ ___________________________ ]
+
+df_filtered = df[ _______________________________________________ ]
+
 print(df_filtered.head())
   \end{lstlisting}
+        \textbf{Hinweis:} Um den Prozentsatz zu berechnen, können Sie die folgende Formel verwenden: \(\text{Prozentsatz} = \text{tip}/\text{total\_bill} \times 100\).
 
-  \item Beschreiben Sie die wesentlichen Schritte, um in Pandas eine Zeitreihe zu analysieren (Umwandlung einer Datumsspalte in ein Datetime-Objekt, Setzen als Index, Resampling). (1 Punkt)
+        \vfill
+
+  \item Gegeben ist ein Pandas-DataFrame \texttt{df} mit einer Spalte \texttt{"Datum"}, die Datumswerte als Strings enthält. Ergänzen Sie den Code, um die Spalte in ein \texttt{datetime}-Format zu konvertieren und als Index zu setzen. (2 Punkt)
+
+        \vspace{0.3cm}
+        \begin{lstlisting}[language=Python]
+import pandas as pd
+
+df["Datum"] = ___________________________
+df = df.set_index("Datum")
+  \end{lstlisting}
+
+        \textbf{Hinweis:} Verwenden Sie die Methode \texttt{pd.to\_datetime()}, um die Spalte in das richtige Format zu bringen.
 \end{enumerate}
 
-\newpage
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section*{Hinweis}
-Überprüfen Sie Ihre Antworten sorgfältig. Ihre Erklärungen und Code-Snippets sollten klar und vollständig formuliert sein.
-
-\vfill
+\vspace*{\fill}
 \hrule
 \vspace{0.3cm}
 \small{Viel Erfolg bei der Klausur!}
