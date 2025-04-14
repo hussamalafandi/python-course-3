@@ -1,0 +1,329 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage{enumitem}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\usepackage[hidelinks]{hyperref}
+\usepackage[de-DE]{datetime2}  % Use German date format
+
+\geometry{left=2.5cm, right=2.5cm, top=3.5cm, bottom=3.0cm}
+
+% Define colors and style for code listings
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.96,0.96,0.96}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{blue},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2
+}
+\lstset{style=mystyle}
+
+% Fancy header and footer settings
+\pagestyle{fancy}
+\fancyhead[L]{Python Programmierung III}
+\fancyhead[R]{\today}
+\fancyfoot[C]{}
+\fancyfoot[R]{\thepage}
+\setlength{\headheight}{14.5pt}
+
+\title{Abschlussklausur\\Python Programmierung III}
+% \author{[Ihr Name oder Kursname]}
+\DTMsetdatestyle{de-DE}
+\date{\DTMdisplaydate{2025}{4}{14}{-1}}
+
+\begin{document}
+
+\maketitle
+
+
+% --- Student Information Fields ---
+\thispagestyle{empty}
+\vspace{1cm}
+\begin{center}
+  \textbf{Name:} \rule{8cm}{0.4pt} \\[0.5cm]
+  \textbf{Vorname:} \rule{8cm}{0.4pt} \\[0.5cm]
+  \textbf{Unterschrift:} \rule{8cm}{0.4pt}
+\end{center}
+
+
+\vfil
+
+\begin{center}
+  \begin{tabular}{|c|c|c|}
+    \hline
+    \textbf{Aufgabe}     & \textbf{Max. Punkte} & \textbf{Erreichte Punkte} \\ \hline
+    \ref{sec:python}     & 4                    &                           \\ \hline
+    \ref{sec:oop}        & 6                    &                           \\ \hline
+    \ref{sec:algorithms} & 6                    &                           \\ \hline
+    \ref{sec:numpy}      & 8                    &                           \\ \hline
+    \ref{sec:pandas}     & 8                    &                           \\ \hline
+    \textbf{Gesamt}      & 32                   &                           \\ \hline
+  \end{tabular}
+\end{center}
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Python Fundamentals \& Environment Setup (4 Punkte)}\label{sec:python}
+
+\begin{enumerate}
+  \item Erklären Sie, \textbf{was} ein virtuelles Python-Environment ist und \textbf{warum} es in Projekten sinnvoll ist. (2 Punkte)
+        \vfil
+  \item Welche Befehle verwenden Sie, um ein virtuelles Environment mit \texttt{venv} zu \textbf{erstellen} und zu \textbf{aktivieren}? Schreiben Sie den entsprechenden Befehl. (2 Punkte)\\[0.3cm]
+        \textbf{Hinweis:} Verwenden Sie z. B. den Befehl zur Erstellung eines neuen Environments namens \texttt{python\_kurs\_3}.
+\end{enumerate}
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Objektorientierte Programmierung (OOP) (6 Punkte)}\label{sec:oop}
+
+\begin{enumerate}
+  \item Erklären Sie den Unterschied zwischen \textbf{statischen} Methoden und \textbf{Klassenmethoden} in Python. (2 Punkte)
+        \vfil
+  \item Nennen Sie ein Entwurfsmuster. (1 Punkte)
+  \vfil
+  \item Ist die folgende Aussage wahr oder falsch? (1 Punkt)
+  \begin{quote}
+    \textit{``Das Entwurfsmuster Singleton wird verwendet, um sicherzustellen, dass eine Klasse nur eine Instanz hat.''}
+  \end{quote}
+
+
+        \newpage
+
+  \item Der folgende Code enthält einen Fehler. Finden Sie den Fehler und korrigieren Sie ihn. (2 Punkte)
+
+        \vspace{0.3cm}
+        \begin{lstlisting}[language=Python]
+from abc import ABC, abstractmethod
+
+class Fahrzeug(ABC):
+    def __init__(self, name, max_speed):
+        self.name = name
+        self.max_speed = max_speed
+
+    @abstractmethod
+    def fahren(self):
+        pass
+
+class Fahrrad(Fahrzeug):
+    def __init__(self, name, max_speed, typ):
+        super().__init__(name, max_speed)
+        self.typ = typ
+
+    def fahren(self):
+        return f"Das Fahrrad {self.name} fährt mit maximal {self.max_speed} km/h."
+
+class Auto(Fahrzeug): # Hinweis: Der Fehler liegt in dieser Klasse
+    def __init__(self, name, max_speed, anzahl_sitze):
+        super().__init__(name, max_speed)
+        self.anzahl_sitze = anzahl_sitze
+
+
+
+
+
+
+
+
+
+
+auto = Auto("BMW", 220, 5)
+\end{lstlisting}
+        \textbf{Hinweis:} Der Code enthält einen Fehler, der das Erstellen einer Instanz der Klasse \texttt{Auto} verhindert.
+
+
+
+\end{enumerate}
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Algorithmen, Effizienz und Rekursion (6 Punkte)}\label{sec:algorithms}
+
+\begin{enumerate}
+  \item Welche der folgenden Aussagen zur Zeitkomplexität von Bubble Sort ist \textbf{korrekt}? (1 Punkte)
+
+        \vspace{0.3cm}
+        \begin{enumerate}
+          \item Die Worst-Case-Zeitkomplexität von Bubble Sort ist \(O(n^2)\), weil jedes Element mit jedem anderen verglichen werden kann.
+          \item Die Worst-Case-Zeitkomplexität von Bubble Sort ist \(O(n \log n)\), weil der Algorithmus immer die Eingabe halbiert.
+          \item Bubble Sort ist in allen Fällen der effizienteste Sortieralgorithmus mit einer Laufzeit von \(O(n)\).
+          \item Die Worst-Case-Zeitkomplexität von Bubble Sort ist \(O(n)\), weil nur eine Schleife durchlaufen wird.
+        \end{enumerate}
+
+        \vfil
+
+
+  \item Der folgende rekursive Code berechnet die Summe aller geraden Zahlen von \(1\) bis \(n\). Eine wichtige Bedingung fehlt, um sicherzustellen, dass nur gerade Zahlen addiert werden. Ergänzen Sie die fehlende Bedingung. (2 Punkte)
+
+        \vspace{0.3cm}
+        \begin{lstlisting}[language=Python]
+def sum_even(n):
+    if n <= 0:
+        return 0
+    if ___________________________:
+        return n + sum_even(n-2)
+    else:
+        return sum_even(n-1)
+
+print(sum_even(6))  # Erwartete Ausgabe: 12 (2 + 4 + 6)
+\end{lstlisting}
+        \textbf{Hinweis:} Mit $\%$ können Sie den Rest einer Division berechnen.
+
+
+        \newpage
+  \item Beschreiben Sie, warum es bei rekursiven Algorithmen wichtig ist, einen Basisfall zu definieren. (1 Punkt)
+
+        \vfil
+
+  \item Der folgende Python-Code implementiert den Sortieralgorithmus \texttt{Selection Sort}. Analysieren Sie den Code und geben Sie die Zeitkomplexität des Algorithmus an. (2 Punkte)
+
+        \vspace{0.3cm}
+        \begin{lstlisting}[language=Python]
+def selection_sort(arr):
+    n = len(arr)
+    for i in range(n):
+        min_index = i
+        for j in range(i + 1, n):
+            if arr[j] < arr[min_index]:
+                min_index = j
+        arr[i], arr[min_index] = arr[min_index], arr[i]
+    return arr
+\end{lstlisting}
+        \textbf{Hinweis:} Bitte geben Sie nur die Zeitkomplexität in Big-O-Notation an.
+
+
+\end{enumerate}
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{NumPy (8 Punkte)}\label{sec:numpy}
+
+\begin{enumerate}
+  \item Erklären Sie, warum NumPy-Arrays für numerische Berechnungen gegenüber Python-Listen bevorzugt werden. (2 Punkte)
+        \vfil
+
+  \item Was ist die Aufgabe der folgenden NumPy-Funktionen? (2 Punkte)
+
+        \begin{enumerate}
+          \item \texttt{np.ones()}
+                \vspace{5cm}
+          \item \texttt{np.arange()}
+        \end{enumerate}
+
+        \vfil
+
+        \newpage
+  \item Was ist die Ausgabe des folgenden Codes? (1 Punkt)
+        \vspace{0.3cm}
+        \begin{lstlisting}[language=Python]
+import numpy as np
+
+a = np.eye(3)
+print(a)
+\end{lstlisting}
+\textbf{Hinweis:} Die Funktion \texttt{np.eye()} erstellt eine Einheitsmatrix.
+
+        \vfil
+
+  \item Was ist die Ausgabe des folgenden Codes? (3 Punkt)
+        \vspace{0.3cm}
+        \begin{lstlisting}[language=Python]
+import numpy as np
+
+a = np.array([[1, 2, 3],
+              [4, 5, 6]])
+
+print(a.shape)
+print(a[:, 2])
+print(a[1, :].sum())
+\end{lstlisting}
+
+
+
+
+\end{enumerate}
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Pandas (8 Punkte)}\label{sec:pandas}
+
+\begin{enumerate}
+  \item Erklären Sie den Unterschied zwischen einer Series und einem DataFrame in Pandas. (2 Punkt)
+        \vfil
+
+  \item Betrachten Sie den folgenden Codeausschnitt. Was ist die Ausgabe, wenn dieser Code ausgeführt wird? (1 Punkt)
+        \vspace{0.3cm}
+        \begin{lstlisting}[language=Python]
+import pandas as pd
+
+data = {'Name': ['Anna', 'Bernd', 'Clara', 'David'],
+        'Alter': [28, 34, 29, 42],
+        'Stadt': ['Berlin', 'München', 'Hamburg', 'Köln']}
+
+df = pd.DataFrame(data)
+
+print(df[df['Alter'] > 30])
+  \end{lstlisting}
+
+        \newpage
+  \item Vervollständigen Sie den folgenden Code, um eine CSV-Datei einzulesen und nur die Rechnungen anzuzeigen, bei denen das Trinkgeld (\texttt{tip}) mehr als 15\% der Gesamtrechnung (\texttt{total\_bill}) beträgt. (2 Punkt)
+
+        \vspace{0.3cm}
+        \begin{lstlisting}[language=Python]
+  df = pd.read_csv("tips.csv")
+  df_filtered = df[ ___________________________ ]
+  print(df_filtered.head())
+  \end{lstlisting}
+        \textbf{Hinweis:} Um den Prozentsatz zu berechnen, können Sie die folgende Formel verwenden: \(\text{Prozentsatz} = \text{tip}/\text{total\_bill} \times 100\).
+
+        \vfil
+
+  \item Was macht die methode \texttt{df.head(10)} in Pandas? (1 Punkt)
+        \newpage
+
+  \item Was ist die Ausgabe des folgenden Codes? (2 Punkte)
+        \vspace{0.3cm}
+        \begin{lstlisting}[language=Python]
+import pandas as pd
+
+data = {'Name': ['Anna', 'Bernd', 'Clara', 'David'],
+        'Alter': [28, 34, 29, 42],
+        'Stadt': ['Berlin', 'München', 'Hamburg', 'Köln']}
+df = pd.DataFrame(data)
+
+df['Geschlecht'] = ['w', 'm', 'w', 'm']
+print(df)
+\end{lstlisting}
+
+\end{enumerate}
+
+
+\vfill
+\hrule
+\vspace{0.3cm}
+\small{Viel Erfolg bei der Klausur!}
+
+\end{document}
