@@ -4,6 +4,7 @@
 \usepackage{graphicx}
 \usepackage{listings}
 \usepackage{xcolor}
+\usepackage{adjustbox}
 
 % --- TikZ (Flowcharts) ---
 \usepackage{tikz}
@@ -36,10 +37,21 @@
 \lstset{style=mystyle}
 
 % --- TikZ styles for flowcharts ---
-\tikzstyle{startstop} = [ellipse, draw, minimum width=2.8cm, minimum height=0.9cm, align=center]
-\tikzstyle{process}   = [rectangle, draw, minimum width=3.4cm, minimum height=0.9cm, align=center]
+\tikzstyle{startstop} = [ellipse, draw, minimum width=2.6cm, minimum height=0.85cm, align=center]
+\tikzstyle{process}   = [rectangle, draw, minimum width=3.1cm, minimum height=0.85cm, align=center]
 \tikzstyle{decision}  = [diamond, draw, aspect=2.2, inner sep=1pt, align=center]
 \tikzstyle{arrow}     = [-{Stealth[length=2.2mm]}, thick]
+
+% Auto-fit TikZ diagrams to the available frame area (keeps aspect ratio)
+\newenvironment{FitTikZ}[1][]%
+{%
+  \begin{adjustbox}{max totalsize={\textwidth}{0.78\textheight},center}%
+  \begin{tikzpicture}[#1]%
+}%
+{%
+  \end{tikzpicture}%
+  \end{adjustbox}%
+}
 
 \title{Python 3 - Grundlagen und Ökosystem}
 \subtitle{Unit 1: Programmiergrundlagen, Flussdiagramme \& Python-Tooling}
@@ -145,13 +157,13 @@
 % ---------------------------------------------------------
 \begin{frame}{Flowchart-Beispiel: Zahl klassifizieren}
   \centering
-  \begin{tikzpicture}[node distance=1.0cm]
+  \begin{FitTikZ}[node distance=0.95cm]
     \node (start) [startstop] {Start};
     \node (input) [process, below=of start] {Eingabe: Zahl $n$};
     \node (d1) [decision, below=of input, yshift=-0.2cm] {$n > 0$?};
-    \node (pos) [process, right=2.8cm of d1] {Ausgabe: ``positiv''};
+    \node (pos) [process, right=2.2cm of d1] {Ausgabe: ``positiv''};
     \node (d2) [decision, below=of d1, yshift=-0.2cm] {$n = 0$?};
-    \node (zero) [process, right=2.8cm of d2] {Ausgabe: ``null''};
+    \node (zero) [process, right=2.2cm of d2] {Ausgabe: ``null''};
     \node (neg) [process, below=of d2, yshift=-0.2cm] {Ausgabe: ``negativ''};
     \node (stop) [startstop, below=of neg] {Ende};
 
@@ -168,7 +180,7 @@
 
     \draw [arrow] (d2) -- node[left]{Nein} (neg);
     \draw [arrow] (neg) -- (stop);
-  \end{tikzpicture}
+  \end{FitTikZ}
 \end{frame}
 
 \begin{frame}{Interpretation des Flowcharts}
@@ -185,15 +197,15 @@
 % ---------------------------------------------------------
 \begin{frame}{Flowchart-Übung: Login mit Wiederholung}
   \centering
-  \begin{tikzpicture}[node distance=0.95cm]
+  \begin{FitTikZ}[node distance=0.9cm]
     \node (start) [startstop] {Start};
     \node (set) [process, below=of start] {Setze Versuche = 0};
     \node (input) [process, below=of set] {Eingabe: Passwort};
     \node (check) [decision, below=of input, yshift=-0.2cm] {Passwort korrekt?};
-    \node (ok) [process, right=3.3cm of check] {Login erfolgreich};
+    \node (ok) [process, right=2.6cm of check] {Login erfolgreich};
     \node (inc) [process, below=of check, yshift=-0.2cm] {Versuche += 1};
     \node (limit) [decision, below=of inc, yshift=-0.2cm] {Versuche $<$ 3?};
-    \node (fail) [process, right=3.3cm of limit] {Account gesperrt};
+    \node (fail) [process, right=2.6cm of limit] {Account gesperrt};
     \node (stop) [startstop, below=of limit, yshift=-0.1cm] {Ende};
 
     \draw [arrow] (start) -- (set);
@@ -210,7 +222,7 @@
     \draw [arrow] (fail) |- (stop);
 
     \draw [arrow] (limit) -- node[left]{Ja} (input);
-  \end{tikzpicture}
+  \end{FitTikZ}
 \end{frame}
 
 
