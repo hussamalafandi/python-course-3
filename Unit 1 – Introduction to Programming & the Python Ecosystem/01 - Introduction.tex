@@ -1,10 +1,15 @@
 \documentclass[aspectratio=169]{beamer}
 \usetheme{metropolis}
+
 \usepackage{graphicx}
 \usepackage{listings}
 \usepackage{xcolor}
 
-% Define custom colors
+% --- TikZ (Flowcharts) ---
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows.meta, positioning}
+
+% Define custom colors for listings
 \definecolor{codegreen}{rgb}{0,0.6,0}
 \definecolor{codegray}{rgb}{0.5,0.5,0.5}
 \definecolor{codepurple}{rgb}{0.58,0,0.82}
@@ -30,8 +35,14 @@
 
 \lstset{style=mystyle}
 
+% --- TikZ styles for flowcharts ---
+\tikzstyle{startstop} = [ellipse, draw, minimum width=2.8cm, minimum height=0.9cm, align=center]
+\tikzstyle{process}   = [rectangle, draw, minimum width=3.4cm, minimum height=0.9cm, align=center]
+\tikzstyle{decision}  = [diamond, draw, aspect=2.2, inner sep=1pt, align=center]
+\tikzstyle{arrow}     = [-{Stealth[length=2.2mm]}, thick]
+
 \title{Python 3 - Grundlagen und Ökosystem}
-\subtitle{Unit 1: Programmiergrundlagen \& Python-Tooling}
+\subtitle{Unit 1: Programmiergrundlagen, Flussdiagramme \& Python-Tooling}
 \author{Hussam Alafandi}
 \date{\today}
 
@@ -47,48 +58,45 @@
 \begin{frame}{Ziele der Unit}
   \begin{itemize}
     \item Verstehen, was Programmierung ist (Problem $\rightarrow$ Algorithmus $\rightarrow$ Code).
-    \item Kontrollfluss als Grundprinzip verstehen: Sequenz, Entscheidung, Wiederholung.
-    \item Flussdiagramme als Werkzeug zur Planung und Kommunikation nutzen.
+    \item Kontrollfluss verstehen: Sequenz, Entscheidung, Wiederholung.
+    \item Flussdiagramme (Flowcharts) als Planungswerkzeug nutzen.
     \item Verstehen, wie Python Code ausführt (Interpreter, Skripte, Notebooks).
-    \item Entwicklungsumgebungen kennenlernen: Jupyter und VS Code.
-    \item Virtuelle Umgebungen erstellen und nutzen (venv, conda).
-    \item Pakete installieren und Abhängigkeiten verwalten (pip, requirements.txt).
-    \item Erste Python-Kommandos ausführen und Unterschiede Skript vs. Notebook kennen.
+    \item Entwicklungsumgebungen nutzen: Jupyter und VS Code.
+    \item Virtuelle Umgebungen einsetzen (venv, conda).
+    \item Pakete und Abhängigkeiten verwalten (pip, requirements.txt).
   \end{itemize}
 \end{frame}
 
 \begin{frame}{Agenda}
   \begin{enumerate}
     \item Programmieren als Problemlösen
-    \item Algorithmen \& Kontrollfluss (inkl. Flussdiagramme)
-    \item Python: Interpreter, Skripte, Notebooks
-    \item Entwicklungsumgebungen (Jupyter, VS Code)
-    \item Virtuelle Umgebungen (venv, conda)
-    \item Pakete \& Abhängigkeiten (pip, requirements.txt)
-    \item Praxis \& Aufgaben
+    \item Kontrollfluss \& Flussdiagramme (TikZ)
+    \item Brücke zu Python
+    \item Python-Tooling: Interpreter, Skripte, Notebooks
+    \item Setup: Umgebungen, Pakete, Praxis
+    \item Aufgaben
   \end{enumerate}
 \end{frame}
 
 % =========================================================
-% Part 1: Programming Fundamentals (Language-Agnostic)
+% Part 1: Programming Fundamentals
 % =========================================================
 \section{Programmieren als Problemlösen}
 
 \begin{frame}{Warum zuerst die Konzepte?}
   \begin{itemize}
     \item Programmierung ist Problemlösen, nicht Syntax.
-    \item Programmiersprachen sind Werkzeuge – Logik ist universell.
+    \item Logik ist universell: unabhängig von Python, Java, \dots
     \item Gute mentale Modelle reduzieren spätere Fehler.
-    \item Wir lernen zuerst \textbf{wie Programme denken} und übersetzen später in Python.
+    \item Wir planen erst, dann implementieren wir.
   \end{itemize}
 \end{frame}
 
 \begin{frame}{Was ist Programmierung?}
   \begin{itemize}
     \item Programmierung bedeutet, einem Computer klare Anweisungen zu geben.
-    \item Computer führen Anweisungen exakt und deterministisch aus.
-    \item Ein Programm löst ein \textbf{konkretes Problem}.
-    \item Programmierung = Denken in Schritten.
+    \item Computer sind deterministisch: gleiche Eingabe $\rightarrow$ gleiche Ausgabe.
+    \item Ziel: Ein konkretes Problem zuverlässig lösen.
   \end{itemize}
 \end{frame}
 
@@ -96,34 +104,17 @@
   \textbf{Allgemeiner Ablauf:}
   \begin{enumerate}
     \item Problem verstehen
-    \item Lösungsidee entwickeln
-    \item Algorithmus formulieren
-    \item In Code umsetzen
+    \item Algorithmus entwerfen
+    \item Implementieren (Code)
     \item Testen und verbessern
   \end{enumerate}
 \end{frame}
 
 \begin{frame}{Was ist ein Algorithmus?}
   \begin{itemize}
-    \item Ein Algorithmus ist eine eindeutige Schritt-für-Schritt-Anleitung.
-    \item Jeder Schritt ist klar definiert.
-    \item Ein Algorithmus ist unabhängig von der Programmiersprache.
-    \item Beispiele:
-      \begin{itemize}
-        \item Kochrezepte
-        \item Bauanleitungen
-        \item Spielregeln
-      \end{itemize}
-  \end{itemize}
-\end{frame}
-
-\begin{frame}{Eigenschaften von Algorithmen}
-  \begin{itemize}
-    \item Endlich (terminiert)
-    \item Eindeutig
-    \item Deterministisch
-    \item Wiederholbar
-    \item Allgemein (für viele Eingaben)
+    \item Schritt-für-Schritt-Anleitung zur Lösung eines Problems.
+    \item Eindeutig, nachvollziehbar und reproduzierbar.
+    \item Unabhängig von Programmiersprachen.
   \end{itemize}
 \end{frame}
 
@@ -134,120 +125,110 @@
 
 \begin{frame}{Kontrollfluss: Die drei Grundbausteine}
   \begin{itemize}
-    \item \textbf{Sequenz:} Anweisungen werden der Reihe nach ausgeführt.
-    \item \textbf{Entscheidung:} Unterschiedliche Wege je nach Bedingung.
-    \item \textbf{Wiederholung:} Schritte werden mehrfach ausgeführt.
+    \item \textbf{Sequenz:} Anweisungen nacheinander
+    \item \textbf{Entscheidung:} Verzweigung anhand einer Bedingung
+    \item \textbf{Wiederholung:} Schritte mehrfach ausführen
   \end{itemize}
 \end{frame}
 
-\begin{frame}{Kontrollfluss: Sequenz}
-  \begin{itemize}
-    \item Schritte werden von oben nach unten ausgeführt.
-    \item Jeder Schritt passiert genau einmal.
-    \item Beispiel:
-      \begin{enumerate}
-        \item Eingabe lesen
-        \item Berechnung durchführen
-        \item Ergebnis ausgeben
-      \end{enumerate}
-  \end{itemize}
-\end{frame}
-
-\begin{frame}{Kontrollfluss: Entscheidung}
-  \begin{itemize}
-    \item Entscheidungen basieren auf Bedingungen.
-    \item Eine Bedingung ist entweder wahr oder falsch.
-    \item Beispiel:
-      \begin{itemize}
-        \item Wenn es regnet $\rightarrow$ Regenschirm mitnehmen
-        \item Sonst $\rightarrow$ keinen Regenschirm
-      \end{itemize}
-  \end{itemize}
-\end{frame}
-
-\begin{frame}{Kontrollfluss: Wiederholung}
-  \begin{itemize}
-    \item Wiederholung = gleiche Schritte mehrfach ausführen.
-    \item Zwei zentrale Fragen:
-      \begin{itemize}
-        \item Wann beginnt die Wiederholung?
-        \item Wann endet sie?
-      \end{itemize}
-    \item Beispiele:
-      \begin{itemize}
-        \item Zählen bis 10
-        \item Alle Einträge einer Liste prüfen
-      \end{itemize}
-  \end{itemize}
-\end{frame}
-
-\begin{frame}{Was ist ein Flussdiagramm?}
-  \begin{itemize}
-    \item Grafische Darstellung eines Algorithmus.
-    \item Macht Kontrollfluss sichtbar.
-    \item Unabhängig von Programmiersprachen.
-    \item Sehr gut geeignet für Planung und Kommunikation.
-  \end{itemize}
-\end{frame}
-
-\begin{frame}{Typische Symbole in Flussdiagrammen}
+\begin{frame}{Flowcharts: Symbole}
   \begin{itemize}
     \item Oval: Start / Ende
-    \item Rechteck: Verarbeitung / Aktion
+    \item Rechteck: Aktion / Verarbeitung
     \item Raute: Entscheidung
-    \item Pfeile: Ablauf des Programms
+    \item Pfeile: Kontrollfluss
   \end{itemize}
 \end{frame}
 
-\begin{frame}{Beispiel: Zahlen prüfen (Konzeptuell)}
+% ---------------------------------------------------------
+% TikZ Flowchart 1: Number classification
+% ---------------------------------------------------------
+\begin{frame}{Flowchart-Beispiel: Zahl klassifizieren}
+  \centering
+  \begin{tikzpicture}[node distance=1.0cm]
+    \node (start) [startstop] {Start};
+    \node (input) [process, below=of start] {Eingabe: Zahl $n$};
+    \node (d1) [decision, below=of input, yshift=-0.2cm] {$n > 0$?};
+    \node (pos) [process, right=2.8cm of d1] {Ausgabe: ``positiv''};
+    \node (d2) [decision, below=of d1, yshift=-0.2cm] {$n = 0$?};
+    \node (zero) [process, right=2.8cm of d2] {Ausgabe: ``null''};
+    \node (neg) [process, below=of d2, yshift=-0.2cm] {Ausgabe: ``negativ''};
+    \node (stop) [startstop, below=of neg] {Ende};
+
+    \draw [arrow] (start) -- (input);
+    \draw [arrow] (input) -- (d1);
+
+    \draw [arrow] (d1) -- node[above]{Ja} (pos);
+    \draw [arrow] (pos) |- (stop);
+
+    \draw [arrow] (d1) -- node[left]{Nein} (d2);
+
+    \draw [arrow] (d2) -- node[above]{Ja} (zero);
+    \draw [arrow] (zero) |- (stop);
+
+    \draw [arrow] (d2) -- node[left]{Nein} (neg);
+    \draw [arrow] (neg) -- (stop);
+  \end{tikzpicture}
+\end{frame}
+
+\begin{frame}{Interpretation des Flowcharts}
   \begin{itemize}
-    \item Eingabe: Zahl
-    \item Prüfen:
-      \begin{itemize}
-        \item Ist die Zahl größer als 0?
-        \item Ist sie gleich 0?
-        \item Oder kleiner als 0?
-      \end{itemize}
-    \item Ausgabe: Positiv, Negativ oder Null
+    \item \textbf{Sequenz:} Start $\rightarrow$ Eingabe $\rightarrow$ Prüfung
+    \item \textbf{Entscheidung:} Zwei Verzweigungen ($n>0$?, $n=0$?)
+    \item \textbf{Determinismus:} Für jedes $n$ genau ein Pfad
+    \item Das ist später direkt übersetzbar in \texttt{if/elif/else}.
   \end{itemize}
 \end{frame}
 
-\begin{frame}{Vom Flussdiagramm zum Code}
-  \begin{itemize}
-    \item Flussdiagramme beschreiben \textbf{Logik}.
-    \item Code ist die formale Umsetzung dieser Logik.
-    \item Gute Programme lassen sich vorher skizzieren.
-    \item Nächster Schritt: Logik in Python ausdrücken.
-  \end{itemize}
+% ---------------------------------------------------------
+% TikZ Flowchart 2: Login with retry loop
+% ---------------------------------------------------------
+\begin{frame}{Flowchart-Übung: Login mit Wiederholung}
+  \centering
+  \begin{tikzpicture}[node distance=0.95cm]
+    \node (start) [startstop] {Start};
+    \node (set) [process, below=of start] {Setze Versuche = 0};
+    \node (input) [process, below=of set] {Eingabe: Passwort};
+    \node (check) [decision, below=of input, yshift=-0.2cm] {Passwort korrekt?};
+    \node (ok) [process, right=3.3cm of check] {Login erfolgreich};
+    \node (inc) [process, below=of check, yshift=-0.2cm] {Versuche += 1};
+    \node (limit) [decision, below=of inc, yshift=-0.2cm] {Versuche $<$ 3?};
+    \node (fail) [process, right=3.3cm of limit] {Account gesperrt};
+    \node (stop) [startstop, below=of limit, yshift=-0.1cm] {Ende};
+
+    \draw [arrow] (start) -- (set);
+    \draw [arrow] (set) -- (input);
+    \draw [arrow] (input) -- (check);
+
+    \draw [arrow] (check) -- node[above]{Ja} (ok);
+    \draw [arrow] (ok) |- (stop);
+
+    \draw [arrow] (check) -- node[left]{Nein} (inc);
+    \draw [arrow] (inc) -- (limit);
+
+    \draw [arrow] (limit) -- node[above]{Nein} (fail);
+    \draw [arrow] (fail) |- (stop);
+
+    \draw [arrow] (limit) -- node[left]{Ja} (input);
+  \end{tikzpicture}
 \end{frame}
 
-\begin{frame}{Mini-Übung (ohne Code)}
-  \textbf{Aufgabe:}
-  \begin{itemize}
-    \item Entwerfe ein Flussdiagramm für:
-      \begin{itemize}
-        \item Anmeldung an einem System
-        \item Prüfen eines Passworts
-      \end{itemize}
-    \item Fokus:
-      \begin{itemize}
-        \item Entscheidungen
-        \item Wiederholungen
-      \end{itemize}
-  \end{itemize}
-\end{frame}
 
-% Bridge slide
-\begin{frame}{Brücke: Von Logik zu Python}
+% =========================================================
+% Bridge to Python
+% =========================================================
+\section{Brücke zu Python}
+
+\begin{frame}{Von Flowchart zu Python}
   \begin{itemize}
-    \item Wir haben Logik als Sequenz/Entscheidung/Wiederholung gesehen.
-    \item Python bietet dafür konkrete Sprachkonstrukte:
-      \begin{itemize}
-        \item Sequenz: Zeile für Zeile
-        \item Entscheidung: \texttt{if/elif/else}
-        \item Wiederholung: \texttt{for/while}
-      \end{itemize}
-    \item Bevor wir diese Syntax lernen, sorgen wir für ein sauberes Setup.
+    \item Flowchart beschreibt \textbf{Logik} und \textbf{Kontrollfluss}.
+    \item Python bietet konkrete Sprachkonstrukte:
+          \begin{itemize}
+            \item Sequenz: Zeile für Zeile
+            \item Entscheidung: \texttt{if/elif/else}
+            \item Wiederholung: \texttt{for/while}
+          \end{itemize}
+    \item Nächster Schritt: Setup, damit wir diese Logik sauber implementieren können.
   \end{itemize}
 \end{frame}
 
@@ -260,40 +241,28 @@
   \begin{itemize}
     \item Python ist eine interpretierte Sprache: Code wird durch den \textbf{Interpreter} ausgeführt.
     \item Quellcode-Dateien enden meist auf \texttt{.py}.
-    \item Fehler sind normal: Python gibt meist sehr hilfreiche Fehlermeldungen aus.
     \item Interaktiv vs. Datei-basiert:
-      \begin{itemize}
-        \item Interaktiv: Python REPL (Shell)
-        \item Datei-basiert: Skripte (\texttt{python file.py})
-      \end{itemize}
+          \begin{itemize}
+            \item Interaktiv: Python REPL (Shell)
+            \item Datei-basiert: Skripte (\texttt{python file.py})
+          \end{itemize}
   \end{itemize}
 \end{frame}
-
-\begin{frame}{Python-Artefakte}
-  \begin{itemize}
-    \item \textbf{Skript} (\texttt{.py}): Code wird von oben nach unten ausgeführt.
-    \item \textbf{Notebook} (\texttt{.ipynb}): Code wird in Zellen ausgeführt (nicht zwingend linear).
-    \item \textbf{Pakete}: Wiederverwendbarer Code, den wir installieren können.
-    \item \textbf{Virtuelle Umgebung}: Isolierter Raum für Pakete pro Projekt.
-  \end{itemize}
-\end{frame}
-
-\section{Skripte vs. Notebooks}
 
 \begin{frame}{Skripte vs. Notebooks}
   \begin{itemize}
     \item \textbf{Skripte:}
-      \begin{itemize}
-        \item Gut für Softwareentwicklung und wiederholbare Abläufe
-        \item Saubere Projektstruktur
-        \item Einfach zu versionieren (Git)
-      \end{itemize}
+          \begin{itemize}
+            \item Gut für wiederholbare Abläufe und Softwareentwicklung
+            \item Saubere Projektstruktur
+            \item Einfach zu versionieren (Git)
+          \end{itemize}
     \item \textbf{Notebooks:}
-      \begin{itemize}
-        \item Gut für Exploration, Lernen, Datenanalyse
-        \item Mischung aus Code, Text, Output
-        \item Gefahr: ``Hidden State'' durch nicht-lineare Ausführung
-      \end{itemize}
+          \begin{itemize}
+            \item Gut für Exploration, Lernen, Datenanalyse
+            \item Mischung aus Code, Text, Output
+            \item Achtung: ``Hidden State'' durch nicht-lineare Ausführung
+          \end{itemize}
   \end{itemize}
 \end{frame}
 
@@ -301,32 +270,22 @@
 
 \begin{frame}{Jupyter Notebook}
   \begin{itemize}
-    \item Interaktive Umgebung für Code + Text (Markdown) + Visualisierungen.
-    \item Ideal für:
-      \begin{itemize}
-        \item Lernen
-        \item Datenanalyse
-        \item Schnelles Prototyping
-      \end{itemize}
-    \item Zellen:
-      \begin{itemize}
-        \item Code-Zellen
-        \item Markdown-Zellen
-      \end{itemize}
+    \item Interaktive Umgebung für Code + Markdown + Visualisierungen.
+    \item Ideal für Lernen, Exploration und Reports.
   \end{itemize}
 \end{frame}
 
-\begin{frame}{VS Code (Warum es sich lohnt)}
+\begin{frame}{VS Code}
   \begin{itemize}
-    \item Professioneller Editor für Skripte und Projekte.
+    \item Professioneller Editor für Projekte.
     \item Vorteile:
-      \begin{itemize}
-        \item Autocomplete \& Linting
-        \item Debugging
-        \item Integriertes Terminal
-        \item Git-Integration
-        \item Notebook-Support
-      \end{itemize}
+          \begin{itemize}
+            \item Autocomplete \& Linting
+            \item Debugging
+            \item Integriertes Terminal
+            \item Git-Integration
+            \item Notebook-Support
+          \end{itemize}
   \end{itemize}
 \end{frame}
 
@@ -335,12 +294,12 @@
 \begin{frame}[fragile]{Python Installation prüfen}
   \begin{itemize}
     \item Version prüfen:
-\begin{lstlisting}[language=bash]
+          \begin{lstlisting}[language=bash]
 python --version
 python3 --version
 \end{lstlisting}
     \item Wo liegt der Interpreter?
-\begin{lstlisting}[language=bash]
+          \begin{lstlisting}[language=bash]
 which python      # Mac/Linux
 where python      # Windows
 \end{lstlisting}
@@ -350,16 +309,16 @@ where python      # Windows
 \begin{frame}[fragile]{Erste Python-Kommandos (REPL)}
   \begin{itemize}
     \item Python Shell starten:
-\begin{lstlisting}[language=bash]
+          \begin{lstlisting}[language=bash]
 python
 \end{lstlisting}
     \item Erste Befehle:
-\begin{lstlisting}[language=Python]
+          \begin{lstlisting}[language=Python]
 print("Hallo Python!")
 2 + 3 * 4
 \end{lstlisting}
-    \item Python Shell verlassen:
-\begin{lstlisting}[language=Python]
+    \item Verlassen:
+          \begin{lstlisting}[language=Python]
 exit()
 \end{lstlisting}
   \end{itemize}
@@ -375,7 +334,6 @@ exit()
     \item Vermeidung von Versionskonflikten zwischen Projekten.
     \item Reproduzierbarkeit (gleiche Pakete $\rightarrow$ gleiche Ergebnisse).
     \item Saubere Abhängigkeiten pro Projekt.
-    \item Best Practice in professionellen Teams.
   \end{itemize}
 \end{frame}
 
@@ -383,16 +341,16 @@ exit()
   \textbf{Schritte:}
   \begin{enumerate}
     \item Umgebung erstellen:
-\begin{lstlisting}[language=bash]
+          \begin{lstlisting}[language=bash]
 python -m venv .venv
 \end{lstlisting}
     \item Aktivieren:
-\begin{lstlisting}[language=bash]
+          \begin{lstlisting}[language=bash]
 source .venv/bin/activate      # Mac/Linux
 .venv\Scripts\activate         # Windows
 \end{lstlisting}
     \item Deaktivieren:
-\begin{lstlisting}[language=bash]
+          \begin{lstlisting}[language=bash]
 deactivate
 \end{lstlisting}
   \end{enumerate}
@@ -402,15 +360,15 @@ deactivate
   \textbf{Schritte:}
   \begin{enumerate}
     \item Umgebung erstellen:
-\begin{lstlisting}[language=bash]
+          \begin{lstlisting}[language=bash]
 conda create --name py101 python=3.11
 \end{lstlisting}
     \item Aktivieren:
-\begin{lstlisting}[language=bash]
+          \begin{lstlisting}[language=bash]
 conda activate py101
 \end{lstlisting}
     \item Deaktivieren:
-\begin{lstlisting}[language=bash]
+          \begin{lstlisting}[language=bash]
 conda deactivate
 \end{lstlisting}
   \end{enumerate}
@@ -418,16 +376,8 @@ conda deactivate
 
 \begin{frame}{venv vs. Conda (Kurzvergleich)}
   \begin{itemize}
-    \item \textbf{venv:}
-      \begin{itemize}
-        \item In Python eingebaut (kein extra Tool nötig)
-        \item Sehr gut für ``pure Python'' Projekte
-      \end{itemize}
-    \item \textbf{Conda:}
-      \begin{itemize}
-        \item Stärker im wissenschaftlichen Umfeld (native Libraries)
-        \item Separater Paketmanager + Environment Manager
-      \end{itemize}
+    \item \textbf{venv:} eingebaut, leichtgewichtig, gut für ``pure Python''.
+    \item \textbf{Conda:} stark im wissenschaftlichen Umfeld, eigene Paketverwaltung.
   \end{itemize}
 \end{frame}
 
@@ -438,32 +388,24 @@ conda deactivate
 
 \begin{frame}{Standard Library vs. Third-Party}
   \begin{itemize}
-    \item \textbf{Standard Library:} Kommt mit Python (z.\,B. \texttt{math}, \texttt{csv}, \texttt{json}).
-    \item \textbf{Third-Party Packages:} Müssen installiert werden (z.\,B. \texttt{numpy}, \texttt{pandas}).
-    \item Warum das wichtig ist:
-      \begin{itemize}
-        \item Projekte brauchen reproduzierbare Abhängigkeiten
-        \item Teamarbeit erfordert gleiche Setups
-      \end{itemize}
+    \item \textbf{Standard Library:} kommt mit Python (z.\,B. \texttt{math}, \texttt{csv}, \texttt{json}).
+    \item \textbf{Third-Party:} installierbar via \texttt{pip}/\texttt{conda} (z.\,B. \texttt{numpy}, \texttt{pandas}).
+    \item Ziel: reproduzierbares Setup über \texttt{requirements.txt}.
   \end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]{Pakete installieren mit pip}
   \begin{itemize}
-    \item Paket installieren:
-\begin{lstlisting}[language=bash]
+    \item Installation:
+          \begin{lstlisting}[language=bash]
 pip install numpy pandas
 \end{lstlisting}
-    \item Installierte Pakete anzeigen:
-\begin{lstlisting}[language=bash]
-pip list
-\end{lstlisting}
-    \item Abhängigkeiten exportieren:
-\begin{lstlisting}[language=bash]
+    \item Export:
+          \begin{lstlisting}[language=bash]
 pip freeze > requirements.txt
 \end{lstlisting}
-    \item Abhängigkeiten installieren:
-\begin{lstlisting}[language=bash]
+    \item Re-Install:
+          \begin{lstlisting}[language=bash]
 pip install -r requirements.txt
 \end{lstlisting}
   \end{itemize}
@@ -475,7 +417,7 @@ pip install -r requirements.txt
 \section{Praxis: Skript vs. Notebook}
 
 \begin{frame}[fragile]{Einfaches Skript: \texttt{hello.py}}
-\begin{lstlisting}[language=Python]
+  \begin{lstlisting}[language=Python]
 print("Hallo aus einem Skript!")
 x = 2 + 3 * 4
 print("Ergebnis:", x)
@@ -484,17 +426,9 @@ print("Ergebnis:", x)
 
 \begin{frame}{Notebook: gleiche Logik, andere Arbeitsweise}
   \begin{itemize}
-    \item Im Notebook:
-      \begin{itemize}
-        \item Code in Zellen ausführen
-        \item Markdown für Dokumentation nutzen
-        \item Output direkt unter der Zelle
-      \end{itemize}
-    \item Wichtig:
-      \begin{itemize}
-        \item Notebooks können ``State'' behalten
-        \item Zellen sollten sinnvoll und reproduzierbar ausgeführt werden
-      \end{itemize}
+    \item Code in Zellen, Markdown für Dokumentation, Output direkt sichtbar.
+    \item Achtung: Reihenfolge der Ausführung kann den Zustand beeinflussen.
+    \item Empfehlung: Notebooks reproduzierbar halten (``Run All'').
   \end{itemize}
 \end{frame}
 
@@ -506,15 +440,9 @@ print("Ergebnis:", x)
 \begin{frame}{Aufgabe 0: Flussdiagramm (ohne Code)}
   \begin{itemize}
     \item Entwerfe ein Flussdiagramm für:
-      \begin{itemize}
-        \item Anmeldung an einem System
-        \item Prüfen eines Passworts
-      \end{itemize}
-    \item Achte auf:
-      \begin{itemize}
-        \item Sequenz, Entscheidung, Wiederholung
-        \item Klare Start-/Endpunkte
-      \end{itemize}
+          \begin{itemize}
+            \item Anmeldung an einem System (max. 3 Versuche)
+          \end{itemize}
   \end{itemize}
 \end{frame}
 
@@ -530,10 +458,10 @@ print("Ergebnis:", x)
 \begin{frame}{Aufgabe 2: Skript vs. Notebook}
   \begin{itemize}
     \item Erstelle \texttt{hello.py} und \texttt{hello.ipynb} mit:
-      \begin{itemize}
-        \item Ausgabe einer Begrüßung
-        \item Einer einfachen Berechnung
-      \end{itemize}
+          \begin{itemize}
+            \item Ausgabe einer Begrüßung
+            \item Einer einfachen Berechnung
+          \end{itemize}
     \item Führe beide aus und vergleiche den Ablauf.
   \end{itemize}
 \end{frame}
@@ -541,11 +469,11 @@ print("Ergebnis:", x)
 \begin{frame}{Aufgabe 3: Kurzreflexion}
   \begin{itemize}
     \item Beantworte kurz:
-      \begin{enumerate}
-        \item Was macht der Python Interpreter?
-        \item Wann ist ein Notebook sinnvoller als ein Skript?
-        \item Warum sind virtuelle Umgebungen nützlich?
-      \end{enumerate}
+          \begin{enumerate}
+            \item Was macht der Python Interpreter?
+            \item Wann ist ein Notebook sinnvoller als ein Skript?
+            \item Warum sind virtuelle Umgebungen nützlich?
+          \end{enumerate}
   \end{itemize}
 \end{frame}
 
