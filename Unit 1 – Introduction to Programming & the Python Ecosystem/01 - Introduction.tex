@@ -171,12 +171,12 @@
     \draw [arrow] (input) -- (d1);
 
     \draw [arrow] (d1) -- node[above]{Ja} (pos);
-    \draw [arrow] (pos) |- (stop);
+    \draw [arrow] (pos.east) -- ++ (0.8,0) |- (stop.east);
 
     \draw [arrow] (d1) -- node[left]{Nein} (d2);
 
     \draw [arrow] (d2) -- node[above]{Ja} (zero);
-    \draw [arrow] (zero) |- (stop);
+    \draw [arrow] (zero.east) -- ++ (0.6,0) |- (stop.east);
 
     \draw [arrow] (d2) -- node[left]{Nein} (neg);
     \draw [arrow] (neg) -- (stop);
@@ -213,15 +213,15 @@
     \draw [arrow] (input) -- (check);
 
     \draw [arrow] (check) -- node[above]{Ja} (ok);
-    \draw [arrow] (ok) |- (stop);
+    \draw [arrow] (ok.east) -- ++ (0.8,0) |- (stop.east);
 
     \draw [arrow] (check) -- node[left]{Nein} (inc);
     \draw [arrow] (inc) -- (limit);
 
     \draw [arrow] (limit) -- node[above]{Nein} (fail);
-    \draw [arrow] (fail) |- (stop);
+    \draw [arrow] (fail.east) -- ++ (0.6,0) |- (stop.east);
 
-    \draw [arrow] (limit) -- node[left]{Ja} (input);
+    \draw [arrow] (limit.west) -- ++ (-1.3,0) |- node[pos=0.25,left]{Ja} (input.west);
   \end{FitTikZ}
 \end{frame}
 
