@@ -20,7 +20,6 @@
     breakatwhitespace=false,
     breaklines=true,
     captionpos=b,
-    % keepspaces=true,
     numbers=left,
     numbersep=5pt,
     showspaces=false,
@@ -32,7 +31,7 @@
 \lstset{style=mystyle}
 
 \title{Python 3 - Grundlagen und Ökosystem}
-\subtitle{Unit 1: Einführung in Programmierung \& Python-Tooling}
+\subtitle{Unit 1: Programmiergrundlagen \& Python-Tooling}
 \author{Hussam Alafandi}
 \date{\today}
 
@@ -40,11 +39,16 @@
 
 \maketitle
 
+% =========================================================
+% Unit Overview
+% =========================================================
 \section{Unit 1: Überblick}
 
 \begin{frame}{Ziele der Unit}
   \begin{itemize}
     \item Verstehen, was Programmierung ist (Problem $\rightarrow$ Algorithmus $\rightarrow$ Code).
+    \item Kontrollfluss als Grundprinzip verstehen: Sequenz, Entscheidung, Wiederholung.
+    \item Flussdiagramme als Werkzeug zur Planung und Kommunikation nutzen.
     \item Verstehen, wie Python Code ausführt (Interpreter, Skripte, Notebooks).
     \item Entwicklungsumgebungen kennenlernen: Jupyter und VS Code.
     \item Virtuelle Umgebungen erstellen und nutzen (venv, conda).
@@ -55,9 +59,9 @@
 
 \begin{frame}{Agenda}
   \begin{enumerate}
-    \item Was ist Programmierung?
-    \item Wie funktioniert Python?
-    \item Skripte vs. Notebooks
+    \item Programmieren als Problemlösen
+    \item Algorithmen \& Kontrollfluss (inkl. Flussdiagramme)
+    \item Python: Interpreter, Skripte, Notebooks
     \item Entwicklungsumgebungen (Jupyter, VS Code)
     \item Virtuelle Umgebungen (venv, conda)
     \item Pakete \& Abhängigkeiten (pip, requirements.txt)
@@ -65,34 +69,192 @@
   \end{enumerate}
 \end{frame}
 
-\section{Einführung in Programmierung}
+% =========================================================
+% Part 1: Programming Fundamentals (Language-Agnostic)
+% =========================================================
+\section{Programmieren als Problemlösen}
+
+\begin{frame}{Warum zuerst die Konzepte?}
+  \begin{itemize}
+    \item Programmierung ist Problemlösen, nicht Syntax.
+    \item Programmiersprachen sind Werkzeuge – Logik ist universell.
+    \item Gute mentale Modelle reduzieren spätere Fehler.
+    \item Wir lernen zuerst \textbf{wie Programme denken} und übersetzen später in Python.
+  \end{itemize}
+\end{frame}
 
 \begin{frame}{Was ist Programmierung?}
   \begin{itemize}
-    \item Programmierung = Problemlösung durch präzise Anweisungen.
-    \item Ein Programm ist eine Abfolge von Schritten, die ein Computer ausführt.
-    \item Zentraler Ablauf:
+    \item Programmierung bedeutet, einem Computer klare Anweisungen zu geben.
+    \item Computer führen Anweisungen exakt und deterministisch aus.
+    \item Ein Programm löst ein \textbf{konkretes Problem}.
+    \item Programmierung = Denken in Schritten.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Von Problem zu Lösung}
+  \textbf{Allgemeiner Ablauf:}
+  \begin{enumerate}
+    \item Problem verstehen
+    \item Lösungsidee entwickeln
+    \item Algorithmus formulieren
+    \item In Code umsetzen
+    \item Testen und verbessern
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}{Was ist ein Algorithmus?}
+  \begin{itemize}
+    \item Ein Algorithmus ist eine eindeutige Schritt-für-Schritt-Anleitung.
+    \item Jeder Schritt ist klar definiert.
+    \item Ein Algorithmus ist unabhängig von der Programmiersprache.
+    \item Beispiele:
       \begin{itemize}
-        \item Problem verstehen
-        \item Algorithmus entwerfen
-        \item Code implementieren
-        \item Testen \& iterieren
+        \item Kochrezepte
+        \item Bauanleitungen
+        \item Spielregeln
       \end{itemize}
   \end{itemize}
 \end{frame}
 
-\begin{frame}{Von Problem zu Code (Beispiel)}
-  \textbf{Problem:} Berechne die Gesamtsumme eines Einkaufs.\\[4pt]
-  \textbf{Algorithmus:}
-  \begin{enumerate}
-    \item Preise erfassen
-    \item Summe berechnen
-    \item Ergebnis ausgeben
-  \end{enumerate}
-  \textbf{Code:} (wir starten heute nur mit sehr einfachen Beispielen)
+\begin{frame}{Eigenschaften von Algorithmen}
+  \begin{itemize}
+    \item Endlich (terminiert)
+    \item Eindeutig
+    \item Deterministisch
+    \item Wiederholbar
+    \item Allgemein (für viele Eingaben)
+  \end{itemize}
 \end{frame}
 
-\section{Wie Python funktioniert}
+% =========================================================
+% Control Flow + Flowcharts
+% =========================================================
+\section{Kontrollfluss \& Flussdiagramme}
+
+\begin{frame}{Kontrollfluss: Die drei Grundbausteine}
+  \begin{itemize}
+    \item \textbf{Sequenz:} Anweisungen werden der Reihe nach ausgeführt.
+    \item \textbf{Entscheidung:} Unterschiedliche Wege je nach Bedingung.
+    \item \textbf{Wiederholung:} Schritte werden mehrfach ausgeführt.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Kontrollfluss: Sequenz}
+  \begin{itemize}
+    \item Schritte werden von oben nach unten ausgeführt.
+    \item Jeder Schritt passiert genau einmal.
+    \item Beispiel:
+      \begin{enumerate}
+        \item Eingabe lesen
+        \item Berechnung durchführen
+        \item Ergebnis ausgeben
+      \end{enumerate}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Kontrollfluss: Entscheidung}
+  \begin{itemize}
+    \item Entscheidungen basieren auf Bedingungen.
+    \item Eine Bedingung ist entweder wahr oder falsch.
+    \item Beispiel:
+      \begin{itemize}
+        \item Wenn es regnet $\rightarrow$ Regenschirm mitnehmen
+        \item Sonst $\rightarrow$ keinen Regenschirm
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Kontrollfluss: Wiederholung}
+  \begin{itemize}
+    \item Wiederholung = gleiche Schritte mehrfach ausführen.
+    \item Zwei zentrale Fragen:
+      \begin{itemize}
+        \item Wann beginnt die Wiederholung?
+        \item Wann endet sie?
+      \end{itemize}
+    \item Beispiele:
+      \begin{itemize}
+        \item Zählen bis 10
+        \item Alle Einträge einer Liste prüfen
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Was ist ein Flussdiagramm?}
+  \begin{itemize}
+    \item Grafische Darstellung eines Algorithmus.
+    \item Macht Kontrollfluss sichtbar.
+    \item Unabhängig von Programmiersprachen.
+    \item Sehr gut geeignet für Planung und Kommunikation.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Typische Symbole in Flussdiagrammen}
+  \begin{itemize}
+    \item Oval: Start / Ende
+    \item Rechteck: Verarbeitung / Aktion
+    \item Raute: Entscheidung
+    \item Pfeile: Ablauf des Programms
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Beispiel: Zahlen prüfen (Konzeptuell)}
+  \begin{itemize}
+    \item Eingabe: Zahl
+    \item Prüfen:
+      \begin{itemize}
+        \item Ist die Zahl größer als 0?
+        \item Ist sie gleich 0?
+        \item Oder kleiner als 0?
+      \end{itemize}
+    \item Ausgabe: Positiv, Negativ oder Null
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Vom Flussdiagramm zum Code}
+  \begin{itemize}
+    \item Flussdiagramme beschreiben \textbf{Logik}.
+    \item Code ist die formale Umsetzung dieser Logik.
+    \item Gute Programme lassen sich vorher skizzieren.
+    \item Nächster Schritt: Logik in Python ausdrücken.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Mini-Übung (ohne Code)}
+  \textbf{Aufgabe:}
+  \begin{itemize}
+    \item Entwerfe ein Flussdiagramm für:
+      \begin{itemize}
+        \item Anmeldung an einem System
+        \item Prüfen eines Passworts
+      \end{itemize}
+    \item Fokus:
+      \begin{itemize}
+        \item Entscheidungen
+        \item Wiederholungen
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+% Bridge slide
+\begin{frame}{Brücke: Von Logik zu Python}
+  \begin{itemize}
+    \item Wir haben Logik als Sequenz/Entscheidung/Wiederholung gesehen.
+    \item Python bietet dafür konkrete Sprachkonstrukte:
+      \begin{itemize}
+        \item Sequenz: Zeile für Zeile
+        \item Entscheidung: \texttt{if/elif/else}
+        \item Wiederholung: \texttt{for/while}
+      \end{itemize}
+    \item Bevor wir diese Syntax lernen, sorgen wir für ein sauberes Setup.
+  \end{itemize}
+\end{frame}
+
+% =========================================================
+% Part 2: Python Ecosystem & Tooling
+% =========================================================
+\section{Python: Interpreter, Skripte, Notebooks}
 
 \begin{frame}{Wie führt Python Code aus?}
   \begin{itemize}
@@ -203,6 +365,9 @@ exit()
   \end{itemize}
 \end{frame}
 
+% =========================================================
+% Environments
+% =========================================================
 \section{Virtuelle Umgebungen}
 
 \begin{frame}{Warum virtuelle Umgebungen?}
@@ -266,6 +431,9 @@ conda deactivate
   \end{itemize}
 \end{frame}
 
+% =========================================================
+% Dependencies
+% =========================================================
 \section{Pakete \& Abhängigkeiten}
 
 \begin{frame}{Standard Library vs. Third-Party}
@@ -301,6 +469,9 @@ pip install -r requirements.txt
   \end{itemize}
 \end{frame}
 
+% =========================================================
+% Script vs Notebook practice
+% =========================================================
 \section{Praxis: Skript vs. Notebook}
 
 \begin{frame}[fragile]{Einfaches Skript: \texttt{hello.py}}
@@ -327,7 +498,25 @@ print("Ergebnis:", x)
   \end{itemize}
 \end{frame}
 
+% =========================================================
+% Assignments
+% =========================================================
 \section{Aufgaben (Unit 1)}
+
+\begin{frame}{Aufgabe 0: Flussdiagramm (ohne Code)}
+  \begin{itemize}
+    \item Entwerfe ein Flussdiagramm für:
+      \begin{itemize}
+        \item Anmeldung an einem System
+        \item Prüfen eines Passworts
+      \end{itemize}
+    \item Achte auf:
+      \begin{itemize}
+        \item Sequenz, Entscheidung, Wiederholung
+        \item Klare Start-/Endpunkte
+      \end{itemize}
+  \end{itemize}
+\end{frame}
 
 \begin{frame}{Aufgabe 1: Setup \& Dokumentation}
   \begin{itemize}
