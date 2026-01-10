@@ -1,0 +1,367 @@
+\documentclass[aspectratio=169]{beamer}
+\usetheme{metropolis}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{xcolor}
+
+% Define custom colors
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.96,0.96,0.96}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{blue},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\small,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    % keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2
+}
+
+\lstset{style=mystyle}
+
+\title{Python 3 - Grundlagen und Ökosystem}
+\subtitle{Unit 1: Einführung in Programmierung \& Python-Tooling}
+\author{Hussam Alafandi}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Unit 1: Überblick}
+
+\begin{frame}{Ziele der Unit}
+  \begin{itemize}
+    \item Verstehen, was Programmierung ist (Problem $\rightarrow$ Algorithmus $\rightarrow$ Code).
+    \item Verstehen, wie Python Code ausführt (Interpreter, Skripte, Notebooks).
+    \item Entwicklungsumgebungen kennenlernen: Jupyter und VS Code.
+    \item Virtuelle Umgebungen erstellen und nutzen (venv, conda).
+    \item Pakete installieren und Abhängigkeiten verwalten (pip, requirements.txt).
+    \item Erste Python-Kommandos ausführen und Unterschiede Skript vs. Notebook kennen.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Agenda}
+  \begin{enumerate}
+    \item Was ist Programmierung?
+    \item Wie funktioniert Python?
+    \item Skripte vs. Notebooks
+    \item Entwicklungsumgebungen (Jupyter, VS Code)
+    \item Virtuelle Umgebungen (venv, conda)
+    \item Pakete \& Abhängigkeiten (pip, requirements.txt)
+    \item Praxis \& Aufgaben
+  \end{enumerate}
+\end{frame}
+
+\section{Einführung in Programmierung}
+
+\begin{frame}{Was ist Programmierung?}
+  \begin{itemize}
+    \item Programmierung = Problemlösung durch präzise Anweisungen.
+    \item Ein Programm ist eine Abfolge von Schritten, die ein Computer ausführt.
+    \item Zentraler Ablauf:
+      \begin{itemize}
+        \item Problem verstehen
+        \item Algorithmus entwerfen
+        \item Code implementieren
+        \item Testen \& iterieren
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Von Problem zu Code (Beispiel)}
+  \textbf{Problem:} Berechne die Gesamtsumme eines Einkaufs.\\[4pt]
+  \textbf{Algorithmus:}
+  \begin{enumerate}
+    \item Preise erfassen
+    \item Summe berechnen
+    \item Ergebnis ausgeben
+  \end{enumerate}
+  \textbf{Code:} (wir starten heute nur mit sehr einfachen Beispielen)
+\end{frame}
+
+\section{Wie Python funktioniert}
+
+\begin{frame}{Wie führt Python Code aus?}
+  \begin{itemize}
+    \item Python ist eine interpretierte Sprache: Code wird durch den \textbf{Interpreter} ausgeführt.
+    \item Quellcode-Dateien enden meist auf \texttt{.py}.
+    \item Fehler sind normal: Python gibt meist sehr hilfreiche Fehlermeldungen aus.
+    \item Interaktiv vs. Datei-basiert:
+      \begin{itemize}
+        \item Interaktiv: Python REPL (Shell)
+        \item Datei-basiert: Skripte (\texttt{python file.py})
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Python-Artefakte}
+  \begin{itemize}
+    \item \textbf{Skript} (\texttt{.py}): Code wird von oben nach unten ausgeführt.
+    \item \textbf{Notebook} (\texttt{.ipynb}): Code wird in Zellen ausgeführt (nicht zwingend linear).
+    \item \textbf{Pakete}: Wiederverwendbarer Code, den wir installieren können.
+    \item \textbf{Virtuelle Umgebung}: Isolierter Raum für Pakete pro Projekt.
+  \end{itemize}
+\end{frame}
+
+\section{Skripte vs. Notebooks}
+
+\begin{frame}{Skripte vs. Notebooks}
+  \begin{itemize}
+    \item \textbf{Skripte:}
+      \begin{itemize}
+        \item Gut für Softwareentwicklung und wiederholbare Abläufe
+        \item Saubere Projektstruktur
+        \item Einfach zu versionieren (Git)
+      \end{itemize}
+    \item \textbf{Notebooks:}
+      \begin{itemize}
+        \item Gut für Exploration, Lernen, Datenanalyse
+        \item Mischung aus Code, Text, Output
+        \item Gefahr: ``Hidden State'' durch nicht-lineare Ausführung
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\section{Entwicklungsumgebungen}
+
+\begin{frame}{Jupyter Notebook}
+  \begin{itemize}
+    \item Interaktive Umgebung für Code + Text (Markdown) + Visualisierungen.
+    \item Ideal für:
+      \begin{itemize}
+        \item Lernen
+        \item Datenanalyse
+        \item Schnelles Prototyping
+      \end{itemize}
+    \item Zellen:
+      \begin{itemize}
+        \item Code-Zellen
+        \item Markdown-Zellen
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{VS Code (Warum es sich lohnt)}
+  \begin{itemize}
+    \item Professioneller Editor für Skripte und Projekte.
+    \item Vorteile:
+      \begin{itemize}
+        \item Autocomplete \& Linting
+        \item Debugging
+        \item Integriertes Terminal
+        \item Git-Integration
+        \item Notebook-Support
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\section{Praxis: Installation \& Checks}
+
+\begin{frame}[fragile]{Python Installation prüfen}
+  \begin{itemize}
+    \item Version prüfen:
+\begin{lstlisting}[language=bash]
+python --version
+python3 --version
+\end{lstlisting}
+    \item Wo liegt der Interpreter?
+\begin{lstlisting}[language=bash]
+which python      # Mac/Linux
+where python      # Windows
+\end{lstlisting}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Erste Python-Kommandos (REPL)}
+  \begin{itemize}
+    \item Python Shell starten:
+\begin{lstlisting}[language=bash]
+python
+\end{lstlisting}
+    \item Erste Befehle:
+\begin{lstlisting}[language=Python]
+print("Hallo Python!")
+2 + 3 * 4
+\end{lstlisting}
+    \item Python Shell verlassen:
+\begin{lstlisting}[language=Python]
+exit()
+\end{lstlisting}
+  \end{itemize}
+\end{frame}
+
+\section{Virtuelle Umgebungen}
+
+\begin{frame}{Warum virtuelle Umgebungen?}
+  \begin{itemize}
+    \item Vermeidung von Versionskonflikten zwischen Projekten.
+    \item Reproduzierbarkeit (gleiche Pakete $\rightarrow$ gleiche Ergebnisse).
+    \item Saubere Abhängigkeiten pro Projekt.
+    \item Best Practice in professionellen Teams.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Virtuelle Umgebung mit venv}
+  \textbf{Schritte:}
+  \begin{enumerate}
+    \item Umgebung erstellen:
+\begin{lstlisting}[language=bash]
+python -m venv .venv
+\end{lstlisting}
+    \item Aktivieren:
+\begin{lstlisting}[language=bash]
+source .venv/bin/activate      # Mac/Linux
+.venv\Scripts\activate         # Windows
+\end{lstlisting}
+    \item Deaktivieren:
+\begin{lstlisting}[language=bash]
+deactivate
+\end{lstlisting}
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]{Virtuelle Umgebung mit Conda}
+  \textbf{Schritte:}
+  \begin{enumerate}
+    \item Umgebung erstellen:
+\begin{lstlisting}[language=bash]
+conda create --name py101 python=3.11
+\end{lstlisting}
+    \item Aktivieren:
+\begin{lstlisting}[language=bash]
+conda activate py101
+\end{lstlisting}
+    \item Deaktivieren:
+\begin{lstlisting}[language=bash]
+conda deactivate
+\end{lstlisting}
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}{venv vs. Conda (Kurzvergleich)}
+  \begin{itemize}
+    \item \textbf{venv:}
+      \begin{itemize}
+        \item In Python eingebaut (kein extra Tool nötig)
+        \item Sehr gut für ``pure Python'' Projekte
+      \end{itemize}
+    \item \textbf{Conda:}
+      \begin{itemize}
+        \item Stärker im wissenschaftlichen Umfeld (native Libraries)
+        \item Separater Paketmanager + Environment Manager
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\section{Pakete \& Abhängigkeiten}
+
+\begin{frame}{Standard Library vs. Third-Party}
+  \begin{itemize}
+    \item \textbf{Standard Library:} Kommt mit Python (z.\,B. \texttt{math}, \texttt{csv}, \texttt{json}).
+    \item \textbf{Third-Party Packages:} Müssen installiert werden (z.\,B. \texttt{numpy}, \texttt{pandas}).
+    \item Warum das wichtig ist:
+      \begin{itemize}
+        \item Projekte brauchen reproduzierbare Abhängigkeiten
+        \item Teamarbeit erfordert gleiche Setups
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Pakete installieren mit pip}
+  \begin{itemize}
+    \item Paket installieren:
+\begin{lstlisting}[language=bash]
+pip install numpy pandas
+\end{lstlisting}
+    \item Installierte Pakete anzeigen:
+\begin{lstlisting}[language=bash]
+pip list
+\end{lstlisting}
+    \item Abhängigkeiten exportieren:
+\begin{lstlisting}[language=bash]
+pip freeze > requirements.txt
+\end{lstlisting}
+    \item Abhängigkeiten installieren:
+\begin{lstlisting}[language=bash]
+pip install -r requirements.txt
+\end{lstlisting}
+  \end{itemize}
+\end{frame}
+
+\section{Praxis: Skript vs. Notebook}
+
+\begin{frame}[fragile]{Einfaches Skript: \texttt{hello.py}}
+\begin{lstlisting}[language=Python]
+print("Hallo aus einem Skript!")
+x = 2 + 3 * 4
+print("Ergebnis:", x)
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}{Notebook: gleiche Logik, andere Arbeitsweise}
+  \begin{itemize}
+    \item Im Notebook:
+      \begin{itemize}
+        \item Code in Zellen ausführen
+        \item Markdown für Dokumentation nutzen
+        \item Output direkt unter der Zelle
+      \end{itemize}
+    \item Wichtig:
+      \begin{itemize}
+        \item Notebooks können ``State'' behalten
+        \item Zellen sollten sinnvoll und reproduzierbar ausgeführt werden
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\section{Aufgaben (Unit 1)}
+
+\begin{frame}{Aufgabe 1: Setup \& Dokumentation}
+  \begin{itemize}
+    \item Python-Version prüfen und dokumentieren.
+    \item Virtuelle Umgebung erstellen und aktivieren.
+    \item \texttt{numpy} installieren.
+    \item Schritte in \texttt{environment\_setup.md} dokumentieren.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Aufgabe 2: Skript vs. Notebook}
+  \begin{itemize}
+    \item Erstelle \texttt{hello.py} und \texttt{hello.ipynb} mit:
+      \begin{itemize}
+        \item Ausgabe einer Begrüßung
+        \item Einer einfachen Berechnung
+      \end{itemize}
+    \item Führe beide aus und vergleiche den Ablauf.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Aufgabe 3: Kurzreflexion}
+  \begin{itemize}
+    \item Beantworte kurz:
+      \begin{enumerate}
+        \item Was macht der Python Interpreter?
+        \item Wann ist ein Notebook sinnvoller als ein Skript?
+        \item Warum sind virtuelle Umgebungen nützlich?
+      \end{enumerate}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[standout]
+  \huge Fragen?
+\end{frame}
+
+\end{document}
