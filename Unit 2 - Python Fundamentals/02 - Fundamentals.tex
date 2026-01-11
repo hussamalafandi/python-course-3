@@ -1,0 +1,410 @@
+\documentclass[aspectratio=169]{beamer}
+\usetheme{metropolis}
+
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{xcolor}
+
+% Define custom colors
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.96,0.96,0.96}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{blue},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\small,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2
+}
+
+\lstset{style=mystyle}
+
+\title{Python 3 - Grundlagen und Ökosystem}
+\subtitle{Unit 2: Python Fundamentals -- Syntax, Variablen \& Datentypen}
+\author{Hussam Alafandi}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+% =========================================================
+% Unit Overview
+% =========================================================
+\section{Unit 2: Überblick}
+
+\begin{frame}{Ziele der Unit}
+  \begin{itemize}
+    \item Python-Syntax und Einrückung (Indentation) verstehen.
+    \item Variablen korrekt definieren und benennen.
+    \item Grundlegende Datentypen sicher verwenden: \texttt{int}, \texttt{float}, \texttt{str}, \texttt{bool}.
+    \item Typumwandlungen (Type Conversion) bewusst einsetzen.
+    \item Operatoren anwenden: arithmetisch, Vergleich, logisch.
+    \item Einfache Ein-/Ausgabe mit \texttt{input()} und \texttt{print()}.
+    \item Häufige Anfängerfehler erkennen und Debugging-Basics nutzen.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Agenda}
+  \begin{enumerate}
+    \item Python-Syntax \& Indentation
+    \item Variablen \& Namenskonventionen
+    \item Datentypen in Python
+    \item Typumwandlung
+    \item Operatoren
+    \item Ein-/Ausgabe (I/O)
+    \item Debugging-Basics \& typische Fehler
+    \item Praxisaufgaben
+  \end{enumerate}
+\end{frame}
+
+% =========================================================
+% Syntax & Indentation
+% =========================================================
+\section{Syntax \& Indentation}
+
+\begin{frame}{Python-Syntax: Was ist besonders?}
+  \begin{itemize}
+    \item Python nutzt \textbf{Einrückung} statt geschweifter Klammern.
+    \item Lesbarkeit ist ein Designziel der Sprache.
+    \item Eine Zeile ist eine Anweisung (Statement).
+    \item Kommentare beginnen mit \texttt{\#}.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Indentation: Beispiel (korrekt)}
+\begin{lstlisting}[language=Python]
+x = 10
+
+if x > 5:
+    print("x ist größer als 5")
+    print("Diese Zeile gehört noch zum if-Block")
+
+print("Diese Zeile ist außerhalb des if-Blocks")
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Indentation: Beispiel (Fehler)}
+\begin{lstlisting}[language=Python]
+x = 10
+
+if x > 5:
+print("x ist größer als 5")  # IndentationError
+\end{lstlisting}
+  \begin{itemize}
+    \item Python erwartet nach \texttt{:} einen eingerückten Block.
+    \item Typischer Fehler: \texttt{IndentationError}.
+  \end{itemize}
+\end{frame}
+
+% =========================================================
+% Variables & Naming
+% =========================================================
+\section{Variablen \& Namenskonventionen}
+
+\begin{frame}{Variablen: Grundidee}
+  \begin{itemize}
+    \item Eine Variable ist ein Name, der auf einen Wert verweist.
+    \item In Python hat der \textbf{Wert} einen Typ, nicht die Variable.
+    \item Variablen können neu zugewiesen werden.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Variablen: Beispiele}
+\begin{lstlisting}[language=Python]
+name = "Hussam"
+age = 30
+pi = 3.14159
+is_admin = False
+
+age = age + 1  # Re-Assignment
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}{Namenskonventionen (Best Practices)}
+  \begin{itemize}
+    \item Verwende sprechende Namen: \texttt{total\_price} statt \texttt{tp}.
+    \item \textbf{snake\_case} für Variablen und Funktionen: \texttt{user\_age}.
+    \item Keine reservierten Keywords: \texttt{if}, \texttt{for}, \texttt{class}, \dots
+    \item Konstanten (Konvention): \texttt{MAX\_RETRIES = 3}
+  \end{itemize}
+\end{frame}
+
+% =========================================================
+% Data Types
+% =========================================================
+\section{Datentypen}
+
+\begin{frame}{Built-in Datentypen (Überblick)}
+  \begin{itemize}
+    \item \texttt{int} -- Ganze Zahlen
+    \item \texttt{float} -- Kommazahlen
+    \item \texttt{str} -- Text (Strings)
+    \item \texttt{bool} -- Wahr/Falsch
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Typen prüfen mit \texttt{type()}}
+\begin{lstlisting}[language=Python]
+x = 42
+y = 3.14
+z = "Python"
+b = True
+
+print(type(x))  # <class 'int'>
+print(type(y))  # <class 'float'>
+print(type(z))  # <class 'str'>
+print(type(b))  # <class 'bool'>
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Strings: Grundlagen}
+\begin{lstlisting}[language=Python]
+first_name = "Ada"
+last_name = "Lovelace"
+
+full_name = first_name + " " + last_name
+print(full_name)
+
+print(len(full_name))  # Länge des Strings
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Booleans: Vergleich erzeugt True/False}
+\begin{lstlisting}[language=Python]
+x = 10
+print(x > 5)   # True
+print(x == 5)  # False
+\end{lstlisting}
+\end{frame}
+
+% =========================================================
+% Type Conversion
+% =========================================================
+\section{Typumwandlung (Type Conversion)}
+
+\begin{frame}{Warum Typumwandlung?}
+  \begin{itemize}
+    \item \texttt{input()} liefert immer einen \texttt{str}.
+    \item Für Berechnungen brauchen wir meist \texttt{int} oder \texttt{float}.
+    \item Explizite Umwandlung macht Code verständlicher und sicherer.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Typumwandlung: Beispiele}
+\begin{lstlisting}[language=Python]
+age_str = "30"
+age_int = int(age_str)
+
+pi_str = "3.14"
+pi_float = float(pi_str)
+
+print(age_int + 1)     # 31
+print(pi_float * 2)    # 6.28
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Typischer Fehler: String + Zahl}
+\begin{lstlisting}[language=Python]
+age = input("Alter: ")
+print(age + 1)  # TypeError
+\end{lstlisting}
+  \begin{itemize}
+    \item \texttt{age} ist ein \texttt{str} -- Addition mit \texttt{int} ist nicht erlaubt.
+    \item Lösung: \texttt{int(age)} oder \texttt{float(age)}
+  \end{itemize}
+\end{frame}
+
+% =========================================================
+% Operators
+% =========================================================
+\section{Operatoren}
+
+\begin{frame}{Arithmetische Operatoren}
+  \begin{itemize}
+    \item \texttt{+} Addition, \texttt{-} Subtraktion, \texttt{*} Multiplikation
+    \item \texttt{/} Division (liefert \texttt{float})
+    \item \texttt{//} Ganzzahl-Division
+    \item \texttt{\%} Modulo (Rest)
+    \item \texttt{**} Potenz
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Arithmetik: Beispiele}
+\begin{lstlisting}[language=Python]
+print(10 / 4)    # 2.5
+print(10 // 4)   # 2
+print(10 % 4)    # 2
+print(2 ** 3)    # 8
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}{Vergleichsoperatoren}
+  \begin{itemize}
+    \item \texttt{==} gleich, \texttt{!=} ungleich
+    \item \texttt{<, <=, >, >=}
+    \item Ergebnis ist immer \texttt{bool}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Logische Operatoren}
+  \begin{itemize}
+    \item \texttt{and} -- beide Bedingungen müssen wahr sein
+    \item \texttt{or} -- mindestens eine Bedingung wahr
+    \item \texttt{not} -- negiert eine Bedingung
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Logik: Beispiele}
+\begin{lstlisting}[language=Python]
+age = 20
+has_ticket = True
+
+can_enter = (age >= 18) and has_ticket
+print(can_enter)  # True
+\end{lstlisting}
+\end{frame}
+
+% =========================================================
+% Input / Output
+% =========================================================
+\section{Ein- und Ausgabe (I/O)}
+
+\begin{frame}{\texttt{print()} und \texttt{input()}}
+  \begin{itemize}
+    \item \texttt{print()} gibt Werte aus.
+    \item \texttt{input()} liest Text von der Konsole (immer \texttt{str}).
+    \item Wir nutzen beides für kleine interaktive Programme.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{I/O: Interaktives Beispiel}
+\begin{lstlisting}[language=Python]
+name = input("Wie heißt du? ")
+print("Hallo", name)
+
+age = int(input("Wie alt bist du? "))
+print("Nächstes Jahr bist du", age + 1)
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{String-Formatierung (f-strings)}
+\begin{lstlisting}[language=Python]
+name = "Ada"
+age = 36
+print(f"{name} ist {age} Jahre alt.")
+\end{lstlisting}
+\end{frame}
+
+% =========================================================
+% Debugging basics
+% =========================================================
+\section{Debugging \& typische Fehler}
+
+\begin{frame}{Häufige Anfängerfehler}
+  \begin{itemize}
+    \item \texttt{SyntaxError}: Syntax falsch (z.\,B. Klammern, \texttt{:})
+    \item \texttt{IndentationError}: Einrückung falsch
+    \item \texttt{NameError}: Variable nicht definiert
+    \item \texttt{TypeError}: falsche Typkombination (z.\,B. \texttt{"3" + 1})
+    \item \texttt{ValueError}: Umwandlung nicht möglich (z.\,B. \texttt{int("abc")})
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Fehler lesen: Beispiel}
+\begin{lstlisting}[language=Python]
+age = int(input("Alter: "))
+print("In 10 Jahren:", age + 10)
+\end{lstlisting}
+  \begin{itemize}
+    \item Wenn der Nutzer \texttt{abc} eingibt $\rightarrow$ \texttt{ValueError}
+    \item Debugging-Basics:
+      \begin{itemize}
+        \item Traceback von unten nach oben lesen
+        \item Zeilennummer finden
+        \item Annahmen prüfen (Typen, Werte)
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Debugging-Basics: Kontrollausgaben}
+\begin{lstlisting}[language=Python]
+x = input("Gib eine Zahl ein: ")
+print("DEBUG:", x, type(x))
+
+n = int(x)
+print("DEBUG:", n, type(n))
+\end{lstlisting}
+\end{frame}
+
+% =========================================================
+% Practice / Exercises
+% =========================================================
+\section{Praxis \& Aufgaben}
+
+\begin{frame}{Praxis 1: Mini-Rechner}
+  \begin{itemize}
+    \item Schreibe ein Programm, das zwei Zahlen einliest.
+    \item Berechne und drucke:
+      \begin{itemize}
+        \item Summe, Differenz, Produkt, Division
+      \end{itemize}
+    \item Bonus:
+      \begin{itemize}
+        \item Ganzzahl-Division und Modulo
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Praxis 2: String-Manipulation}
+  \begin{itemize}
+    \item Lies einen Namen ein und gib Folgendes aus:
+      \begin{itemize}
+        \item Name in Großbuchstaben
+        \item Länge des Namens
+        \item Initialen (Vorname/ Nachname, falls vorhanden)
+      \end{itemize}
+    \item Hinweis: Wir nutzen heute nur String-Methoden und \texttt{len()}.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Praxis 3: Einfache Input-Validierung}
+  \begin{itemize}
+    \item Lies das Alter ein.
+    \item Wenn die Umwandlung fehlschlägt:
+      \begin{itemize}
+        \item Gib eine sinnvolle Fehlermeldung aus
+      \end{itemize}
+    \item Fokus: \textbf{ValueError verstehen} (Exception Handling folgt später ausführlich).
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Optional: Validierung mit \texttt{try/except}}
+\begin{lstlisting}[language=Python]
+age_str = input("Alter: ")
+
+try:
+    age = int(age_str)
+    print(f"Du bist {age} Jahre alt.")
+except ValueError:
+    print("Bitte gib eine ganze Zahl ein.")
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[standout]
+  \huge Fragen?
+\end{frame}
+
+\end{document}
