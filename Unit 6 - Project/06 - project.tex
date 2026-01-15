@@ -167,7 +167,7 @@ ledger = [transaction1, transaction2, ...]
 % =========================================================
 \section{Architektur \& Module}
 
-\begin{frame}{Empfohlene Projektstruktur}
+\begin{frame}[fragile]{Empfohlene Projektstruktur}
 \begin{lstlisting}[language=bash]
 expense_tracker/
   main.py
@@ -220,16 +220,15 @@ def read_float(prompt, *, min_value=None):
 \end{frame}
 
 \begin{frame}[fragile]{Beispiel: Logik-Funktion (kein print)}
+  \begin{itemize}
+    \item Logik-Funktionen sollen möglichst \textbf{deterministisch} und \textbf{side-effect-arm} sein.
+  \end{itemize}
 \begin{lstlisting}[language=Python]
 def add_transaction(ledger, tx):
     # tx ist ein dict mit keys: date,type,category,amount,note
     ledger.append(tx)
     return ledger
 \end{lstlisting}
-
-  \begin{itemize}
-    \item Logik-Funktionen sollen möglichst \textbf{deterministisch} und \textbf{side-effect-arm} sein.
-  \end{itemize}
 \end{frame}
 
 % =========================================================
@@ -286,7 +285,7 @@ def add_transaction(ledger, tx):
 % =========================================================
 \section{Persistenz (CSV/JSON)}
 
-\begin{frame}{CSV-Format (empfohlen für späteres Pandas)}
+\begin{frame}[fragile]{CSV-Format (empfohlen für späteres Pandas)}
   \begin{itemize}
     \item Spalten: \texttt{date,type,category,amount,note}
     \item Vorteil: später direkt \texttt{pd.read\_csv(...)} in Unit 11.
