@@ -1,149 +1,189 @@
-\documentclass[aspectratio=169]{beamer}
-\usetheme{metropolis}
+\documentclass[11pt,a4paper]{article}
 
-\usepackage{graphicx}
-\usepackage{listings}
+% =========================
+% Packages
+% =========================
+\usepackage[a4paper,margin=2.3cm,headheight=14pt]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc} % remove if using lualatex/xelatex
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{parskip}        % nicer paragraph spacing
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{tabularx}
 \usepackage{xcolor}
-\usepackage{adjustbox}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{listings}
+\usepackage{graphicx}
 
-% --- TikZ (Flowcharts) ---
-\usepackage{tikz}
-\usetikzlibrary{shapes.geometric, arrows.meta, positioning}
-
-% Define custom colors for listings
-\definecolor{codegreen}{rgb}{0,0.6,0}
+% =========================
+% Styling
+% =========================
+\definecolor{accent}{HTML}{0B3D91}
+\definecolor{muted}{HTML}{6B7280}
+\definecolor{backcolour}{HTML}{F6F7F9}
+\definecolor{codegreen}{rgb}{0,0.55,0}
 \definecolor{codegray}{rgb}{0.5,0.5,0.5}
 \definecolor{codepurple}{rgb}{0.58,0,0.82}
-\definecolor{backcolour}{rgb}{0.96,0.96,0.96}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=accent,
+  urlcolor=accent,
+  citecolor=accent
+}
+
+\titleformat{\section}{\large\bfseries\color{accent}}{}{0pt}{}
+\titleformat{\subsection}{\normalsize\bfseries\color{accent}}{}{0pt}{}
+\titleformat{\subsubsection}{\normalsize\bfseries}{}{0pt}{}
+
+\setlist[itemize]{leftmargin=*, itemsep=2pt, topsep=4pt}
+\setlist[enumerate]{leftmargin=*, itemsep=2pt, topsep=4pt}
 
 \lstdefinestyle{mystyle}{
-    backgroundcolor=\color{backcolour},
-    commentstyle=\color{codegreen},
-    keywordstyle=\color{blue},
-    numberstyle=\tiny\color{codegray},
-    stringstyle=\color{codepurple},
-    basicstyle=\ttfamily\small,
-    breakatwhitespace=false,
-    breaklines=true,
-    captionpos=b,
-    numbers=left,
-    numbersep=5pt,
-    showspaces=false,
-    showstringspaces=false,
-    showtabs=false,
-    tabsize=2
+  backgroundcolor=\color{backcolour},
+  commentstyle=\color{codegreen},
+  keywordstyle=\color{accent},
+  numberstyle=\tiny\color{codegray},
+  stringstyle=\color{codepurple},
+  basicstyle=\ttfamily\small,
+  breaklines=true,
+  numbers=left,
+  numbersep=6pt,
+  showstringspaces=false,
+  tabsize=2,
+  frame=single,
+  rulecolor=\color{black!10}
 }
 \lstset{style=mystyle}
 
-% --- TikZ styles for flowcharts ---
-\tikzstyle{startstop} = [ellipse, draw, minimum width=2.6cm, minimum height=0.85cm, align=center]
-\tikzstyle{process}   = [rectangle, draw, minimum width=3.6cm, minimum height=0.85cm, align=center]
-\tikzstyle{decision}  = [diamond, draw, aspect=2.2, inner sep=1pt, align=center]
-\tikzstyle{arrow}     = [-{Stealth[length=2.2mm]}, thick]
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\textbf{Unit 6 --- Mini Project I}}
+\rhead{\textcolor{muted}{Expense Tracker \& Reporting (CLI)}}
+\cfoot{\thepage}
 
-% Auto-fit TikZ diagrams to the available frame area (keeps aspect ratio)
-\newenvironment{FitTikZ}[1][]%
-{%
-  \begin{adjustbox}{max totalsize={\textwidth}{0.78\textheight},center}%
-  \begin{tikzpicture}[#1]%
-}%
-{%
-  \end{tikzpicture}%
-  \end{adjustbox}%
-}
-
-\title{Python 3 - Grundlagen und Ökosystem}
-\subtitle{Unit 6: Mini Project I -- Expense Tracker \& Reporting (CLI)}
-\author{Hussam Alafandi}
-\date{\today}
+% =========================
+% Document Meta
+% =========================
+\newcommand{\courseTitle}{Python Programming \& Data Analysis}
+\newcommand{\unitTitle}{Unit 6 --- Mini Project I: Programming Foundations}
+\newcommand{\projectTitle}{Expense Tracker \& Reporting (CLI)}
+\newcommand{\instructorName}{Hussam Alafandi}
+\newcommand{\handoverDate}{\today}
 
 \begin{document}
 
-\maketitle
+% =========================
+% Header block
+% =========================
+{\Large \textbf{\courseTitle}}\\[-2pt]
+{\large \textbf{\unitTitle}}\\[4pt]
+{\normalsize \textcolor{muted}{Project Handout --- \projectTitle}}\\[10pt]
 
-% =========================================================
-% Overview
-% =========================================================
-\section{Unit 6: Überblick}
+\begin{tabularx}{\textwidth}{@{}lX@{}}
+% \textbf{Instructor:} & \instructorName \\
+\textbf{Date:} & \handoverDate \\
+\textbf{Estimated workload:} & 6--10 hours (depending on optional extensions) \\
+\textbf{Allowed libraries:} & Python \textbf{Standard Library only} (no external packages) \\
+\end{tabularx}
 
-\begin{frame}{Ziel der Unit}
-  \begin{itemize}
-    \item Konsolidierung der Grundlagen aus Units 1--5 in einem realistischen Mini-Projekt.
-    \item Fokus: \textbf{saubere Struktur}, \textbf{logischer Flow}, \textbf{Lesbarkeit}, \textbf{Korrektheit}.
-    \item Ergebnis: Ein kleines CLI-Tool, das später leicht in OOP und Data Analysis erweitert werden kann.
-  \end{itemize}
-\end{frame}
+\vspace{10pt}
+\hrule
+\vspace{12pt}
 
-\begin{frame}{Warum ein Expense Tracker?}
-  \begin{itemize}
-    \item Nutzt alle bisherigen Themen:
-      \begin{itemize}
-        \item Variablen/Typen, I/O, Debugging
-        \item Kontrollfluss, Schleifen, Validierung
-        \item Datenstrukturen: List/Dict/Set
-        \item Funktionen, Module, Imports (Multi-File)
-      \end{itemize}
-    \item Bereitet sehr gut vor auf:
-      \begin{itemize}
-        \item Unit 7--8 (OOP-Refactor: Transaction/Ledger/Report)
-        \item Unit 10--12 (CSV $\rightarrow$ Pandas $\rightarrow$ Visualisierung)
-      \end{itemize}
-  \end{itemize}
-\end{frame}
+% =========================
+% 1. Overview
+% =========================
+\section{Project Overview}
 
-\begin{frame}{Agenda}
-  \begin{enumerate}
-    \item Projektbrief (Scope \& Anforderungen)
-    \item Datenmodell (ohne externe Libraries)
-    \item Architektur \& Modulstruktur (Multi-File)
-    \item Flowchart: Programmlogik
-    \item Milestones (MVP $\rightarrow$ Erweiterungen)
-    \item Abgabe \& Bewertungskriterien
-  \end{enumerate}
-\end{frame}
+In this mini project, you will build a \textbf{command-line (CLI) expense tracker} that allows users to record income and expenses, view and filter entries, generate basic summary reports, and persist data to disk (\texttt{CSV} or \texttt{JSON}).
 
-% =========================================================
-% Project Brief
-% =========================================================
-\section{Projektbrief}
+\textbf{Primary goal:} consolidate the foundational skills from Units 1--5:
+\begin{itemize}
+  \item Tooling + running scripts (Unit 1)
+  \item Types, conversion, I/O, debugging (Unit 2)
+  \item Control flow, loops, validation, menu programs (Unit 3)
+  \item Data structures + aggregation without Pandas (Unit 4)
+  \item Functions, modularity, imports, multi-file programs (Unit 5)
+\end{itemize}
 
-\begin{frame}{Projekt: Expense Tracker (CLI)}
-  \textbf{Beschreibung:}\\
-  Ein textbasiertes Programm zur Erfassung von Einnahmen/Ausgaben inkl. Reporting.\\[6pt]
-  \textbf{Kernfeatures (MVP):}
-  \begin{itemize}
-    \item Transaktionen hinzufügen (Income/Expense)
-    \item Transaktionen anzeigen (optional: Filter)
-    \item Summary Report (Totals, Balance, pro Kategorie)
-    \item Speichern/Laden (CSV oder JSON)
-    \item Input-Validierung (robust, keine Crashes)
-  \end{itemize}
-\end{frame}
+\textbf{Forward compatibility:} this project is intentionally designed to be refactored later into:
+\begin{itemize}
+  \item \textbf{OOP} (Units 7--8): \texttt{Transaction}, \texttt{Ledger}, \texttt{Report}
+  \item \textbf{Algorithms} (Unit 9): sorting, searching
+  \item \textbf{Pandas/Viz} (Units 11--12): load CSV, groupby, charts
+\end{itemize}
 
-\begin{frame}{Nicht-Ziele (bewusst weggelassen)}
-  \begin{itemize}
-    \item Keine GUI, keine Web-App
-    \item Keine Datenbank (nur CSV/JSON)
-    \item Keine externen Libraries (nur Standard Library)
-    \item Kein perfektes Datums-Parsing (nur einfache Formatprüfung)
-  \end{itemize}
-\end{frame}
+% =========================
+% 2. Learning objectives
+% =========================
+\section{Learning Objectives}
 
-% =========================================================
-% Data Model
-% =========================================================
-\section{Datenmodell}
+By completing this project, you will demonstrate that you can:
+\begin{itemize}
+  \item Design a program with a clear logical flow and robust user input handling
+  \item Use lists, dictionaries, and sets to represent and aggregate structured data
+  \item Decompose a program into reusable functions and modules
+  \item Read/write structured data using the standard library (\texttt{csv} or \texttt{json})
+  \item Produce readable and maintainable code (naming, structure, separation of concerns)
+\end{itemize}
 
-\begin{frame}[fragile]{Datenmodell: Transaction als Dictionary}
-  \begin{itemize}
-    \item Eine Transaktion wird als Dictionary gespeichert.
-    \item Ein Ledger ist eine Liste von Transaktionen.
-  \end{itemize}
+% =========================
+% 3. Functional requirements
+% =========================
+\section{Functional Requirements (MVP)}
+
+Your program must implement the following features:
+
+\subsection{1) Add transaction}
+The user can add a transaction with:
+\begin{itemize}
+  \item \textbf{date} (string, recommended format: \texttt{YYYY-MM-DD})
+  \item \textbf{type} (\texttt{income} or \texttt{expense})
+  \item \textbf{category} (e.g., \texttt{food}, \texttt{rent}, \texttt{salary})
+  \item \textbf{amount} (positive float)
+  \item \textbf{note} (optional short text)
+\end{itemize}
+You must validate user input (no crashes on invalid input).
+
+\subsection{2) List transactions}
+The user can list all transactions. Minimum output: one line per transaction.
+
+\textbf{Optional filters (recommended):} by category and/or type.
+
+\subsection{3) Summary report}
+Provide at least:
+\begin{itemize}
+  \item total income
+  \item total expenses
+  \item balance (= income - expenses)
+  \item expense totals per category
+\end{itemize}
+
+\subsection{4) Persist data}
+Your program must support \textbf{save and load} using either:
+\begin{itemize}
+  \item \textbf{CSV} (recommended; best for later Pandas units), or
+  \item \textbf{JSON}
+\end{itemize}
+
+\textbf{Requirement:} when starting, attempt to load existing data; when quitting, save the current ledger.
+
+% =========================
+% 4. Data model
+% =========================
+\section{Data Model (No external libraries)}
+
+Represent a transaction as a dictionary and store transactions in a list:
 
 \begin{lstlisting}[language=Python]
 transaction = {
   "date": "2026-01-15",
-  "type": "expense",          # "income" oder "expense"
+  "type": "expense",     # "income" or "expense"
   "category": "food",
   "amount": 12.50,
   "note": "lunch"
@@ -151,23 +191,21 @@ transaction = {
 
 ledger = [transaction1, transaction2, ...]
 \end{lstlisting}
-\end{frame}
 
-\begin{frame}{Warum dieses Datenmodell?}
-  \begin{itemize}
-    \item \textbf{List} = Reihenfolge + einfache Iteration (Reports, Filter).
-    \item \textbf{Dict} = strukturiertes Objekt mit klaren Keys.
-    \item \textbf{Set} = Hilfsstruktur (z.\,B. Kategorien ohne Duplikate).
-    \item Später leicht umzustellen auf OOP (Transaction/Ledger Klassen).
-  \end{itemize}
-\end{frame}
+\textbf{Notes:}
+\begin{itemize}
+  \item Keep \texttt{amount} as a numeric type (\texttt{float}) in memory.
+  \item Use a \texttt{set} where useful (e.g., extracting unique categories).
+\end{itemize}
 
-% =========================================================
-% Architecture / Modules
-% =========================================================
-\section{Architektur \& Module}
+% =========================
+% 5. Recommended structure
+% =========================
+\section{Code Organization (Required)}
 
-\begin{frame}[fragile]{Empfohlene Projektstruktur}
+This unit evaluates structure and modularity. Use a multi-file layout.
+
+\subsection{Recommended folder structure}
 \begin{lstlisting}[language=bash]
 expense_tracker/
   main.py
@@ -178,127 +216,43 @@ expense_tracker/
   data/
     ledger.csv
 \end{lstlisting}
-  \begin{itemize}
-    \item \texttt{main.py}: Menu Loop / Program Entry
-    \item \texttt{utils.py}: Input-Helper (read\_float, read\_choice, read\_date)
-    \item \texttt{logic.py}: CRUD-Operationen auf Ledger
-    \item \texttt{reports.py}: Aggregation/Reporting
-    \item \texttt{storage.py}: Load/Save (CSV/JSON)
-  \end{itemize}
-\end{frame}
 
-\begin{frame}{Designregel: I/O vs. Logik trennen}
-  \begin{itemize}
-    \item \textbf{I/O (input/print)} gehört in \texttt{main.py} und \texttt{utils.py}.
-    \item \textbf{Logik} (berechnen/filtern/aggregieren) als Funktionen, die Werte \textbf{zurückgeben}.
-    \item Vorteil:
-      \begin{itemize}
-        \item einfacher zu testen (Unit 14)
-        \item leichter zu refactoren (OOP)
-        \item weniger ``Spaghetti-Code''
-      \end{itemize}
-  \end{itemize}
-\end{frame}
+\subsection{Module responsibilities (guideline)}
+\begin{tabularx}{\textwidth}{@{}lX@{}}
+\toprule
+\textbf{File} & \textbf{Responsibility} \\
+\midrule
+\texttt{main.py} & Menu loop, orchestration, user interaction \\
+\texttt{utils.py} & Input helpers (validation), formatting helpers \\
+\texttt{logic.py} & Add/filter/update operations on the ledger \\
+\texttt{reports.py} & Aggregations: totals, per-category summaries \\
+\texttt{storage.py} & Load/save ledger via CSV or JSON \\
+\bottomrule
+\end{tabularx}
 
-\begin{frame}[fragile]{Beispiel: Utility-Funktion (Input-Validierung)}
-\begin{lstlisting}[language=Python]
-def read_float(prompt, *, min_value=None):
-    while True:
-        text = input(prompt).strip()
-        try:
-            x = float(text)
-        except ValueError:
-            print("Bitte eine Zahl eingeben.")
-            continue
+\subsection{Separation of concerns (important)}
+\begin{itemize}
+  \item Keep business logic \textbf{separate} from printing/input where possible.
+  \item Prefer functions that \textbf{return values} instead of printing inside them.
+\end{itemize}
 
-        if min_value is not None and x < min_value:
-            print(f"Wert muss >= {min_value} sein.")
-            continue
+% =========================
+% 6. Persistence format
+% =========================
+\section{Persistence Format}
 
-        return x
-\end{lstlisting}
-\end{frame}
+\subsection{CSV (recommended)}
+Use columns:
+\texttt{date,type,category,amount,note}
 
-\begin{frame}[fragile]{Beispiel: Logik-Funktion (kein print)}
-  \begin{itemize}
-    \item Logik-Funktionen sollen möglichst \textbf{deterministisch} und \textbf{side-effect-arm} sein.
-  \end{itemize}
-\begin{lstlisting}[language=Python]
-def add_transaction(ledger, tx):
-    # tx ist ein dict mit keys: date,type,category,amount,note
-    ledger.append(tx)
-    return ledger
-\end{lstlisting}
-\end{frame}
-
-% =========================================================
-% Flowchart: Menu Loop
-% =========================================================
-\section{Flowchart: Programmlogik}
-
-\begin{frame}{Flowchart: Menü-gesteuerter Ablauf (High Level)}
-  \centering
-  \begin{FitTikZ}[node distance=0.95cm]
-    \node (start) [startstop] {Start};
-    \node (load)  [process, below=of start] {Lade Ledger (CSV/JSON)};
-    \node (menu)  [process, below=of load] {Zeige Menü};
-    \node (choice)[decision, below=of menu, yshift=-0.2cm] {Option?};
-
-    \node (add)   [process, right=2.9cm of choice] {Add Transaction};
-    \node (list)  [process, left=2.9cm of choice] {List / Filter};
-    \node (rep)   [process, below=of choice, yshift=-0.2cm] {Report (Summary)};
-    \node (save)  [process, below=of rep] {Save Ledger};
-    \node (quit)  [startstop, below=of save] {Ende};
-
-    \draw [arrow] (start) -- (load);
-    \draw [arrow] (load) -- (menu);
-    \draw [arrow] (menu) -- (choice);
-
-    \draw [arrow] (choice) -- node[above]{1} (add);
-    \draw [arrow] (add.east) -- ++(0.7,0) |- (menu.east);
-
-    \draw [arrow] (choice) -- node[above]{2} (list);
-    \draw [arrow] (list.west) -- ++(-0.7,0) |- (menu.west);
-
-    \draw [arrow] (choice) -- node[left]{3} (rep);
-    \draw [arrow] (rep) -- (save);
-
-    \draw [arrow] (save) -- node[left]{4} (quit);
-
-    % "Invalid" loop
-    \draw [arrow] (choice.south east) -- ++(1.2,-0.8) node[right]{invalid} |- (menu.east);
-  \end{FitTikZ}
-\end{frame}
-
-\begin{frame}{Mapping: Flowchart $\rightarrow$ Python-Konstrukte}
-  \begin{itemize}
-    \item Menü-Schleife: \texttt{while True:}
-    \item Auswahl: \texttt{if/elif/else}
-    \item Wiederholung bei invalid input: \texttt{continue}
-    \item Exit: \texttt{break}
-    \item Laden/Speichern: Standard Library (\texttt{csv} oder \texttt{json})
-  \end{itemize}
-\end{frame}
-
-% =========================================================
-% Persistence
-% =========================================================
-\section{Persistenz (CSV/JSON)}
-
-\begin{frame}[fragile]{CSV-Format (empfohlen für späteres Pandas)}
-  \begin{itemize}
-    \item Spalten: \texttt{date,type,category,amount,note}
-    \item Vorteil: später direkt \texttt{pd.read\_csv(...)} in Unit 11.
-  \end{itemize}
-
+Example:
 \begin{lstlisting}[language=bash]
 date,type,category,amount,note
 2026-01-15,expense,food,12.50,lunch
 2026-01-15,income,salary,2500.00,January
 \end{lstlisting}
-\end{frame}
 
-\begin{frame}[fragile]{Speichern mit \texttt{csv.DictWriter} (Skizze)}
+\subsection{Implementation sketch (CSV)}
 \begin{lstlisting}[language=Python]
 import csv
 
@@ -310,12 +264,6 @@ def save_csv(path, ledger):
         w.writeheader()
         for tx in ledger:
             w.writerow(tx)
-\end{lstlisting}
-\end{frame}
-
-\begin{frame}[fragile]{Laden mit \texttt{csv.DictReader} (Skizze)}
-\begin{lstlisting}[language=Python]
-import csv
 
 def load_csv(path):
     ledger = []
@@ -323,108 +271,112 @@ def load_csv(path):
         with open(path, newline="", encoding="utf-8") as f:
             r = csv.DictReader(f)
             for row in r:
-                row["amount"] = float(row["amount"])  # type conversion!
+                row["amount"] = float(row["amount"])
                 ledger.append(row)
     except FileNotFoundError:
-        pass  # Start with empty ledger
+        pass
     return ledger
 \end{lstlisting}
-\end{frame}
 
-% =========================================================
-% Milestones
-% =========================================================
+% =========================
+% 7. Milestones
+% =========================
 \section{Milestones}
 
-\begin{frame}{Milestone 1: MVP (In-Memory)}
-  \begin{itemize}
-    \item Menü + Ledger in Memory
-    \item Add Transaction (mit Validierung)
-    \item List Transactions
-    \item Mindestens 3 Testfälle (manuell)
-  \end{itemize}
-\end{frame}
+\begin{enumerate}
+  \item \textbf{Milestone 1 (MVP --- in memory)}: menu + add + list + validation
+  \item \textbf{Milestone 2 (Reporting)}: totals + balance + per-category expenses
+  \item \textbf{Milestone 3 (Persistence)}: load on start, save on exit
+  \item \textbf{Milestone 4 (Optional extensions)}:
+    \begin{itemize}
+      \item sort by date or amount
+      \item filter by type/category
+      \item search keyword in \texttt{note}
+      \item monthly report (group by \texttt{YYYY-MM})
+      \item export \texttt{report.txt}
+    \end{itemize}
+\end{enumerate}
 
-\begin{frame}{Milestone 2: Reporting}
-  \begin{itemize}
-    \item Summary:
-      \begin{itemize}
-        \item Total Income
-        \item Total Expenses
-        \item Balance
-        \item Spend by Category
-      \end{itemize}
-    \item Implementiere Aggregationen ohne Pandas:
-      \begin{itemize}
-        \item Dictionary-Akkumulatoren
-        \item Loop + if + \texttt{dict.get()}
-      \end{itemize}
-  \end{itemize}
-\end{frame}
+% =========================
+% 8. Quality checklist
+% =========================
+\section{Quality Checklist (What we look for)}
 
-\begin{frame}{Milestone 3: Persistenz}
-  \begin{itemize}
-    \item Save/Load (CSV oder JSON)
-    \item Programmstart lädt vorhandene Daten
-    \item Programmende speichert den aktuellen Stand
-    \item Keine Datenverluste, robuste Fehlerbehandlung
-  \end{itemize}
-\end{frame}
+Before submission, verify:
+\begin{itemize}
+  \item Program does not crash on invalid input (robust validation)
+  \item Data loads/saves correctly (no loss, correct amount conversion)
+  \item Code is structured into functions and modules (no giant \texttt{main})
+  \item Names are meaningful; repetition is minimized
+  \item Output is readable (consistent formatting)
+\end{itemize}
 
-\begin{frame}{Milestone 4 (Optional): Erweiterungen}
-  \begin{itemize}
-    \item Sortierung nach Datum oder Betrag
-    \item Filter:
-      \begin{itemize}
-        \item nach Kategorie
-        \item nach Typ (income/expense)
-        \item nach Textsuche im Note
-      \end{itemize}
-    \item Monatsreport (grouping nach \texttt{YYYY-MM})
-    \item Export: ``Report.txt'' (einfacher Textreport)
-  \end{itemize}
-\end{frame}
+% =========================
+% 9. Submission
+% =========================
+\section{Submission Instructions}
 
-% =========================================================
-% Deliverables & Rubric
-% =========================================================
-\section{Abgabe \& Bewertung}
+Submit a single folder (zip) containing:
+\begin{itemize}
+  \item All \texttt{.py} files
+  \item \texttt{data/ledger.csv} or \texttt{data/ledger.json} (with sample entries)
+  \item A short \texttt{README.md} including:
+    \begin{itemize}
+      \item setup instructions (venv/conda)
+      \item how to run the program
+      \item implemented features + optional extensions
+    \end{itemize}
+\end{itemize}
 
-\begin{frame}{Abgabe (Deliverables)}
-  \begin{itemize}
-    \item Projektordner inkl. \texttt{main.py} und Modulen
-    \item Datendatei (\texttt{data/ledger.csv} oder \texttt{data/ledger.json})
-    \item Kurze README:
-      \begin{itemize}
-        \item Setup (venv/conda + requirements)
-        \item Starten des Programms
-        \item Welche Features sind implementiert?
-      \end{itemize}
-    \item Optional: Demo-Screenshot oder Beispielausgabe
-  \end{itemize}
-\end{frame}
+\textbf{Run command (example):}
+\begin{lstlisting}[language=bash]
+python main.py
+\end{lstlisting}
 
-\begin{frame}{Bewertungskriterien (Rubrik)}
-  \begin{itemize}
-    \item \textbf{Correctness:} Ergebnisse stimmen, Daten werden korrekt gespeichert/geladen
-    \item \textbf{Robustness:} Input-Validierung, keine Crashes bei falscher Eingabe
-    \item \textbf{Structure:} Funktionen, Module, klare Verantwortlichkeiten
-    \item \textbf{Readability:} gute Namen, konsistenter Stil, sinnvolle Kommentare/Docstrings
-    \item \textbf{Data handling:} passende Nutzung von List/Dict/Set, saubere Aggregationen
-  \end{itemize}
-\end{frame}
+% =========================
+% 10. Rubric
+% =========================
+\section{Grading Rubric}
 
-\begin{frame}{Was wir später damit machen (Preview)}
-  \begin{itemize}
-    \item Unit 7--8: OOP-Refactor (Transaction, Ledger, Report als Klassen)
-    \item Unit 9: Suchen/Sortieren (Algorithmen) auf dem Ledger
-    \item Unit 11: CSV in Pandas laden und gruppieren
-    \item Unit 12: Spend-by-Category als Bar Chart, Balance als Line Chart
-  \end{itemize}
-\end{frame}
+\begin{tabularx}{\textwidth}{@{}lXc@{}}
+\toprule
+\textbf{Category} & \textbf{What this means} & \textbf{Points} \\
+\midrule
+Correctness & Calculations are correct; save/load works reliably & 0--4 \\
+Robustness & Handles invalid input gracefully; no crashes & 0--4 \\
+Structure & Clear decomposition; responsibilities separated across modules & 0--4 \\
+Readability & Good naming, consistent style, helpful comments/docstrings & 0--4 \\
+Data handling & Appropriate use of list/dict/set; clean aggregations & 0--4 \\
+\midrule
+\textbf{Total} &  & \textbf{0--20} \\
+\bottomrule
+\end{tabularx}
 
-\begin{frame}[standout]
-  \huge Fragen?
-\end{frame}
+\vspace{6pt}
+\textbf{Optional extensions} may improve your score within categories but do not replace missing MVP requirements.
+
+% =========================
+% 11. Appendix: Suggested menu
+% =========================
+\section{Appendix: Suggested Menu (CLI)}
+
+You may implement any reasonable menu, but the following works well:
+
+\begin{lstlisting}[language={}]
+1) Add transaction
+2) List transactions
+3) Summary report
+4) Save and quit
+\end{lstlisting}
+
+\textbf{Guideline:} invalid choices should show a short message and return to the menu.
+
+% =========================
+% Footer note
+% =========================
+\vspace{10pt}
+\hrule
+\vspace{8pt}
+\textcolor{muted}{\small Tip: Keep your core logic in functions that return values. This will make Unit 14 (Testing) much easier.}
 
 \end{document}
