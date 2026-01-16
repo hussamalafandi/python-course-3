@@ -40,8 +40,8 @@
 \titleformat{\subsection}{\normalsize\bfseries\color{accent}}{}{0pt}{}
 \titleformat{\subsubsection}{\normalsize\bfseries}{}{0pt}{}
 
-\setlist[itemize]{leftmargin=*, itemsep=2pt, topsep=4pt}
-\setlist[enumerate]{leftmargin=*, itemsep=2pt, topsep=4pt}
+\setlist[itemize]{leftmargin=*, itemsep=0pt, topsep=2pt, parsep=0pt}
+\setlist[enumerate]{leftmargin=*, itemsep=0pt, topsep=2pt, parsep=0pt}
 
 \lstdefinestyle{mystyle}{
   backgroundcolor=\color{backcolour},
@@ -135,6 +135,7 @@ By completing this project, you will demonstrate that you can:
 % =========================
 % 3. Functional requirements
 % =========================
+\newpage
 \section{Functional Requirements (MVP)}
 
 Your program must implement the following features:
@@ -176,6 +177,7 @@ Your program must support \textbf{save and load} using either:
 % =========================
 % 4. Data model
 % =========================
+\enlargethispage{2\baselineskip}
 \section{Data Model (No external libraries)}
 
 Represent a transaction as a dictionary and store transactions in a list:
@@ -191,8 +193,10 @@ transaction = {
 
 ledger = [transaction1, transaction2, ...]
 \end{lstlisting}
+\nopagebreak[4]
 
 \textbf{Notes:}
+\nopagebreak[4]
 \begin{itemize}
   \item Keep \texttt{amount} as a numeric type (\texttt{float}) in memory.
   \item Use a \texttt{set} where useful (e.g., extracting unique categories).
@@ -239,6 +243,7 @@ expense_tracker/
 % =========================
 % 6. Persistence format
 % =========================
+\newpage
 \section{Persistence Format}
 
 \subsection{CSV (recommended)}
@@ -252,7 +257,7 @@ date,type,category,amount,note
 2026-01-15,income,salary,2500.00,January
 \end{lstlisting}
 
-\subsection{Implementation sketch (CSV)}
+\subsection{Implementation sketch --- optional}
 \begin{lstlisting}[language=Python]
 import csv
 
@@ -334,28 +339,6 @@ python main.py
 \end{lstlisting}
 
 % =========================
-% 10. Rubric
-% =========================
-\section{Grading Rubric}
-
-\begin{tabularx}{\textwidth}{@{}lXc@{}}
-\toprule
-\textbf{Category} & \textbf{What this means} & \textbf{Points} \\
-\midrule
-Correctness & Calculations are correct; save/load works reliably & 0--4 \\
-Robustness & Handles invalid input gracefully; no crashes & 0--4 \\
-Structure & Clear decomposition; responsibilities separated across modules & 0--4 \\
-Readability & Good naming, consistent style, helpful comments/docstrings & 0--4 \\
-Data handling & Appropriate use of list/dict/set; clean aggregations & 0--4 \\
-\midrule
-\textbf{Total} &  & \textbf{0--20} \\
-\bottomrule
-\end{tabularx}
-
-\vspace{6pt}
-\textbf{Optional extensions} may improve your score within categories but do not replace missing MVP requirements.
-
-% =========================
 % 11. Appendix: Suggested menu
 % =========================
 \section{Appendix: Suggested Menu (CLI)}
@@ -377,6 +360,6 @@ You may implement any reasonable menu, but the following works well:
 \vspace{10pt}
 \hrule
 \vspace{8pt}
-\textcolor{muted}{\small Tip: Keep your core logic in functions that return values. This will make Unit 14 (Testing) much easier.}
+\textcolor{muted}{\small Tip: Keep your core logic in functions that return values.}
 
 \end{document}
