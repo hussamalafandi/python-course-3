@@ -83,7 +83,7 @@
 \noindent\textbf{Instructions:}
 \begin{itemize}[noitemsep]
     \item Time allowed: \textbf{90 minutes}
-    \item Total points: \textbf{100 points}
+    \item Total points: \textbf{105 points}
     \item No aids (no notes, no electronic devices)
     \item Write legibly; illegible answers may not be graded
     \item Show your work where applicable
@@ -111,9 +111,9 @@
     \hline
     7 & 16 & \\
     \hline
-    8 & 16 & \\
+    8 & 21 & \\
     \hline
-    \textbf{Total} & \textbf{100} & \\
+    \textbf{Total} & \textbf{105} & \\
     \hline
 \end{tabular}
 \end{center}
@@ -472,89 +472,150 @@ print(f"result_b: {result_b}")
 %==============================================================================
 % QUESTION 8: Object-Oriented Programming
 %==============================================================================
-\section*{Question 8: Object-Oriented Programming \pointsbox{16}}
+\section*{Question 8: Object-Oriented Programming \pointsbox{21}}
 
 \begin{enumerate}[label=\textbf{8.\arabic*}]
-    \item \textbf{(4 pts)} What is the output of the following code?
+    \item \textbf{(5 pts)} What is the output of the following code? Explain why.
     \begin{lstlisting}
-class Counter:
-    def __init__(self, start=0):
-        self.value = start
+class ProgressTracker:
+    def __init__(self, total_steps):
+        self._total = total_steps
+        self._completed = 0
     
-    def increment(self):
-        self.value += 1
-        return self
+    @property
+    def completed(self):
+        return self._completed
     
-    def __str__(self):
-        return f"Counter({self.value})"
+    @completed.setter
+    def completed(self, value):
+        if value < 0:
+            self._completed = 0
+        elif value > self._total:
+            self._completed = self._total
+        else:
+            self._completed = value
+    
+    @property
+    def percentage(self):
+        return (self._completed / self._total) * 100
 
-c = Counter(5)
-c.increment()
-c.increment()
-print(c)
+tracker = ProgressTracker(10)
+tracker.completed = 7
+print(tracker.percentage)
+tracker.completed = 15
+print(tracker.completed)
+print(tracker.percentage)
     \end{lstlisting}
-    \textbf{Output:} \hrulefill \\[0.8cm]
+    \textbf{Output:} \\[0.3cm]
+    \hrulefill \\[0.3cm]
+    \hrulefill \\[0.3cm]
+    \hrulefill \\[0.5cm]
+    \textbf{What is the purpose of the setter validation in this code?} \\[0.3cm]
+    \hrulefill \\[0.3cm]
+    \hrulefill \\[0.8cm]
 
-    \item \textbf{(6 pts)} Complete the following \texttt{BankAccount} class:
+    \newpage
+    \item \textbf{(5 pts)} The following code has a common OOP bug. Identify the bug, explain why it happens, and write the corrected code.
     \begin{lstlisting}
-class BankAccount:
-    def __init__(self, owner, balance=0):
-        # Initialize owner and balance
-        
-        
+class ChatRoom:
+    messages = []
     
-    def deposit(self, amount):
-        # Add amount to balance (only if amount > 0)
-        
-        
-        
+    def __init__(self, room_name):
+        self.room_name = room_name
     
-    def withdraw(self, amount):
-        # Subtract amount from balance
-        # Only if amount > 0 and sufficient balance exists
-        # Return True if successful, False otherwise
-        
-        
-        
-        
-        
-        
-        
+    def post_message(self, user, text):
+        self.messages.append(f"{user}: {text}")
+
+room1 = ChatRoom("General")
+room2 = ChatRoom("Sports")
+room1.post_message("Alice", "Hello!")
+room2.post_message("Bob", "Goal!")
+print(f"General: {room1.messages}")
+print(f"Sports: {room2.messages}")
     \end{lstlisting}
+    \textbf{What is the bug and why does it happen?} \\[0.3cm]
+    \hrulefill \\[0.3cm]
+    \hrulefill \\[0.3cm]
+    \hrulefill \\[0.5cm]
+    \textbf{Write the corrected \texttt{\_\_init\_\_} method:} \\[2.5cm]
 
-    \item \textbf{(6 pts)} Given the following code, answer the questions below:
+    \newpage
+    
+    \item \textbf{(6 pts)} Complete the \texttt{Playlist} class with proper encapsulation. The songs list should be private (use \texttt{\_songs}) and only accessible through a property that returns a copy (to prevent external modification).
     \begin{lstlisting}
-class Animal:
+class Playlist:
     def __init__(self, name):
         self.name = name
+        # TODO: Initialize private _songs as empty list
+        
     
-    def speak(self):
-        return "Some sound"
+    @property
+    def songs(self):
+        # TODO: Return a COPY of the songs list
+        
+    
+    @property
+    def count(self):
+        # TODO: Return number of songs
+        
+    
+    def add_song(self, title):
+        # TODO: Add song only if not already in playlist
+        # Return True if added, False if duplicate
+        
+        
+        
+        
+    
+    def remove_song(self, title):
+        # TODO: Remove song if exists
+        # Return True if removed, False if not found
+        
+        
+        
+        
+        
+    \end{lstlisting}
 
-class Dog(Animal):
-    def speak(self):
-        return f"{self.name} says Woof!"
+    \newpage
+    \item \textbf{(5 pts)} Consider the following inheritance hierarchy:
+    \begin{lstlisting}
+class Notification:
+    def __init__(self, message):
+        self.message = message
+    
+    def send(self):
+        return f"Sending: {self.message}"
 
-class Cat(Animal):
-    def speak(self):
-        return f"{self.name} says Meow!"
+class EmailNotification(Notification):
+    def __init__(self, message, recipient):
+        super().__init__(message)
+        self.recipient = recipient
+    
+    def send(self):
+        base = super().send()
+        return f"{base} to {self.recipient}"
 
-animals = [Dog("Buddy"), Cat("Whiskers"), Animal("Generic")]
-for animal in animals:
-    print(animal.speak())
+class UrgentEmail(EmailNotification):
+    def send(self):
+        return "[URGENT] " + super().send()
+
+notif = UrgentEmail("Server down!", "admin@example.com")
+print(notif.send())
+print(isinstance(notif, Notification))
     \end{lstlisting}
     
     \begin{enumerate}[label=\alph*)]
-        \item What is the relationship between \texttt{Dog}/\texttt{Cat} and \texttt{Animal}? \\[0.5cm]
+        \item What will be printed? \\[0.3cm]
         \hrulefill \\[0.3cm]
         \hrulefill \\[0.5cm]
         
-        \item What will be printed when this code runs? \\[0.5cm]
+        \item Trace the \texttt{super().send()} calls: which methods are called and in what order when \texttt{notif.send()} executes? \\[0.3cm]
         \hrulefill \\[0.3cm]
         \hrulefill \\[0.3cm]
         \hrulefill \\[0.5cm]
         
-        \item What OOP concept allows \texttt{Dog} and \texttt{Cat} to have different implementations of \texttt{speak()}? \\[0.5cm]
+        \item Why does \texttt{UrgentEmail} not need its own \texttt{\_\_init\_\_} method? \\[0.3cm]
         \hrulefill \\[0.3cm]
         \hrulefill
     \end{enumerate}
