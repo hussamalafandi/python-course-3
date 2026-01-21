@@ -339,15 +339,28 @@ dog1 = Dog("Buddy", "Labrador")
 \vspace{0.4cm}
 
 \begin{lstlisting}
-def find_max(numbers):
-    if len(numbers) == 0:
-        return None
+def analyze_grades(grades):
+    if len(grades) == 0:
+        return "No grades", 0, 0
     
-    max_val = numbers[0]
-    for num in numbers:
-        if num > max_val:
-            max_val = num
-    return max_val
+    total = 0
+    passed = 0
+    
+    for grade in grades:
+        total = total + grade
+        if grade >= 50:
+            passed = passed + 1
+    
+    average = total / len(grades)
+    
+    if average >= 70:
+        status = "Excellent"
+    elif average >= 50:
+        status = "Passed"
+    else:
+        status = "Failed"
+    
+    return status, average, passed
 \end{lstlisting}
 
 \vspace{0.5cm}
