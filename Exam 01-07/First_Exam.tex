@@ -9,7 +9,7 @@
 \usepackage{listings}
 \usepackage{xcolor}
 \usepackage{tikz}
-\usetikzlibrary{shapes.geometric, arrows, positioning}
+\usetikzlibrary{shapes.geometric, arrows, positioning, calc}
 \usepackage{fancyhdr}
 \usepackage{lastpage}
 \usepackage{array}
@@ -306,7 +306,9 @@ dog1 = Dog("Buddy", "Labrador")
     \draw [arrow] (check) -- node[anchor=south] {Yes} (getdigit);
     \draw [arrow] (getdigit) -- (build);
     \draw [arrow] (build) -- (reduce);
-    \draw [arrow] (reduce.east) -- +(2,0) |- (check.north);
+    % Loop back: go right, then up, then left to join the line between init and check
+    \coordinate (loopback) at ($(init.south)!0.5!(check.north)$);
+    \draw [arrow] (reduce.east) -- +(2,0) |- (loopback);
     \draw [arrow] (check) -- node[anchor=east] {No} (output);
     \draw [arrow] (output) -- (stop);
 \end{tikzpicture}
@@ -314,6 +316,10 @@ dog1 = Dog("Buddy", "Labrador")
 
 \vspace{0.3cm}
 \textbf{Hint:} Trace through the flowchart with \texttt{n = 123} to understand what it does before writing the code.
+
+\vspace{0.2cm}
+\textbf{Reminder:} \texttt{\%} gives the remainder, \texttt{//} gives the integer quotient.\\
+\textit{Example:} \texttt{47 \% 10 = 7} \quad and \quad \texttt{47 // 10 = 4}
 
 \vspace{0.3cm}
 
