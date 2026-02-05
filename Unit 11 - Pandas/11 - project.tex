@@ -1,0 +1,463 @@
+\documentclass[11pt,a4paper]{article}
+
+% =========================
+% Packages
+% =========================
+\usepackage[a4paper,margin=2.3cm,headheight=14pt]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc} % remove if using lualatex/xelatex
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{parskip}        % nicer paragraph spacing
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{listings}
+\usepackage{graphicx}
+
+% =========================
+% Styling
+% =========================
+\definecolor{accent}{HTML}{0B3D91}
+\definecolor{muted}{HTML}{6B7280}
+\definecolor{backcolour}{HTML}{F6F7F9}
+\definecolor{codegreen}{rgb}{0,0.55,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=accent,
+  urlcolor=accent,
+  citecolor=accent
+}
+
+\titleformat{\section}{\large\bfseries\color{accent}}{}{0pt}{}
+\titleformat{\subsection}{\normalsize\bfseries\color{accent}}{}{0pt}{}
+\titleformat{\subsubsection}{\normalsize\bfseries}{}{0pt}{}
+
+\setlist[itemize]{leftmargin=*, itemsep=0pt, topsep=2pt, parsep=0pt}
+\setlist[enumerate]{leftmargin=*, itemsep=0pt, topsep=2pt, parsep=0pt}
+
+\lstdefinestyle{mystyle}{
+  backgroundcolor=\color{backcolour},
+  commentstyle=\color{codegreen},
+  keywordstyle=\color{accent},
+  numberstyle=\tiny\color{codegray},
+  stringstyle=\color{codepurple},
+  basicstyle=\ttfamily\small,
+  breaklines=true,
+  numbers=left,
+  numbersep=6pt,
+  showstringspaces=false,
+  tabsize=2,
+  frame=single,
+  rulecolor=\color{black!10}
+}
+\lstset{style=mystyle}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\textbf{Mini Project II}}
+\rhead{\textcolor{muted}{Sales Analytics Platform}}
+\cfoot{\thepage}
+
+% =========================
+% Document Meta
+% =========================
+\newcommand{\courseTitle}{Python Programming \& Data Analysis}
+\newcommand{\unitTitle}{Mini Project II: Data Analysis \& OOP Integration}
+\newcommand{\projectTitle}{Sales Analytics Platform}
+\newcommand{\instructorName}{Hussam Alafandi}
+\newcommand{\handoverDate}{\today}
+
+\begin{document}
+
+% =========================
+% Header block
+% =========================
+{\Large \textbf{\courseTitle}}\\[-2pt]
+{\large \textbf{\unitTitle}}\\[4pt]
+{\normalsize \textcolor{muted}{Project Handout --- \projectTitle}}\\[10pt]
+
+\begin{tabularx}{\textwidth}{@{}lX@{}}
+\textbf{Date:} & \handoverDate \\
+\textbf{Estimated workload:} & 6--10 hours (depending on optional extensions) \\
+\textbf{Required libraries:} & \texttt{pandas}, \texttt{numpy}, \texttt{matplotlib} \\
+\end{tabularx}
+
+\vspace{10pt}
+\hrule
+\vspace{12pt}
+
+% =========================
+% 1. Overview
+% =========================
+\section{Project Overview}
+
+In this project, you will build a \textbf{sales analytics platform} that consolidates everything learned in the course. You will design object-oriented data models, load and clean datasets, apply algorithms, generate reports, create visualizations, and manage your code with Git.
+
+\textbf{This project integrates:}
+\begin{itemize}
+  \item Modular code structure, functions, multi-file organization (Units 1--5)
+  \item Object-oriented design: classes, inheritance, design patterns (Units 7--8)
+  \item Algorithms: sorting, searching, complexity analysis (Unit 9)
+  \item NumPy for numerical computing (Unit 10)
+  \item Pandas for data analysis, cleaning, and aggregation (Unit 11)
+  \item Basic visualization with Matplotlib (Unit 12)
+  \item Version control with Git and GitHub (Unit 13)
+\end{itemize}
+
+% =========================
+% 2. Functional requirements
+% =========================
+\section{Functional Requirements}
+
+\subsection{1) Object-Oriented Data Models}
+
+Define classes to represent your domain:
+\begin{itemize}
+  \item \textbf{\texttt{Product}}: id, name, category, base price
+  \item \textbf{\texttt{Customer}}: id, name, email, lifetime value
+  \item \textbf{\texttt{Order}}: date, items, customer, amount, status
+  \item \textbf{\texttt{SalesAnalyzer}}: orchestrates loading, cleaning, and analysis
+\end{itemize}
+
+Requirements:
+\begin{itemize}
+  \item Proper \texttt{\_\_init\_\_} constructors with input validation
+  \item String representations (\texttt{\_\_str\_\_}, \texttt{\_\_repr\_\_})
+  \item At least one inheritance hierarchy (e.g., base \texttt{Entity} class)
+  \item Use of a design pattern (Factory or Strategy)
+\end{itemize}
+
+\subsection{2) Data Loading \& Cleaning}
+\begin{itemize}
+  \item Load CSV data into a Pandas DataFrame
+  \item Inspect structure, types, and missing values (\texttt{info()}, \texttt{describe()})
+  \item Handle missing values with a documented strategy
+  \item Validate and convert types (dates, amounts)
+  \item Remove duplicates or invalid entries
+  \item Export a clean, analysis-ready dataset
+\end{itemize}
+
+\subsection{3) Algorithmic Analysis}
+
+Implement \textbf{both} of the following:
+
+\begin{itemize}
+  \item \textbf{Sorting}:
+    \begin{itemize}
+      \item Implement your own sorting algorithm (e.g., quicksort, mergesort, or bubble sort)
+      \item Also use built-in methods: Python's \texttt{sorted()}, Pandas \texttt{sort\_values()}, or NumPy \texttt{np.sort()}
+      \item Compare execution time between your implementation and the built-in function using \texttt{timeit}
+    \end{itemize}
+  \item \textbf{Searching}:
+    \begin{itemize}
+      \item Implement your own search algorithm (e.g., linear search, binary search)
+      \item Also use built-in methods: Python's \texttt{in} operator, Pandas \texttt{loc[]}/\texttt{query()}, or NumPy \texttt{np.where()}
+      \item Compare execution time between your implementation and the built-in function
+    \end{itemize}
+\end{itemize}
+
+\textbf{Optional Analysis:}
+\begin{itemize}
+  \item Document the \textbf{time complexity (Big-O)} for your implementations
+  \item Include a brief comparison report discussing the performance differences
+  \item Explain why built-in functions are typically faster (hint: optimized C implementations)
+\end{itemize}
+
+\subsection{4) Analytics \& Business Insights}
+
+Using Pandas and NumPy, answer at least \textbf{8} of the following questions:
+\begin{itemize}
+  \item Total revenue, average order value (AOV), customer count
+  \item Which product category is most profitable?
+  \item Who are the top 10 customers by lifetime value?
+  \item What is the repeat customer rate?
+  \item Are there seasonal or monthly trends in sales?
+  \item What is the average order size by category?
+  \item What percentage of orders are cancelled vs. completed?
+  \item Which orders are outliers (unusually large/small)?
+  \item Customer segmentation by spending tier
+  \item Revenue trends over time (monthly growth)
+\end{itemize}
+
+\subsection{5) Visualization}
+
+Create at least \textbf{3 visualizations} using Matplotlib:
+\begin{itemize}
+  \item Bar chart (e.g., revenue by category)
+  \item Line chart (e.g., monthly revenue trend)
+  \item Histogram or boxplot (e.g., order value distribution)
+\end{itemize}
+
+Export visualizations as PNG files.
+
+\subsection{6) Reporting \& Export}
+\begin{itemize}
+  \item Export cleaned dataset to CSV
+  \item Generate a summary report (\texttt{.txt} or \texttt{.csv}) with key metrics
+  \item Export top customers and products lists
+\end{itemize}
+
+% =========================
+% 3. Data model
+% =========================
+\section{Data Model}
+
+You will work with a CSV file: \texttt{sales\_data.csv}
+
+Expected columns:
+\begin{lstlisting}[language=bash]
+order_id,customer_id,order_date,product_category,product_name,quantity,unit_price,order_amount,status
+\end{lstlisting}
+
+\textbf{Notes:}
+\begin{itemize}
+  \item Data may contain missing values, duplicates, or inconsistencies
+  \item \texttt{order\_date} may need standardization to \texttt{YYYY-MM-DD}
+  \item \texttt{order\_amount} may be stored as strings; convert to float
+  \item \texttt{status}: \texttt{completed}, \texttt{cancelled}, or \texttt{pending}
+\end{itemize}
+
+% =========================
+% 4. Code organization
+% =========================
+\section{Code Organization (Required)}
+
+Use a multi-module project structure:
+
+\begin{lstlisting}[language=bash]
+sales_analytics/
+  main.py              # Entry point / orchestration
+  models.py            # OOP classes (Product, Customer, Order)
+  analyzer.py          # SalesAnalyzer class with analysis methods
+  algorithms.py        # Sorting, searching functions
+  utils.py             # Validation, formatting helpers
+  data/
+    sales_data.csv     # Raw data
+    sales_clean.csv    # Cleaned data
+  output/
+    summary_report.txt
+    figures/           # Visualizations
+\end{lstlisting}
+
+\textbf{Module responsibilities:}
+
+\begin{tabularx}{\textwidth}{@{}lX@{}}
+\toprule
+\textbf{File} & \textbf{Responsibility} \\
+\midrule
+\texttt{main.py} & Entry point; orchestrate loading, cleaning, analysis, reporting \\
+\texttt{models.py} & OOP classes with validation and business logic \\
+\texttt{analyzer.py} & Data analysis: groupby, filtering, metrics \\
+\texttt{algorithms.py} & Sorting, searching, optimization functions \\
+\texttt{utils.py} & Helpers for validation, formatting, dates \\
+\bottomrule
+\end{tabularx}
+
+\textbf{Design principles:}
+\begin{itemize}
+  \item Keep business logic separate from I/O and printing
+  \item Prefer functions that return values instead of printing inside
+  \item Write docstrings for all functions and classes
+\end{itemize}
+
+% =========================
+% 5. Git & GitHub Requirements
+% =========================
+\section{Version Control Requirements (Git \& GitHub)}
+
+You \textbf{must} use Git for version control and host your project on GitHub.
+
+\subsection{Repository Setup}
+\begin{itemize}
+  \item Create a new GitHub repository for this project
+  \item Initialize with a \texttt{README.md} and \texttt{.gitignore} (Python template)
+  \item Clone the repository locally and work from there
+\end{itemize}
+
+\subsection{Commit Requirements}
+\begin{itemize}
+  \item Make \textbf{at least 10 meaningful commits} throughout development
+  \item Each commit should represent a logical unit of work
+  \item Write clear, descriptive commit messages (e.g., ``Add Customer class with validation'')
+\end{itemize}
+
+\subsection{Branching (Recommended)}
+\begin{itemize}
+  \item Use feature branches for major components (e.g., \texttt{feature/oop-models}, \texttt{feature/visualization})
+  \item Merge completed features into \texttt{main}
+\end{itemize}
+
+\subsection{Required Files in Repository}
+\begin{itemize}
+  \item \texttt{README.md} --- project description, setup instructions, usage
+  \item \texttt{.gitignore} --- exclude \texttt{\_\_pycache\_\_}, \texttt{.venv}, IDE files
+  \item \texttt{requirements.txt} --- list dependencies (\texttt{pandas}, \texttt{numpy}, \texttt{matplotlib})
+\end{itemize}
+
+% =========================
+% 6. Milestones
+% =========================
+\section{Milestones}
+
+\begin{enumerate}
+  \item \textbf{Milestone 1 (Setup)}: Create GitHub repo, project structure, load raw data
+  \item \textbf{Milestone 2 (OOP)}: Implement all required classes with validation
+  \item \textbf{Milestone 3 (Cleaning)}: Clean data, handle missing values, export clean CSV
+  \item \textbf{Milestone 4 (Analysis)}: Implement analytics, answer 8+ business questions
+  \item \textbf{Milestone 5 (Algorithms)}: Implement sorting/searching, compare with built-ins
+  \item \textbf{Milestone 6 (Visualization)}: Create 3+ charts, export as PNG
+  \item \textbf{Milestone 7 (Finalize)}: Generate reports, update README, final commit
+\end{enumerate}
+
+% =========================
+% 7. Quality checklist
+% =========================
+\newpage
+\section{Quality Checklist}
+
+Before submission, verify:
+
+\textbf{Code Quality:}
+\begin{itemize}
+  \item Code is organized into multiple modules
+  \item Functions are modular with meaningful names
+  \item No crashes on invalid input
+  \item Comments explain non-obvious logic
+\end{itemize}
+
+\textbf{OOP Design:}
+\begin{itemize}
+  \item Classes have clear responsibilities
+  \item Constructors validate input
+  \item At least one inheritance hierarchy
+  \item \texttt{\_\_str\_\_} and \texttt{\_\_repr\_\_} implemented
+\end{itemize}
+
+\textbf{Data Analysis:}
+\begin{itemize}
+  \item Data properly loaded, inspected, and cleaned
+  \item NumPy/Pandas used appropriately
+  \item All 8+ business questions answered
+\end{itemize}
+
+\textbf{Algorithms:}
+\begin{itemize}
+  \item Own sorting algorithm implemented
+  \item Own searching algorithm implemented
+  \item Built-in functions also used for comparison
+  \item Performance comparison with \texttt{timeit} included
+  \item Big-O complexity documented
+\end{itemize}
+
+\textbf{Visualization:}
+\begin{itemize}
+  \item At least 3 charts created
+  \item Charts are labeled and readable
+  \item Exported as PNG files
+\end{itemize}
+
+\textbf{Git \& GitHub:}
+\begin{itemize}
+  \item Repository is public (or shared with instructor)
+  \item At least 10 meaningful commits
+  \item Clear commit messages
+  \item README.md with instructions
+  \item \texttt{requirements.txt} included
+\end{itemize}
+
+% =========================
+% 8. Synthetic data template
+% =========================
+\section{Appendix: Synthetic Data Generator}
+
+If you need a dataset, use this code:
+
+\begin{lstlisting}[language=Python]
+import pandas as pd
+import numpy as np
+from datetime import datetime, timedelta
+
+np.random.seed(42)
+n_orders = 200
+categories = ["Electronics", "Clothing", "Home & Garden", "Sports", "Books"]
+products = {
+    "Electronics": ["Laptop", "Phone", "Tablet", "Headphones"],
+    "Clothing": ["T-Shirt", "Jeans", "Jacket", "Shoes"],
+    "Home & Garden": ["Lamp", "Plant", "Cushion", "Rug"],
+    "Sports": ["Yoga Mat", "Dumbbell", "Running Shoes", "Bike"],
+    "Books": ["Fiction", "Science", "History", "Art"]
+}
+
+orders = []
+start_date = datetime(2023, 1, 1)
+
+for i in range(n_orders):
+    category = np.random.choice(categories)
+    product = np.random.choice(products[category])
+    qty = np.random.randint(1, 5)
+    unit_price = np.random.uniform(10, 500)
+    amount = qty * unit_price
+    status = np.random.choice(
+        ["completed", "pending", "cancelled", np.nan],
+        p=[0.7, 0.15, 0.1, 0.05]
+    )
+    orders.append({
+        "order_id": f"ORD{1000+i}",
+        "customer_id": f"CUST{np.random.randint(1, 50)}",
+        "order_date": start_date + timedelta(days=np.random.randint(0, 365)),
+        "product_category": category,
+        "product_name": product,
+        "quantity": qty,
+        "unit_price": round(unit_price, 2),
+        "order_amount": round(amount, 2),
+        "status": status
+    })
+
+df = pd.DataFrame(orders)
+df.to_csv("sales_data.csv", index=False)
+\end{lstlisting}
+
+% =========================
+% 9. Submission
+% =========================
+\section{Submission}
+
+Submit:
+\begin{enumerate}
+  \item \textbf{GitHub repository URL} (must be accessible)
+  \item Repository must contain:
+    \begin{itemize}
+      \item All source code (\texttt{.py} files)
+      \item \texttt{README.md} with setup and run instructions
+      \item \texttt{requirements.txt}
+      \item Cleaned dataset (\texttt{sales\_clean.csv})
+      \item Summary report with answers to business questions
+      \item Visualization files (PNG)
+    \end{itemize}
+\end{enumerate}
+
+\textbf{Execution:} Your project should run via:
+\begin{lstlisting}[language=bash]
+$ pip install -r requirements.txt
+$ python main.py
+\end{lstlisting}
+
+% =========================
+% Footer note
+% =========================
+\vspace{10pt}
+\hrule
+\vspace{8pt}
+\textcolor{muted}{\small Tip: Commit often. Each milestone should have at least one commit.}
+
+\end{document}
+
+\end{document}
