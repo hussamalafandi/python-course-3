@@ -151,10 +151,14 @@ The user can add a transaction with:
 \end{itemize}
 You must validate user input (no crashes on invalid input).
 
+\textbf{Bonus:} Allow adding multiple transactions in one function call (e.g., for batch import).
+
 \subsection{2) List transactions}
 The user can list all transactions. Minimum output: one line per transaction.
 
-\textbf{Optional filters (recommended):} by category and/or type.
+\textbf{Filtering (required):} Implement a flexible filter function that can accept \textbf{any combination} of criteria (e.g., filter by type only, by category only, by both, or by date range). The same function should handle all cases.
+
+\textit{Hint: Think about how to design a function that doesn't need a fixed number of parameters.}
 
 \subsection{3) Summary report}
 Provide at least:
@@ -227,7 +231,7 @@ expense_tracker/
 \textbf{File} & \textbf{Responsibility} \\
 \midrule
 \texttt{main.py} & Menu loop, orchestration, user interaction \\
-\texttt{utils.py} & Input helpers (validation), formatting helpers \\
+\texttt{utils.py} & Input helpers (validation), formatting helpers. These should be \textbf{pure utility functions} that work independently of any specific ledger. \\
 \texttt{logic.py} & Add/filter/update operations on the ledger \\
 \texttt{reports.py} & Aggregations: totals, per-category summaries \\
 \texttt{storage.py} & Load/save ledger via CSV or JSON \\
