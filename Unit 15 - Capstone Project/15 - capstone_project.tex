@@ -1,0 +1,731 @@
+\documentclass[11pt,a4paper]{article}
+
+% =========================
+% Packages
+% =========================
+\usepackage[a4paper,margin=2.3cm,headheight=14pt]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc} % remove if using lualatex/xelatex
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{parskip}        % nicer paragraph spacing
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{multirow}
+\usepackage{amsmath}
+
+% =========================
+% Styling
+% =========================
+\definecolor{accent}{HTML}{0B3D91}
+\definecolor{muted}{HTML}{6B7280}
+\definecolor{backcolour}{HTML}{F6F7F9}
+\definecolor{codegreen}{rgb}{0,0.55,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=accent,
+  urlcolor=accent,
+  citecolor=accent
+}
+
+\titleformat{\section}{\large\bfseries\color{accent}}{}{0pt}{}
+\titleformat{\subsection}{\normalsize\bfseries\color{accent}}{}{0pt}{}
+\titleformat{\subsubsection}{\normalsize\bfseries}{}{0pt}{}
+
+\setlist[itemize]{leftmargin=*, itemsep=0pt, topsep=2pt, parsep=0pt}
+\setlist[enumerate]{leftmargin=*, itemsep=0pt, topsep=2pt, parsep=0pt}
+
+\lstdefinestyle{mystyle}{
+  backgroundcolor=\color{backcolour},
+  commentstyle=\color{codegreen},
+  keywordstyle=\color{accent},
+  numberstyle=\tiny\color{codegray},
+  stringstyle=\color{codepurple},
+  basicstyle=\ttfamily\small,
+  breaklines=true,
+  numbers=left,
+  numbersep=6pt,
+  showstringspaces=false,
+  tabsize=2,
+  frame=single,
+  rulecolor=\color{black!10}
+}
+\lstset{style=mystyle}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\textbf{Capstone Project}}
+\rhead{\textcolor{muted}{CityBike --- Bike-Sharing Analytics}}
+\cfoot{\thepage}
+
+% =========================
+% Document Meta
+% =========================
+\newcommand{\courseTitle}{Python Programming \& Data Analysis}
+\newcommand{\unitTitle}{Unit 15 --- Capstone Project}
+\newcommand{\projectTitle}{CityBike --- Bike-Sharing Operations \& Usage Analytics Platform}
+\newcommand{\instructorName}{Hussam Alafandi}
+\newcommand{\handoverDate}{\today}
+
+\begin{document}
+
+% =========================
+% Header block
+% =========================
+{\Large \textbf{\courseTitle}}\\[-2pt]
+{\large \textbf{\unitTitle}}\\[4pt]
+{\normalsize \textcolor{muted}{Project Handout --- \projectTitle}}\\[10pt]
+
+\begin{tabularx}{\textwidth}{@{}lX@{}}
+\textbf{Date:}               & \handoverDate \\
+\textbf{Estimated workload:} & 20--30 hours \\
+\textbf{Required libraries:} & \texttt{pandas}, \texttt{numpy}, \texttt{matplotlib} \\
+\end{tabularx}
+
+\vspace{10pt}
+\hrule
+\vspace{12pt}
+
+% =========================
+% 1. Motivation
+% =========================
+\section{Motivation \& Context}
+
+Bike-sharing systems have become a cornerstone of modern urban transport in cities worldwide --- from Berlin's \emph{Nextbike} to New York's \emph{Citi Bike} and London's \emph{Santander Cycles}. These systems generate vast amounts of operational data every day: trip records, station usage, fleet maintenance logs, and user activity.
+
+Managing such a system is a real-world software engineering challenge. Operators need to:
+\begin{itemize}
+  \item Track hundreds of bikes across dozens of stations
+  \item Understand when and where demand peaks occur
+  \item Schedule preventive maintenance to minimize downtime
+  \item Analyze user behavior to optimize station placement and pricing
+  \item Generate reports for city authorities and stakeholders
+\end{itemize}
+
+In this capstone project, you will build a \textbf{complete backend platform} for a fictional city bike-sharing service. You will model the domain with object-oriented design, load and clean operational datasets, implement algorithms, compute statistics, generate visualizations, and deliver a well-structured, version-controlled codebase.
+
+% =========================
+% 2. Overview
+% =========================
+\section{Project Overview}
+
+This is the \textbf{final integrative project} of the course. It is designed to demonstrate mastery of every major topic covered across Units 1--13.
+
+\textbf{This project integrates:}
+\begin{itemize}
+  \item Modular code structure, functions, multi-file organization (Units 1--5)
+  \item Object-oriented design: classes, inheritance, abstract base classes, design patterns (Units 7--8)
+  \item Algorithms: sorting, searching, complexity analysis (Unit 9)
+  \item NumPy for numerical computing (Unit 10)
+  \item Pandas for data analysis, cleaning, and aggregation (Unit 11)
+  \item Data visualization with Matplotlib (Unit 12)
+  \item Version control with Git and GitHub
+\end{itemize}
+
+Unlike the earlier mini projects, this capstone requires you to demonstrate \textbf{all} of the above in a single, cohesive application. Quality expectations are higher: your code must be documented, modular, and professionally structured.
+
+% =========================
+% 3. Functional requirements
+% =========================
+\newpage
+\section{Functional Requirements}
+
+\subsection{1) Object-Oriented Data Models \textnormal{\textcolor{muted}{(Units 7--8)}}}
+
+Design a class hierarchy to represent the bike-sharing domain.
+
+\subsubsection{Required Classes}
+\begin{itemize}
+  \item \textbf{\texttt{Entity}} (abstract base class): shared \texttt{id}, \texttt{created\_at}; enforces \texttt{\_\_str\_\_} and \texttt{\_\_repr\_\_} in subclasses
+  \item \textbf{\texttt{Bike(Entity)}}: bike\_id, bike\_type, status (\texttt{available}/\texttt{in\_use}/\texttt{maintenance})
+    \begin{itemize}
+      \item \textbf{\texttt{ClassicBike(Bike)}}: gear\_count
+      \item \textbf{\texttt{ElectricBike(Bike)}}: battery\_level, max\_range\_km
+    \end{itemize}
+  \item \textbf{\texttt{Station(Entity)}}: station\_id, name, capacity, latitude, longitude
+  \item \textbf{\texttt{User(Entity)}}: user\_id, name, email, user\_type
+    \begin{itemize}
+      \item \textbf{\texttt{CasualUser(User)}}: day\_pass\_count
+      \item \textbf{\texttt{MemberUser(User)}}: membership\_start, membership\_end, tier (\texttt{basic}/\texttt{premium})
+    \end{itemize}
+  \item \textbf{\texttt{Trip}}: trip\_id, user, bike, start\_station, end\_station, start\_time, end\_time, distance\_km
+  \item \textbf{\texttt{MaintenanceRecord}}: record\_id, bike, date, maintenance\_type, cost, description
+  \item \textbf{\texttt{BikeShareSystem}}: orchestrates loading, cleaning, analysis, and reporting
+\end{itemize}
+
+\subsubsection{OOP Requirements}
+\begin{itemize}
+  \item Proper \texttt{\_\_init\_\_} constructors with \textbf{input validation} (e.g., reject negative prices, invalid emails)
+  \item String representations: \texttt{\_\_str\_\_} for user-friendly output, \texttt{\_\_repr\_\_} for debugging
+  \item At least one \textbf{abstract base class} using Python's \texttt{abc} module
+  \item At least one \textbf{inheritance hierarchy} with a minimum depth of two (e.g., \texttt{Entity} $\rightarrow$ \texttt{Bike} $\rightarrow$ \texttt{ElectricBike})
+  \item Use of \textbf{properties} (\texttt{@property}) for controlled attribute access where appropriate
+  \item Implement at least \textbf{two design patterns}:
+    \begin{itemize}
+      \item \textbf{Factory Pattern}: create \texttt{Bike} or \texttt{User} objects from CSV row dictionaries without exposing subclass constructors
+      \item \textbf{Strategy Pattern}: interchangeable pricing strategies (e.g., \texttt{CasualPricing}, \texttt{MemberPricing}, \texttt{PeakHourPricing}) that compute trip cost
+    \end{itemize}
+\end{itemize}
+
+\subsection{2) Data Loading \& Cleaning \textnormal{\textcolor{muted}{(Unit 11)}}}
+\begin{itemize}
+  \item Load the provided CSV files (\texttt{trips.csv}, \texttt{stations.csv}, \texttt{maintenance.csv}) into Pandas DataFrames
+  \item Inspect structure, types, and missing values using \texttt{info()}, \texttt{describe()}, \texttt{isnull().sum()}
+  \item Handle missing values with a \textbf{documented strategy} (drop, fill, interpolate --- justify your choice)
+  \item Validate and convert types: parse dates, ensure numeric columns are numeric, standardize categorical values
+  \item Remove duplicates and invalid entries (e.g., trips where end time is before start time)
+  \item Export cleaned, analysis-ready datasets to CSV
+\end{itemize}
+
+\subsection{3) Algorithmic Analysis \textnormal{\textcolor{muted}{(Unit 9)}}}
+
+Implement \textbf{both} of the following from scratch:
+
+\begin{itemize}
+  \item \textbf{Sorting}:
+    \begin{itemize}
+      \item Implement your own sorting algorithm (e.g., merge sort, quicksort)
+      \item Apply it to sort trips by duration or distance
+      \item Also sort using Python's built-in \texttt{sorted()} / Pandas \texttt{sort\_values()}
+      \item Compare execution times using \texttt{timeit}
+    \end{itemize}
+  \item \textbf{Searching}:
+    \begin{itemize}
+      \item Implement your own search algorithm (e.g., binary search on sorted data)
+      \item Apply it to find trips, stations, or users by ID or attribute
+      \item Also search using built-in methods (e.g., \texttt{in}, Pandas \texttt{.loc[]}, \texttt{.query()})
+      \item Compare execution times using \texttt{timeit}
+    \end{itemize}
+\end{itemize}
+
+\textbf{Optional Analysis:}
+\begin{itemize}
+  \item Document the \textbf{time complexity (Big-O)} for each of your implementations
+  \item Include a brief written comparison discussing the performance differences
+  \item Explain why built-in functions are typically faster
+\end{itemize}
+
+\subsection{4) Numerical Computing \textnormal{\textcolor{muted}{(Unit 10)}}}
+
+Use NumPy for at least the following:
+\begin{itemize}
+  \item Compute \textbf{distances} between stations using the Euclidean distance formula on latitude/longitude arrays:
+    \[
+      d = \sqrt{(\text{lat}_2 - \text{lat}_1)^2 + (\text{lon}_2 - \text{lon}_1)^2}
+    \]
+    (Use a simplified flat-earth model; no need for the Haversine formula.)
+  \item Compute vectorized \textbf{statistics} on trip durations and distances (mean, median, standard deviation, percentiles) without using Python loops
+  \item Use NumPy arrays for any batch numerical computation (e.g., fare calculation across all trips, z-score outlier detection)
+\end{itemize}
+
+\subsection{5) Analytics \& Business Insights \textnormal{\textcolor{muted}{(Units 10--11)}}}
+
+Using Pandas and NumPy, answer at least \textbf{10} of the following questions:
+
+\begin{enumerate}
+  \item Total number of trips, total distance traveled, and average trip duration
+  \item What are the \textbf{top 10 most popular} start stations and end stations?
+  \item What are the \textbf{peak usage hours} during the day?
+  \item Which \textbf{day of the week} has the highest trip volume?
+  \item What is the \textbf{average trip distance} by user type (casual vs.\ member)?
+  \item What is the \textbf{bike utilization rate} (percentage of time bikes are in use vs.\ available)?
+  \item Show the \textbf{monthly trip trend} over time --- is ridership growing?
+  \item Who are the \textbf{top 15 most active users} by trip count?
+  \item What is the \textbf{total maintenance cost} per bike type (classic vs.\ electric)?
+  \item What are the \textbf{most common station-to-station routes} (top 10 origin--destination pairs)?
+  \item What is the \textbf{trip completion rate} (completed vs.\ cancelled trips)?
+  \item What is the \textbf{average number of trips per user}, segmented by user type?
+  \item Which bikes have the \textbf{highest maintenance frequency}?
+  \item Identify \textbf{outlier trips} (unusually long/short duration or distance) using statistical methods
+\end{enumerate}
+
+\subsection{6) Visualization \textnormal{\textcolor{muted}{(Unit 12)}}}
+
+Create at least \textbf{4 visualizations} using Matplotlib:
+\begin{itemize}
+  \item \textbf{Bar chart}: trips per station or revenue by user type
+  \item \textbf{Line chart}: monthly trip volume trend over time
+  \item \textbf{Histogram}: trip duration or distance distribution
+  \item \textbf{Box plot}: trip duration comparison between user types or bike types
+\end{itemize}
+
+All charts must have:
+\begin{itemize}
+  \item Descriptive title
+  \item Labeled axes with units
+  \item Legend where applicable
+  \item Clean, readable styling
+\end{itemize}
+
+Export all visualizations as \textbf{PNG files} to the \texttt{output/figures/} directory.
+
+\subsection{7) Reporting \& Export \textnormal{\textcolor{muted}{(Units 5, 11--12)}}}
+\begin{itemize}
+  \item Export all cleaned datasets to CSV (\texttt{data/trips\_clean.csv}, etc.)
+  \item Generate a \textbf{summary report} (\texttt{.txt}) containing key metrics and answers to business questions
+  \item Export top stations, top users, and maintenance summaries as separate CSV or text files
+\end{itemize}
+
+% =========================
+% 4. Clean Code
+% =========================
+\section{Clean Code \& Documentation}
+
+\begin{itemize}
+  \item \textbf{Docstrings}: every module, class, and public function must have a docstring
+  \item \textbf{Naming}: use clear, descriptive names (no single-letter variables except in loops)
+  \item \textbf{Separation of concerns}: business logic must be separate from I/O and display
+  \item \textbf{DRY principle}: avoid code duplication; extract common logic into helper functions
+  \item \textbf{Functions}: prefer functions that \textbf{return values} rather than printing inside them
+  \item \textbf{Type hints}: add type annotations to all function signatures
+  \item \textbf{No magic numbers}: use named constants for fixed values
+\end{itemize}
+
+% =========================
+% Optional: Testing
+% =========================
+\subsection{Optional Extension: Unit Testing with \texttt{pytest} \textnormal{\textcolor{muted}{(Optional)}}}
+
+This is \textbf{not required} but helps demonstrate best practices in software development. You can write unit tests for your OOP models and algorithms to ensure correctness and robustness.
+
+If you choose to include tests, create a \texttt{tests/} directory and use \texttt{pytest}:
+
+\begin{lstlisting}[language=bash]
+citybike/
+  tests/
+    __init__.py
+    test_models.py        # Tests for OOP models
+    test_algorithms.py    # Tests for sorting & searching
+\end{lstlisting}
+
+\textbf{Guidelines:}
+\begin{itemize}
+  \item Write at least \textbf{10 test functions} covering model validation and algorithm correctness
+  \item Use descriptive test names (e.g., \texttt{test\_electric\_bike\_rejects\_negative\_battery})
+  \item Test both valid inputs (happy path) and invalid inputs (edge cases)
+  \item All tests must pass when running:
+\end{itemize}
+
+\begin{lstlisting}[language=bash]
+$ pytest tests/ -v
+\end{lstlisting}
+
+Add \texttt{pytest} to your \texttt{requirements.txt} if you include tests.
+
+% =========================
+% 6. Data model
+% =========================
+\section{Data Model}
+
+You will work with \textbf{three CSV files}:
+
+\subsection{trips.csv}
+\begin{lstlisting}[language=bash]
+trip_id,user_id,user_type,bike_id,bike_type,start_station_id,
+end_station_id,start_time,end_time,duration_minutes,
+distance_km,status
+\end{lstlisting}
+
+\subsection{stations.csv}
+\begin{lstlisting}[language=bash]
+station_id,station_name,capacity,latitude,longitude
+\end{lstlisting}
+
+\subsection{maintenance.csv}
+\begin{lstlisting}[language=bash]
+record_id,bike_id,bike_type,date,maintenance_type,cost,
+description
+\end{lstlisting}
+
+\textbf{Notes:}
+\begin{itemize}
+  \item Data may contain missing values, duplicates, or inconsistencies (by design)
+  \item \texttt{start\_time} and \texttt{end\_time} may need parsing to \texttt{datetime}
+  \item \texttt{duration\_minutes} and \texttt{distance\_km} may be stored as strings; convert to float
+  \item \texttt{status}: \texttt{completed} or \texttt{cancelled}
+  \item \texttt{maintenance\_type}: \texttt{tire\_repair}, \texttt{brake\_adjustment}, \texttt{battery\_replacement}, \texttt{chain\_lubrication}, \texttt{general\_inspection}
+  \item Some trips may have \texttt{end\_time} before \texttt{start\_time} --- these are invalid
+\end{itemize}
+
+% =========================
+% 7. Code organization
+% =========================
+\section{Code Organization (Required)}
+
+Use a multi-module project structure:
+
+\begin{lstlisting}[language=bash]
+citybike/
+  main.py                 # Entry point: orchestration
+  models.py               # OOP classes (Entity, Bike, Station, ...)
+  analyzer.py             # BikeShareSystem: analysis methods
+  algorithms.py           # Sorting, searching implementations
+  numerical.py            # NumPy-based computations
+  visualization.py        # Matplotlib chart functions
+  pricing.py              # Strategy Pattern: pricing strategies
+  factories.py            # Factory Pattern: object creation
+  utils.py                # Validation, formatting, helpers
+  data/
+    trips.csv             # Raw trip data
+    stations.csv          # Station metadata
+    maintenance.csv       # Maintenance records
+    trips_clean.csv       # Cleaned trip data (generated)
+    stations_clean.csv    # Cleaned station data (generated)
+  output/
+    summary_report.txt    # Key metrics and insights
+    top_stations.csv      # Most popular stations
+    top_users.csv         # Most active users
+    figures/              # Visualization PNGs
+\end{lstlisting}
+
+\textbf{Module responsibilities:}
+
+\begin{tabularx}{\textwidth}{@{}lX@{}}
+\toprule
+\textbf{File} & \textbf{Responsibility} \\
+\midrule
+\texttt{main.py}          & Entry point; orchestrate the full pipeline from loading to reporting \\
+\texttt{models.py}        & Domain classes with validation, inheritance, abstract base class \\
+\texttt{analyzer.py}      & Data analysis: groupby, filtering, aggregation, business metrics \\
+\texttt{algorithms.py}    & Custom sorting and searching implementations with benchmarks \\
+\texttt{numerical.py}     & NumPy operations: distance calculations, statistics, outlier detection \\
+\texttt{visualization.py} & All Matplotlib chart creation and export functions \\
+\texttt{pricing.py}       & Strategy Pattern: pricing strategy interface and implementations \\
+\texttt{factories.py}     & Factory Pattern: create model objects from raw data dictionaries \\
+\texttt{utils.py}         & Input validation, date parsing, formatting helpers \\
+\bottomrule
+\end{tabularx}
+
+\vspace{6pt}
+\textbf{Design principles:}
+\begin{itemize}
+  \item Keep business logic separate from I/O and printing
+  \item Prefer functions that return values instead of printing inside
+  \item Each module should have a single, clear responsibility
+  \item Write docstrings for all public functions and classes
+  \item Use type hints in function signatures
+\end{itemize}
+
+% =========================
+% 8. Git & GitHub
+% =========================
+\section{Version Control Requirements (Git \& GitHub)}
+
+You \textbf{must} use Git for version control and host your project on GitHub.
+
+\subsection{Repository Setup}
+\begin{itemize}
+  \item Create a new GitHub repository for this project
+  \item Initialize with a \texttt{README.md} and \texttt{.gitignore} (Python template)
+  \item Clone the repository locally and work from there
+\end{itemize}
+
+\subsection{Commit Requirements}
+\begin{itemize}
+  \item Make \textbf{at least 15 meaningful commits} throughout development
+  \item Each commit should represent a logical unit of work
+  \item Write clear, descriptive commit messages following conventional style:
+    \begin{itemize}
+      \item \texttt{feat: add Station class with capacity validation}
+      \item \texttt{fix: handle missing values in trip duration column}
+      \item \texttt{test: add unit tests for sorting algorithms}
+      \item \texttt{docs: update README with setup instructions}
+    \end{itemize}
+\end{itemize}
+
+\subsection{Branching (Required)}
+\begin{itemize}
+  \item Use feature branches for major components (e.g., \texttt{feature/models}, \texttt{feature/analysis}, \texttt{feature/visualization})
+  \item Merge completed features into \texttt{main} via pull requests or local merge
+  \item The \texttt{main} branch must always contain working code
+\end{itemize}
+
+\subsection{Required Files in Repository}
+\begin{itemize}
+  \item \texttt{README.md} --- project description, setup instructions, usage guide, and a brief summary of findings
+  \item \texttt{.gitignore} --- exclude \texttt{\_\_pycache\_\_}, \texttt{.venv}, IDE files, \texttt{output/figures/*.png}
+  \item \texttt{requirements.txt} --- list all dependencies (\texttt{pandas}, \texttt{numpy}, \texttt{matplotlib})
+\end{itemize}
+
+% =========================
+% 9. Milestones
+% =========================
+\section{Milestones}
+
+Follow these milestones to structure your development process. Each milestone should result in at least one commit.
+
+\begin{enumerate}
+  \item \textbf{Milestone 1 --- Project Setup} \\
+    Create GitHub repo, set up project structure, add \texttt{README.md}, \texttt{.gitignore}, \texttt{requirements.txt}. Generate or place raw data files.
+  \item \textbf{Milestone 2 --- Domain Models} \\
+    Implement all OOP classes (\texttt{Entity}, \texttt{Bike}, \texttt{Station}, \texttt{User}, \texttt{Trip}, \texttt{MaintenanceRecord}) with validation, inheritance, and string representations. Implement Factory and Strategy patterns.
+  \item \textbf{Milestone 3 --- Data Loading \& Cleaning} \\
+    Load CSV files into DataFrames. Inspect, clean, validate, and export cleaned datasets.
+  \item \textbf{Milestone 4 --- Algorithms} \\
+    Implement custom sorting and searching algorithms. Benchmark against built-in functions. Document Big-O analysis.
+  \item \textbf{Milestone 5 --- Numerical Computing} \\
+    Implement NumPy-based distance calculations, statistical summaries, and outlier detection.
+  \item \textbf{Milestone 6 --- Analytics} \\
+    Answer all 10+ business questions using Pandas and NumPy. Generate summary report.
+  \item \textbf{Milestone 7 --- Visualization} \\
+    Create 4+ charts with proper labels and styling. Export as PNG.
+  \item \textbf{Milestone 8 --- Polish \& Delivery} \\
+    Add docstrings and type hints throughout. Update \texttt{README.md} with final instructions and findings summary. Final review and commit.
+\end{enumerate}
+
+% =========================
+% 10. Quality checklist
+% =========================
+\newpage
+\section{Quality Checklist}
+
+Before submission, verify every item:
+
+\textbf{Code Quality \& Clean Code:}
+\begin{itemize}
+  \item Code is organized into multiple modules with clear responsibilities
+  \item All public functions and classes have docstrings
+  \item Function signatures include type hints
+  \item No magic numbers; named constants are used
+  \item No code duplication; helpers are extracted
+  \item No crashes on invalid input
+\end{itemize}
+
+\textbf{OOP Design:}
+\begin{itemize}
+  \item Abstract base class using \texttt{abc} module
+  \item Inheritance hierarchy with at least 2 levels
+  \item Constructors validate input
+  \item \texttt{\_\_str\_\_} and \texttt{\_\_repr\_\_} implemented on all domain classes
+  \item Properties (\texttt{@property}) used where appropriate
+  \item Factory Pattern implemented and used
+  \item Strategy Pattern implemented and used
+\end{itemize}
+
+\textbf{Data Analysis:}
+\begin{itemize}
+  \item All three CSV files properly loaded, inspected, and cleaned
+  \item Missing value strategy documented
+  \item NumPy used for numerical computations (not Python loops)
+  \item Pandas used for aggregation, filtering, and grouping
+  \item At least 10 business questions answered with code and output
+\end{itemize}
+
+\textbf{Algorithms:}
+\begin{itemize}
+  \item Custom sorting algorithm implemented and correct
+  \item Custom searching algorithm implemented and correct
+  \item Built-in equivalents also used for comparison
+  \item Performance comparison with \texttt{timeit} included
+  \item Big-O complexity documented for each algorithm
+\end{itemize}
+
+\textbf{Visualization:}
+\begin{itemize}
+  \item At least 4 charts created
+  \item All charts have title, axis labels, and legend (where applicable)
+  \item Charts are readable and professionally styled
+  \item Exported as PNG files
+\end{itemize}
+
+\textbf{Git \& GitHub:}
+\begin{itemize}
+  \item Repository is public (or shared with instructor)
+  \item At least 15 meaningful commits with clear messages
+  \item Feature branches used for development
+  \item \texttt{README.md} with project description, setup, and usage
+  \item \texttt{requirements.txt} included
+  \item \texttt{.gitignore} properly configured
+\end{itemize}
+
+% =========================
+% 11. Data generator
+% =========================
+\newpage
+\section{Appendix: Synthetic Data Generator}
+
+Use the following script to generate the three dataset files. You may also modify or extend the generator to create additional scenarios.
+
+\begin{lstlisting}[language=Python]
+import pandas as pd
+import numpy as np
+from datetime import datetime, timedelta
+
+np.random.seed(42)
+
+# --- Station data ---
+station_names = [
+    "Central Station", "University Campus", "City Hall",
+    "Riverside Park", "Market Square", "Tech Hub",
+    "Old Town", "Harbor View", "Sports Arena",
+    "West End", "North Gate", "Museum Quarter",
+    "Business District", "Lakeside", "Airport Terminal"
+]
+
+stations = []
+for i, name in enumerate(station_names):
+    stations.append({
+        "station_id": f"ST{100 + i}",
+        "station_name": name,
+        "capacity": np.random.choice([10, 15, 20, 25, 30]),
+        "latitude": round(48.75 + np.random.uniform(0, 0.15), 6),
+        "longitude": round(9.15 + np.random.uniform(0, 0.15), 6),
+    })
+
+stations_df = pd.DataFrame(stations)
+stations_df.to_csv("stations.csv", index=False)
+
+# --- Trip data ---
+n_trips = 1500
+user_ids = [f"USR{np.random.randint(1000, 1200)}"
+            for _ in range(80)]
+bike_ids = [f"BK{np.random.randint(200, 350)}"
+            for _ in range(60)]
+start_date = datetime(2024, 1, 1)
+
+trips = []
+for i in range(n_trips):
+    user_type = np.random.choice(
+        ["casual", "member"], p=[0.35, 0.65]
+    )
+    bike_type = np.random.choice(
+        ["classic", "electric"], p=[0.6, 0.4]
+    )
+    start_st = np.random.choice(stations_df["station_id"])
+    end_st = np.random.choice(stations_df["station_id"])
+    start_time = start_date + timedelta(
+        days=np.random.randint(0, 365),
+        hours=np.random.randint(6, 23),
+        minutes=np.random.randint(0, 60),
+    )
+    duration = max(2, np.random.exponential(25))
+    end_time = start_time + timedelta(minutes=duration)
+    distance = round(np.random.uniform(0.5, 15.0), 2)
+    status = np.random.choice(
+        ["completed", "cancelled", np.nan],
+        p=[0.82, 0.12, 0.06]
+    )
+
+    trips.append({
+        "trip_id": f"TR{10000 + i}",
+        "user_id": np.random.choice(user_ids),
+        "user_type": user_type,
+        "bike_id": np.random.choice(bike_ids),
+        "bike_type": bike_type,
+        "start_station_id": start_st,
+        "end_station_id": end_st,
+        "start_time": start_time.strftime(
+            "%Y-%m-%d %H:%M:%S"
+        ),
+        "end_time": end_time.strftime(
+            "%Y-%m-%d %H:%M:%S"
+        ),
+        "duration_minutes": round(duration, 1),
+        "distance_km": distance,
+        "status": status,
+    })
+
+trips_df = pd.DataFrame(trips)
+
+# Inject some messiness
+idx = np.random.choice(n_trips, 30, replace=False)
+trips_df.loc[idx[:10], "duration_minutes"] = np.nan
+trips_df.loc[idx[10:20], "distance_km"] = np.nan
+trips_df.loc[idx[20:25], "end_time"] = (
+    trips_df.loc[idx[20:25], "start_time"]
+)
+dup_rows = trips_df.sample(15)
+trips_df = pd.concat(
+    [trips_df, dup_rows], ignore_index=True
+)
+trips_df.to_csv("trips.csv", index=False)
+
+# --- Maintenance data ---
+maint_types = [
+    "tire_repair", "brake_adjustment",
+    "battery_replacement", "chain_lubrication",
+    "general_inspection"
+]
+
+records = []
+for i in range(200):
+    bike = np.random.choice(bike_ids)
+    btype = np.random.choice(["classic", "electric"])
+    mtype = np.random.choice(maint_types)
+    cost = round(np.random.uniform(10, 150), 2)
+    if mtype == "battery_replacement":
+        cost = round(np.random.uniform(80, 250), 2)
+        btype = "electric"
+
+    records.append({
+        "record_id": f"MR{5000 + i}",
+        "bike_id": bike,
+        "bike_type": btype,
+        "date": (
+            start_date
+            + timedelta(days=np.random.randint(0, 365))
+        ).strftime("%Y-%m-%d"),
+        "maintenance_type": mtype,
+        "cost": cost,
+        "description": f"{mtype.replace('_', ' ').title()}"
+                       f" for bike {bike}",
+    })
+
+maint_df = pd.DataFrame(records)
+maint_df.loc[
+    np.random.choice(200, 8, replace=False), "cost"
+] = np.nan
+maint_df.to_csv("maintenance.csv", index=False)
+
+print("Generated: stations.csv, trips.csv, "
+      "maintenance.csv")
+\end{lstlisting}
+
+% =========================
+% 13. Submission
+% =========================
+\newpage
+\section{Submission}
+
+Submit:
+\begin{enumerate}
+  \item \textbf{GitHub repository URL} (must be accessible to the instructor)
+  \item Repository must contain:
+    \begin{itemize}
+      \item All source code modules (\texttt{.py} files)
+      \item \texttt{README.md} with project description, setup instructions, and usage guide
+      \item \texttt{requirements.txt}
+      \item Raw data files (\texttt{trips.csv}, \texttt{stations.csv}, \texttt{maintenance.csv})
+      \item Cleaned datasets (\texttt{trips\_clean.csv}, \texttt{stations\_clean.csv})
+      \item Summary report with answers to business questions (\texttt{summary\_report.txt})
+      \item Visualization files (\texttt{output/figures/*.png})
+    \end{itemize}
+\end{enumerate}
+
+\textbf{Execution:} Your project should run successfully via:
+\begin{lstlisting}[language=bash]
+$ pip install -r requirements.txt
+$ python main.py
+\end{lstlisting}
+
+\textbf{Deadline:} announced separately. Late submissions lose 10\% per calendar day.
+
+% =========================
+% Footer note
+% =========================
+\vspace{10pt}
+\hrule
+\vspace{8pt}
+\textcolor{muted}{\small Tip: Start with the data generator and models. Commit after every milestone. A working project with clean code is worth more than a feature-rich project that crashes.}
+
+\end{document}
