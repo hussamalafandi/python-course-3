@@ -1,0 +1,654 @@
+\documentclass[11pt,a4paper]{article}
+
+% Packages
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{enumitem}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows, positioning, calc}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{booktabs}
+
+% Code listing style
+\definecolor{codebg}{RGB}{248,248,248}
+\definecolor{codeframe}{RGB}{200,200,200}
+\definecolor{codekw}{RGB}{0,0,180}
+\definecolor{codecomment}{RGB}{0,128,0}
+\definecolor{codestring}{RGB}{163,21,21}
+
+\lstdefinestyle{pythonstyle}{
+    language=Python,
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{codekw}\bfseries,
+    commentstyle=\color{codecomment}\itshape,
+    stringstyle=\color{codestring},
+    backgroundcolor=\color{codebg},
+    frame=single,
+    rulecolor=\color{codeframe},
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    numbersep=8pt,
+    showstringspaces=false,
+    showlines=true,
+    breaklines=true,
+    tabsize=4,
+    xleftmargin=15pt,
+    framexleftmargin=15pt,
+}
+
+\lstset{style=pythonstyle}
+
+% Flowchart styles
+\tikzstyle{startstop} = [rectangle, rounded corners, minimum width=2.5cm, minimum height=0.8cm, text centered, draw=black, fill=red!20]
+\tikzstyle{process} = [rectangle, minimum width=2.5cm, minimum height=0.8cm, text centered, draw=black, fill=blue!15]
+\tikzstyle{decision} = [diamond, aspect=2, minimum width=2cm, minimum height=0.8cm, text centered, draw=black, fill=green!15]
+\tikzstyle{io} = [trapezium, trapezium left angle=70, trapezium right angle=110, minimum width=2cm, minimum height=0.8cm, text centered, draw=black, fill=orange!15]
+\tikzstyle{arrow} = [thick,->,>=stealth]
+
+% Header and footer
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Python-Programmierung -- Dritte Nachprüfung}
+\rhead{}
+\cfoot{Seite \thepage\ von \pageref{LastPage}}
+
+% Points box
+\newcommand{\pointsbox}[1]{\hfill\fbox{\textbf{#1 Pkt.}}}
+
+\begin{document}
+
+% Title section
+\begin{center}
+    {\Large\bfseries Python-Programmierung}\\[0.3cm]
+    {\large Dritte Nachprüfung}\\[0.3cm]
+    {\normalsize 28.02.2026}\\[0.5cm]
+
+    \vfil
+    \textbf{Name:} \hrulefill
+    \vfil
+
+\end{center}
+
+\vspace{0.5cm}
+
+\noindent\textbf{Hinweise:}
+\begin{itemize}[noitemsep]
+    \item Bearbeitungszeit: \textbf{2 Stunden}
+    \item Gesamtpunktzahl: \textbf{60 Punkte}
+    \item Keine Hilfsmittel erlaubt (keine Notizen, keine elektronischen Geräte)
+\end{itemize}
+
+\vspace{0.3cm}
+
+\noindent\textbf{Punkteübersicht:}
+\begin{center}
+    \begin{tabular}{|c|c|c|}
+        \hline
+        \textbf{Aufgabe} & \textbf{Max. Punkte} & \textbf{Erreicht} \\
+        \hline
+        1                 & 4                   &                \\
+        \hline
+        2                 & 6                   &                \\
+        \hline
+        3                 & 5                   &                \\
+        \hline
+        4                 & 7                   &                \\
+        \hline
+        5                 & 8                   &                \\
+        \hline
+        6                 & 6                   &                \\
+        \hline
+        7                 & 9                   &                \\
+        \hline
+        8                 & 15                  &                \\
+        \hline
+        \textbf{Gesamt}   & \textbf{60}         &                \\
+        \hline
+    \end{tabular}
+\end{center}
+
+\newpage
+
+%==============================================================================
+% AUFGABE 1: Multiple Choice (Grundlagen & Typen)
+%==============================================================================
+\section*{Aufgabe 1: Multiple Choice \pointsbox{4}}
+
+\textit{Kreisen Sie die richtige Antwort ein. Jede richtige Antwort ist 1 Punkt wert.}
+
+\vspace{0.4cm}
+
+\begin{enumerate}[label=\textbf{1.\arabic*}]
+    \item Was ist die Ausgabe des folgenden Ausdrucks?
+          \begin{lstlisting}[numbers=none]
+result = 29 // 4
+print(result)
+    \end{lstlisting}
+          \begin{enumerate}[label=\Alph*)]
+              \item \texttt{7.25}
+              \item \texttt{7}
+              \item \texttt{8}
+              \item \texttt{1}
+          \end{enumerate}
+
+          \vspace{0.5cm}
+
+    \item Welcher der folgenden Datentypen ist in Python \textbf{unveränderbar} (immutable)?
+          \begin{enumerate}[label=\Alph*)]
+              \item \texttt{list}
+              \item \texttt{dict}
+              \item \texttt{tuple}
+              \item \texttt{set}
+          \end{enumerate}
+
+          \vspace{0.5cm}
+
+    \item Was gibt \texttt{type(True)} zurück?
+          \begin{enumerate}[label=\Alph*)]
+              \item \texttt{<class 'int'>}
+              \item \texttt{<class 'str'>}
+              \item \texttt{<class 'bool'>}
+              \item \texttt{<class 'binary'>}
+          \end{enumerate}
+
+          \vspace{0.5cm}
+
+    \item Was bewirkt die Funktion \texttt{super()} in einer Unterklasse?
+          \begin{enumerate}[label=\Alph*)]
+              \item Erstellt eine neue Instanz der Unterklasse
+              \item Ruft eine Methode der Elternklasse auf
+              \item Löscht die Elternklasse
+              \item Macht die Unterklasse zu einer globalen Klasse
+          \end{enumerate}
+\end{enumerate}
+
+\newpage
+
+%==============================================================================
+% AUFGABE 2: Ausgabe vorhersagen
+%==============================================================================
+\section*{Aufgabe 2: Ausgabe vorhersagen \pointsbox{6}}
+
+\textit{Schreiben Sie für jeden Code-Ausschnitt genau auf, was ausgegeben wird. Achten Sie auf Abstände und Format.}
+
+\vspace{0.4cm}
+
+\begin{enumerate}[label=\textbf{2.\arabic*}]
+    \item \textbf{(1 Pkt.)}
+          \begin{lstlisting}
+words = ["red", "green", "blue", "yellow", "white"]
+print(words[2:5])
+print(words[-3])
+    \end{lstlisting}
+          \textbf{Ausgabe:}
+          \vfil
+
+    \item \textbf{(2 Pkt.)}
+          \begin{lstlisting}
+p = 8
+q = 5
+p, q = p - q, p + q
+print(f"p={p}, q={q}")
+    \end{lstlisting}
+          \textbf{Ausgabe:}
+
+
+          \newpage
+    \item \textbf{(1 Pkt.)}
+          \begin{lstlisting}
+inventory = {"apples": 12, "bananas": 0, "oranges": 7}
+for item in inventory:
+    if inventory[item] > 0:
+        print(item, end=" ")
+    \end{lstlisting}
+          \textbf{Ausgabe:}
+          \vfil
+
+    \item \textbf{(2 Pkt.)}
+          \begin{lstlisting}
+def update(data):
+    data["x"] = 99
+    data = {"a": 1}
+    return data
+
+original = {"x": 10, "y": 20}
+result = update(original)
+print(original)
+print(result)
+    \end{lstlisting}
+          \textbf{Ausgabe:}
+          \vfil
+\end{enumerate}
+
+\newpage
+
+%==============================================================================
+% AUFGABE 3: Fehler finden
+%==============================================================================
+\section*{Aufgabe 3: Fehler finden und korrigieren \pointsbox{5}}
+
+\textit{Jeder Code-Ausschnitt enthält einen oder mehrere Fehler. Identifizieren Sie jeden Fehler und schreiben Sie die korrigierte(n) Zeile(n). Erklären Sie kurz, was falsch war.}
+
+\vspace{0.4cm}
+
+\begin{enumerate}[label=\textbf{3.\arabic*}]
+    \item \textbf{(1 Pkt.)} Der folgende Code soll die Länge einer Liste ausgeben, enthält aber einen Fehler:
+          \begin{lstlisting}
+items = [10, 20, 30]
+size = len[items]
+print(size)
+    \end{lstlisting}
+          \textbf{Fehler:}
+          \vspace{3cm}
+
+          \textbf{Korrektur:}
+          \vfil
+
+    \item \textbf{(2 Pkt.)} Die folgende Funktion soll die größte Zahl in einer Liste zurückgeben:
+          \begin{lstlisting}
+def find_max(numbers):
+    biggest = numbers[0]
+    for num in numbers
+        if num > biggest
+            biggest = num
+    return biggest
+    \end{lstlisting}
+          \textbf{Fehler (alle auflisten):}
+          \vspace{3cm}
+
+          \textbf{Korrigierter Code:}
+          \vfil
+          \newpage
+    \item \textbf{(2 Pkt.)} Die folgende Klassendefinition enthält einen Fehler:
+          \begin{lstlisting}
+class Student:
+    def __init__(self, name, grade):
+        name = name
+        grade = grade
+
+s1 = Student("Alice", 90)
+print(s1.name)
+    \end{lstlisting}
+          \textbf{Fehler:}
+          \vspace{3cm}
+
+          \textbf{Korrektur:}
+          \vspace{1.5cm}
+\end{enumerate}
+
+\newpage
+
+%==============================================================================
+% AUFGABE 4: Flussdiagramm zu Code
+%==============================================================================
+\section*{Aufgabe 4: Flussdiagramm zu Python-Code \pointsbox{7}}
+
+\textit{Studieren Sie das folgende Flussdiagramm und schreiben Sie den entsprechenden Python-Code. Das Flussdiagramm nimmt eine positive ganze Zahl und zählt die Anzahl der geraden Ziffern, die sie enthält.}
+
+\vspace{0.4cm}
+
+\begin{center}
+    \begin{tikzpicture}[node distance=1.3cm]
+        \node (start) [startstop] {Start};
+        \node (input) [io, below of=start] {Eingabe: n};
+        \node (init) [process, below of=input] {count = 0};
+        \node (check) [decision, below of=init, yshift=-0.6cm] {n $>$ 0?};
+        \node (getdigit) [process, right of=check, xshift=3cm] {digit = n \% 10};
+        \node (evencheck) [decision, below of=getdigit, yshift=-0.6cm] {digit \% 2 == 0?};
+        \node (increment) [process, below of=evencheck, yshift=-1cm] {count = count + 1};
+        \node (reduce) [process, right of=evencheck, xshift=3cm] {n = n // 10};
+
+        \node (output) [io, below of=check, yshift=-4.5cm] {Ausgabe: count};
+        \node (stop) [startstop, below of=output] {Stop};
+
+        \draw [arrow] (start) -- (input);
+        \draw [arrow] (input) -- (init);
+        \draw [arrow] (init) -- (check);
+        \draw [arrow] (check) -- node[anchor=south] {Ja} (getdigit);
+        \draw [arrow] (getdigit) -- (evencheck);
+        \draw [arrow] (evencheck) -- node[anchor=east] {Ja} (increment);
+        \draw [arrow] (evencheck) -- node[anchor=south] {Nein} (reduce);
+        \draw [arrow] (increment.east) -| (reduce.south);
+        % Loop back
+        \coordinate (loopback) at ($(init.south)!0.5!(check.north)$);
+        \draw [arrow] (reduce.north) |- (loopback);
+        \draw [arrow] (check) -- node[anchor=east] {Nein} (output);
+        \draw [arrow] (output) -- (stop);
+    \end{tikzpicture}
+\end{center}
+
+\vspace{0.3cm}
+\textbf{Hinweis:} Verfolgen Sie das Flussdiagramm mit \texttt{n = 2483}, um zu verstehen, was es tut, bevor Sie den Code schreiben.
+
+\vspace{0.2cm}
+\textbf{Erinnerung:} \texttt{\%} gibt den Rest, \texttt{//} gibt den ganzzahligen Quotienten.\\
+\textit{Beispiel:} \texttt{2483 \% 10 = 3} \quad und \quad \texttt{2483 // 10 = 248}
+
+\vspace{0.3cm}
+\textbf{Schreiben Sie den Python-Code, der dieses Flussdiagramm implementiert, auf der nächsten Seite.}
+
+\newpage
+
+\textbf{Aufgabe 4 -- Antwortbereich:}
+
+\vfill
+
+\newpage
+
+%==============================================================================
+% AUFGABE 5: Code zu Flussdiagramm
+%==============================================================================
+\section*{Aufgabe 5: Python-Code zu Flussdiagramm \pointsbox{8}}
+
+\textit{Zeichnen Sie für den folgenden Python-Code ein Flussdiagramm, das seine Logik darstellt. Verwenden Sie die richtigen Flussdiagrammsymbole (Oval für Start/Stop, Rechteck für Verarbeitung, Raute für Entscheidung, Parallelogramm für Ein-/Ausgabe).}
+
+\vspace{0.4cm}
+
+\begin{lstlisting}
+def evaluate_password(password):
+    length = len(password)
+    
+    if length < 6:
+        strength = "Weak"
+    elif length < 10:
+        has_digit = False
+        for char in password:
+            if char.isdigit():
+                has_digit = True
+        if has_digit:
+            strength = "Medium"
+        else:
+            strength = "Weak"
+    else:
+        strength = "Strong"
+    
+    return strength
+\end{lstlisting}
+
+\vspace{0.3cm}
+\textbf{Zeichnen Sie Ihr Flussdiagramm auf der nächsten Seite.}
+
+\newpage
+
+\textbf{Aufgabe 5 -- Antwortbereich:}
+
+\vfill
+
+\newpage
+
+%==============================================================================
+% AUFGABE 6: Datenstrukturen
+%==============================================================================
+\section*{Aufgabe 6: Datenstrukturen \pointsbox{6}}
+
+\begin{enumerate}[label=\textbf{6.\arabic*}]
+    \item \textbf{(2 Pkt.)} Schreiben Sie für das folgende Dictionary Python-Code, um:
+          \begin{lstlisting}[numbers=none]
+temperatures = {
+    "Monday": 22,
+    "Tuesday": 18,
+    "Wednesday": 25,
+    "Thursday": 20
+}
+    \end{lstlisting}
+
+          \begin{enumerate}[label=\alph*)]
+              \item ,,Friday'' mit einer Temperatur von 27 hinzuzufügen:
+                    \vspace{1.5cm}
+
+              \item Alle Tage auszugeben, an denen die Temperatur über 21 liegt:
+                    \vspace{2.5cm}
+          \end{enumerate}
+
+    \item \textbf{(2 Pkt.)} Was ist der Unterschied zwischen einem \textbf{Dictionary} und einer \textbf{Liste}? Nennen Sie je einen praktischen Anwendungsfall.
+          \vspace{3.5cm}
+
+    \item \textbf{(2 Pkt.)} Was wird der Inhalt von \texttt{colors} nach Ausführung des folgenden Codes sein?
+          \begin{lstlisting}
+colors = {"red", "blue", "green", "blue", "red", "yellow"}
+colors.add("purple")
+colors.add("red")
+colors.discard("green")
+    \end{lstlisting}
+          \textbf{Antwort:}
+          \vspace{1.5cm}
+\end{enumerate}
+
+\newpage
+
+%==============================================================================
+% AUFGABE 7: Funktionen
+%==============================================================================
+\section*{Aufgabe 7: Funktionen \pointsbox{9}}
+
+\begin{enumerate}[label=\textbf{7.\arabic*}]
+    \item \textbf{(3 Pkt.)} Vervollständigen Sie die folgende Funktion, die eine Liste von Strings nimmt und eine neue Liste mit nur den Strings zurückgibt, die mehr als 4 Zeichen haben:
+          \begin{lstlisting}
+def filter_long_words(words):
+    # Ihr Code hier
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+    \end{lstlisting}
+          \vfil
+    \item \textbf{(3 Pkt.)} Erklären Sie den Unterschied zwischen diesen beiden Funktionen. Was wird jeweils ausgegeben, wenn sie aufgerufen werden?
+          \begin{lstlisting}
+def greet_a(name):
+    return f"Hello, {name}!"
+
+def greet_b(name):
+    print(f"Hello, {name}!")
+
+result_a = greet_a("Alice")
+result_b = greet_b("Alice")
+print(f"result_a: {result_a}")
+print(f"result_b: {result_b}")
+    \end{lstlisting}
+          \textbf{Erklärung und Ausgabe:}
+          \vfil
+
+          \newpage
+    \item \textbf{(3 Pkt.)} Schreiben Sie eine Funktion namens \texttt{sum\_digits}, die eine positive ganze Zahl nimmt und die Summe ihrer Ziffern zurückgibt.
+
+          \textbf{Beispiel:} \texttt{sum\_digits(1234)} soll \texttt{10} zurückgeben
+
+          \textbf{Hinweis:} Verwenden Sie die Operatoren \texttt{\%} und \texttt{//}, um Ziffern zu extrahieren.
+
+          \vspace{7cm}
+\end{enumerate}
+
+\newpage
+
+%==============================================================================
+% AUFGABE 8: Objektorientierte Programmierung
+%==============================================================================
+\section*{Aufgabe 8: Objektorientierte Programmierung \pointsbox{15}}
+
+\begin{enumerate}[label=\textbf{8.\arabic*}]
+    \item \textbf{(4 Pkt.)} Was ist die Ausgabe des folgenden Codes? Erklären Sie warum.
+          \begin{lstlisting}
+class TemperatureSensor:
+    def __init__(self, min_temp, max_temp):
+        self._min = min_temp
+        self._max = max_temp
+        self._reading = min_temp
+    
+    @property
+    def reading(self):
+        return self._reading
+    
+    @reading.setter
+    def reading(self, value):
+        if value < self._min:
+            print("Below minimum! Clamping.")
+            self._reading = self._min
+        elif value > self._max:
+            print("Above maximum! Clamping.")
+            self._reading = self._max
+        else:
+            self._reading = value
+    
+    def status(self):
+        mid = (self._min + self._max) / 2
+        if self._reading >= mid:
+            return "HIGH"
+        return "LOW"
+
+sensor = TemperatureSensor(0, 100)
+sensor.reading = 75
+print(sensor.reading)
+print(sensor.status())
+sensor.reading = 150
+print(sensor.reading)
+sensor.reading = -10
+print(sensor.reading)
+    \end{lstlisting}
+          \textbf{Ausgabe:}
+          \vspace{2.5cm}
+
+          \textbf{Was ist der Zweck der Setter-Validierung in diesem Code?}
+          \vspace{2cm}
+
+          \newpage
+    \item \textbf{(4 Pkt.)} Der folgende Code enthält einen häufigen OOP-Fehler. Identifizieren Sie den Fehler, erklären Sie, warum er auftritt, und schreiben Sie den korrigierten Code.
+          \begin{lstlisting}
+class ShoppingCart:
+    items = []
+    
+    def __init__(self, customer):
+        self.customer = customer
+    
+    def add_item(self, item):
+        self.items.append(item)
+
+cart1 = ShoppingCart("Alice")
+cart2 = ShoppingCart("Bob")
+cart1.add_item("Laptop")
+cart2.add_item("Phone")
+print(f"Alice: {cart1.items}")
+print(f"Bob: {cart2.items}")
+    \end{lstlisting}
+          \textbf{Was ist der Fehler und warum tritt er auf?}
+          \vspace{2.5cm}
+
+          \textbf{Schreiben Sie die korrigierte \texttt{\_\_init\_\_}-Methode:}
+          \vspace{4cm}
+
+          \newpage
+
+    \item \textbf{(4 Pkt.)} Vervollständigen Sie die \texttt{ContactBook}-Klasse mit korrekter Kapselung. Das Kontakte-Dictionary soll privat sein (verwenden Sie \texttt{\_contacts}) und nur über eine Property zugänglich sein, die eine Kopie zurückgibt (um externe Modifikation zu verhindern).
+          \begin{lstlisting}
+class ContactBook:
+    def __init__(self, owner):
+        self.owner = owner
+        # TODO: Privates _contacts als leeres Dict initialisieren
+ 
+ 
+
+    @property
+    def contacts(self):
+        # TODO: Eine KOPIE des Kontakte-Dicts zurückgeben
+ 
+ 
+
+    @property
+    def total_contacts(self):
+        # TODO: Anzahl der Kontakte zurückgeben
+ 
+ 
+
+    def add_contact(self, name, phone):
+        # TODO: Kontakt nur hinzufügen, wenn Name nicht bereits vorhanden
+        # True zurückgeben wenn hinzugefügt, False bei Duplikat
+ 
+ 
+ 
+ 
+ 
+ 
+
+    def remove_contact(self, name):
+        # TODO: Kontakt entfernen falls vorhanden
+        # True zurückgeben wenn entfernt, False wenn nicht gefunden
+ 
+ 
+ 
+ 
+ 
+ 
+    \end{lstlisting}
+
+          \newpage
+    \item \textbf{(3 Pkt.)} Betrachten Sie die folgende Vererbungshierarchie:
+          \begin{lstlisting}
+class Shape:
+    def __init__(self, color):
+        self.color = color
+    
+    def describe(self):
+        return f"Shape({self.color})"
+
+class Rectangle(Shape):
+    def __init__(self, color, width, height):
+        super().__init__(color)
+        self.width = width
+        self.height = height
+    
+    def describe(self):
+        base = super().describe()
+        return f"{base}, {self.width}x{self.height}"
+
+class Square(Rectangle):
+    def __init__(self, color, side):
+        super().__init__(color, side, side)
+    
+    def describe(self):
+        base = super().describe()
+        return f"{base}, Square"
+
+s = Square("red", 5)
+print(s.describe())
+print(isinstance(s, Shape))
+    \end{lstlisting}
+
+          \begin{enumerate}[label=\alph*)]
+              \item Was wird ausgegeben?
+                    \vspace{1.5cm}
+
+              \item Verfolgen Sie die \texttt{super().describe()}-Aufrufe: Welche Methoden werden in welcher Reihenfolge aufgerufen, wenn \texttt{s.describe()} ausgeführt wird?
+                    \vspace{2cm}
+
+              \item Was würde passieren, wenn \texttt{Square.\_\_init\_\_} nicht \texttt{super().\_\_init\_\_()} aufrufen würde? Erklären Sie kurz.
+                    \vspace{2cm}
+          \end{enumerate}
+\end{enumerate}
+
+\vfill
+
+\begin{center}
+    \rule{8cm}{0.4pt}\\[0.3cm]
+    \textbf{Ende der Prüfung}\\[0.2cm]
+    \textit{Viel Erfolg!}
+\end{center}
+
+\end{document}
